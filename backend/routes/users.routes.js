@@ -2,16 +2,23 @@ const { urlConfig } = require("../common/config");
 
 module.exports = (app) => {
   const user = require("../controllers/users.controller");
+  const order = require("../controllers/orders.controller");
 
   // Create a new user
   app.post(`${urlConfig}/users`, user.create);
 
-  //   // Retrieve all poducts by cart id
-  //   app.get(`${urlConfig}/cart/products/:cartId`, cart.find);
-
   // Update a user info with userId
   app.put(`${urlConfig}/users/:userId`, user.update);
 
-  //   // Delete a category with categoryId
-  //   app.delete(`${urlConfig}/category/:categoryId`, category.delete);
+  // Get a user info with userId
+  app.get(`${urlConfig}/users/:docId`, user.getUserInfo);
+
+  // Retrieve all user orders by user id
+  app.get(`${urlConfig}/users/orders/:userId`, user.getUserOrders);
+
+  // Create a new order
+  app.post(`${urlConfig}/users/order`, order.create);
+
+  // Update order status by order id
+  app.put(`${urlConfig}/users/orders/:orderId`, order.updateOrderStatus);
 };

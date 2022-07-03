@@ -125,3 +125,43 @@ exports.update = (req, res) => {
       });
   }
 };
+
+// Find a single user with a doc id
+exports.getUserInfo = (req, res) => {
+  User.find({ _id: req.params.docId })
+    .then((user) => {
+      res.json(user[0]);
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "user not found with doc id " + req.params.userId,
+        });
+      }
+      return res.status(500).send({
+        message: "Error retrieving user with doc id " + req.params.userId,
+      });
+    });
+};
+
+// Find all user orders by a userId
+exports.getUserOrders = async (req, res) => {
+  try {
+    let orders = await User.find({
+      _id: req.params.userId,
+    }).populate("orders");
+    res.json(orders);
+  } catch (err) {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "orders not found with given user id " + req.params.userId,
+        });
+      }
+      return res.status(500).send({
+        message:
+          "Error retrieving orders with given user id " + req.params.userId,
+      });
+    }
+  }
+};

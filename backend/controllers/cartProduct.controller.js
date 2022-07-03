@@ -8,7 +8,7 @@ const getProductPrice = async (id) => {
 };
 
 exports.create = async (req, res) => {
-  if (!req.body.productId) {
+  if (!req.body.product) {
     return res.status(400).send({
       message: "Product id can't be empty",
     });
@@ -22,9 +22,9 @@ exports.create = async (req, res) => {
     });
   }
 
-  const productPrice = await getProductPrice(req.body.productId);
+  const productPrice = await getProductPrice(req.body.product._id);
   const cartProduct = new CartProduct({
-    product: req.body.productId,
+    product: req.body.product,
     quantity: req.body.quantity,
     totalPrice: productPrice * req.body.quantity,
     cartId: req.body.cartId,

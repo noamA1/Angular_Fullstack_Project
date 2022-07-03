@@ -1,8 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"),
+  Schema = mongoose.Schema;
 
 const OrderSchema = mongoose.Schema(
   {
-    cartId: String,
+    cart: {
+      type: Schema.Types.ObjectId,
+      ref: "Cart",
+    },
     orderDate: Date,
     deliveryDate: Date,
     totalPrice: Number,

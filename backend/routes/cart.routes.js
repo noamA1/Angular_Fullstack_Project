@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.post(`${urlConfig}/cart`, cart.create);
 
   // Retrieve all poducts by cart id
-  app.get(`${urlConfig}/cart/products/:cartId`, cart.find);
+  app.get(`${urlConfig}/cart/products/:cartId`, cart.findOne);
 
   // Add new product to cart
   app.post(`${urlConfig}/cart/products/add-product`, cartProduct.create);

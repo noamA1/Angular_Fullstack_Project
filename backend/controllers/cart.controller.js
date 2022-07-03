@@ -1,4 +1,5 @@
 const Cart = require("../models/Cart.model");
+const Product = require("../models/product.model");
 
 // Create and Save a new Cart
 exports.create = (req, res) => {
@@ -30,11 +31,12 @@ exports.create = (req, res) => {
 };
 
 // Find all cart products by a CartId
-exports.find = async (req, res) => {
+exports.findOne = async (req, res) => {
   try {
     let products = await Cart.find({
-      _id: req.params.CartId,
+      _id: req.params.cartId,
     }).populate("products");
+
     res.json(products);
   } catch (err) {
     if (err) {
