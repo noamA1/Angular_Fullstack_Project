@@ -72,18 +72,18 @@ exports.create = async (req, res) => {
     });
 };
 
-// // Retrieve and return all user orders from the database.
-// exports.findAll = (req, res) => {
-//   Order.find({ user: req.params.userId })
-//     .then((orders) => {
-//       res.send(orders);
-//     })
-//     .catch((err) => {
-//       res.status(500).send({
-//         message: err.message || "Some error occurred while retrieving orders.",
-//       });
-//     });
-// };
+// Retrieve and return all user orders from the database.
+exports.findAll = (req, res) => {
+  Order.find()
+    .then((orders) => {
+      res.send(orders);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving orders.",
+      });
+    });
+};
 
 // Update a order identified by the orderId in the request
 exports.updateOrderStatus = (req, res) => {

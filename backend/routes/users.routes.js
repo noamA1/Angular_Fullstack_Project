@@ -21,4 +21,7 @@ module.exports = (app) => {
 
   // Update order status by order id
   app.put(`${urlConfig}/users/orders/:orderId`, order.updateOrderStatus);
+
+  // Retrieve all user orders by user id
+  app.get(`${urlConfig}/orders`, order.findAll);
 };

@@ -4,17 +4,17 @@ module.exports = (app) => {
   const category = require("../controllers/category.controller");
 
   // Create a new category
-  app.post(`${urlConfig}/category`, category.create);
+  app.post(`${urlConfig}/categories`, category.create);
 
   // Retrieve all categorys
-  // app.get("/category", category.findAll);
+  // app.get("/categories", category.findAll);
 
   // Retrieve all poducts by category id
-  app.get(`${urlConfig}/category/products/:categoryName`, category.findOne);
+  app.get(`${urlConfig}/categories/products/:categoryName`, category.findOne);
 
   // Update a category with categoryId
-  app.put(`${urlConfig}/category/:categoryId`, category.update);
+  app.put(`${urlConfig}/categories/:categoryId`, category.update);
 
   // Delete a category with categoryId
-  app.delete(`${urlConfig}/category/:categoryId`, category.delete);
+  app.delete(`${urlConfig}/categories/:categoryId`, category.delete);
 };

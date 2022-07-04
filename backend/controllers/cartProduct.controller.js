@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
     });
   }
 
-  const productPrice = await getProductPrice(req.body.product._id);
+  const productPrice = await getProductPrice(req.body.product);
   const cartProduct = new CartProduct({
     product: req.body.product,
     quantity: req.body.quantity,

@@ -5,20 +5,20 @@ module.exports = (app) => {
   const cartProduct = require("../controllers/cartProduct.controller");
 
   // Create a new cart
-  app.post(`${urlConfig}/cart`, cart.create);
+  app.post(`${urlConfig}/carts`, cart.create);
 
   // Retrieve all poducts by cart id
-  app.get(`${urlConfig}/cart/products/:cartId`, cart.findOne);
+  app.get(`${urlConfig}/carts/products/:cartId`, cart.findOne);
 
   // Add new product to cart
-  app.post(`${urlConfig}/cart/products/add-product`, cartProduct.create);
+  app.post(`${urlConfig}/carts/products/add-product`, cartProduct.create);
 
   //   // Retrieve all poducts by cart id
   //   app.get(`${urlConfig}/cart/products/:cartId`, cart.find);
 
   // Update a category with categoryId
-  app.put(`${urlConfig}/cart/products/:cartProductId`, cartProduct.update);
+  app.put(`${urlConfig}/carts/products/:cartProductId`, cartProduct.update);
 
   // Delete a category with categoryId
-  app.delete(`${urlConfig}/cart/products/:cartProductId`, cartProduct.delete);
+  app.delete(`${urlConfig}/carts/products/:cartProductId`, cartProduct.delete);
 };
