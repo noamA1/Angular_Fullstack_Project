@@ -90,6 +90,19 @@ exports.update = (req, res) => {
     });
 };
 
+exports.getAllCategories = (req, res) => {
+  Category.find()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving categories.",
+      });
+    });
+};
+
 // Delete a category with the specified categoryId in the request
 exports.delete = (req, res) => {
   Category.deleteOne({ _id: req.params.categoryId })
