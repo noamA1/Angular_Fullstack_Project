@@ -16,7 +16,6 @@ export class CategoriesService {
   }
 
   uploadImage(image: FormData) {
-    console.log(image);
     return this.http
       .post(`${this.URL}/category-image`, image)
       .subscribe((res) => {
@@ -37,6 +36,7 @@ export class CategoriesService {
   }
 
   getProducts(categoryName: String): Observable<Category[]> {
+    console.log(categoryName);
     return this.http.get<Category[]>(
       `${this.URL}/categories/products/${categoryName}`
     );

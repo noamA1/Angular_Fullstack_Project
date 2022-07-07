@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 
@@ -9,11 +10,18 @@ import { CategoriesService } from 'src/app/shared/services/categories.service';
 })
 export class NavBarComponent implements OnInit {
   categoriesMenu: Category[] = [];
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(
+    private categoriesService: CategoriesService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.categoriesService.getAllCategories().subscribe((data) => {
       this.categoriesMenu = data;
     });
+  }
+
+  navigateMenu(categry: String) {
+    this.router.navigate([`/products/${categry}`]);
   }
 }

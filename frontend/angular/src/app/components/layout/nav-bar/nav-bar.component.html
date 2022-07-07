@@ -6,7 +6,8 @@
             <button mat-button [matMenuTriggerFor]="menu">Categories</button>
             <mat-menu #menu="matMenu" class="categories_menu">
                 <div *ngFor="let category of categoriesMenu">
-                    <button class="categories_menu-btn" mat-menu-item>{{category.name}}</button>
+                    <button class="categories_menu-btn" (click)="navigateMenu(category.name)"
+                        mat-menu-item>{{category.name}}</button>
                 </div>
                 <mat-divider></mat-divider>
                 <button mat-menu-item routerLink="/categories/add">Add Category</button>
