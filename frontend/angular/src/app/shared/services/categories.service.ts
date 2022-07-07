@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '../models/category';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,11 @@ export class CategoriesService {
 
   deleteCategory(id: String): Observable<Category> {
     return this.http.delete<Category>(`${this.URL}/categories/${id}`);
+  }
+
+  getProducts(categoryName: String): Observable<Category[]> {
+    return this.http.get<Category[]>(
+      `${this.URL}/categories/products/${categoryName}`
+    );
   }
 }

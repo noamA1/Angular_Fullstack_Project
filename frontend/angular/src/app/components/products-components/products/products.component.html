@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card-conatiner" *ngFor="let product of products">
+        <mat-card class="example-card">
+            <mat-card-title-group>
+
+                <img src="../../../../../../assets/products-images/{{product.image}}">
+            </mat-card-title-group>
+            <mat-card-content>
+                <h4>{{product.name}}</h4>
+                <p>Price: {{product.price}}</p>
+
+            </mat-card-content>
+            <mat-card-footer>
+                <mat-card-actions>
+                    <button mat-flat-button color="primary">Add to cart</button>
+                    <button mat-flat-button (click)="editProduct(product)" color="primary">Edit product</button>
+                    <button mat-flat-button (click)="delProduct(product._id)" color="warn">Delete product</button>
+                </mat-card-actions>
+            </mat-card-footer>
+        </mat-card>
+
+
+
+    </div>

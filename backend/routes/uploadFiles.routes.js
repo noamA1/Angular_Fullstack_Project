@@ -6,6 +6,12 @@ module.exports = (app) => {
   app.post(
     `${urlConfig}/category-image`,
     upload.single("file"),
-    uploadFile.uploadCategoryImage
+    uploadFile.uploadImage
+  );
+
+  app.post(
+    `${urlConfig}/products-image`,
+    upload.single("file"),
+    uploadFile.uploadImage
   );
 };

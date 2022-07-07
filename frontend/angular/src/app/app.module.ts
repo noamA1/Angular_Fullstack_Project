@@ -12,6 +12,8 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoriesComponent } from './components/categories/categories/categories.component';
 import { AddCategoryComponent } from './components/categories/add-category/add-category.component';
+import { ProductsComponent } from './components/products-components/products/products.component';
+import { AddProductComponent } from './components/products-components/add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { AddCategoryComponent } from './components/categories/add-category/add-c
     NavBarComponent,
     CategoriesComponent,
     AddCategoryComponent,
+    ProductsComponent,
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,

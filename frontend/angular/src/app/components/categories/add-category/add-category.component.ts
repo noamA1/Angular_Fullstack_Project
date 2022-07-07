@@ -28,7 +28,6 @@ export class AddCategoryComponent implements OnInit {
     const url = this.router.url;
 
     if (url.endsWith('edit')) {
-      const imageName = window.history.state.category.categoryImage;
       try {
         this.editMode = true;
         this.title = 'Edit Category';
@@ -63,6 +62,7 @@ export class AddCategoryComponent implements OnInit {
     this.category = {
       name: this.categoryForm.value.name,
       image: this.image ? this.image.data.name : undefined,
+      products: [],
     };
     if (this.editMode) {
       this.categoriesService
