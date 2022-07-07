@@ -7,10 +7,31 @@ import { Category } from '../models/category';
   providedIn: 'root',
 })
 export class CategoriesService {
-  URL = 'http://localhost:5000/api/categories';
+  URL = 'http://localhost:5000/api';
   constructor(private http: HttpClient) {}
 
   getAllCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.URL);
+    return this.http.get<Category[]>(`${this.URL}/categories`);
+  }
+
+  uploadImage(image: FormData) {
+    console.log(image);
+    return this.http
+      .post(`${this.URL}/category-image`, image)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+
+  addCategory(newCategory: Category): Observable<Category> {
+    return this.http.post<Category>(`${this.URL}/categories`, newCategory);
+  }
+
+  editCategory(newCategory: Category, id: String): Observable<Category> {
+    return this.http.put<Category>(`${this.URL}/categories/${id}`, newCategory);
+  }
+
+  deleteCategory(id: String): Observable<Category> {
+    return this.http.delete<Category>(`${this.URL}/categories/${id}`);
   }
 }

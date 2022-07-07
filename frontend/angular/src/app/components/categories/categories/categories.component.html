@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="card-conatiner" *ngFor="let category of allCategories">
+        <mat-card class="example-card">
+            <mat-card-title-group>
+                <mat-card-title>{{category.name}}</mat-card-title>
+                <img mat-card-lg-image src="../../../../../../assets/categoriesImeges/{{category.image}}">
+            </mat-card-title-group>
+            <mat-card-footer>
+                <mat-card-actions>
+                    <button mat-flat-button color="primary">Add to cart</button>
+                    <button mat-flat-button (click)="editCategory(category)" color="primary">Edit category</button>
+                    <button mat-flat-button (click)="delCategory(category)" color="warn">Delete category</button>
+                </mat-card-actions>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+</div>

@@ -8,16 +8,26 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { NavBarComponent } from './components/layout/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadModule } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CategoriesComponent } from './components/categories/categories/categories.component';
+import { AddCategoryComponent } from './components/categories/add-category/add-category.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, NavBarComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    NavBarComponent,
+    CategoriesComponent,
+    AddCategoryComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    FileUploadModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],

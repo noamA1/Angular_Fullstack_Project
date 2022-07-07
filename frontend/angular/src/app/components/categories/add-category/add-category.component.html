@@ -1,0 +1,26 @@
+<mat-card class="example-card card-shadow">
+    <mat-card-header>
+        <mat-card-title>{{title}}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div [formGroup]="categoryForm">
+            <mat-form-field MatFormFieldControl appearance="standard">
+                <mat-label>Enter category name</mat-label>
+                <input matInput type="text" [(ngModel)]="categoryName" formControlName="name" required>
+                <!-- <mat-error *ngIf="accountForm.get('id')?.errors">{{getErrorMessage("id")}}</mat-error> -->
+            </mat-form-field>
+
+            <div class="file-upload">
+                <mat-label>Choose category image</mat-label>
+                <input MatFormFieldControl accept="image/*" type="file" name="image" (change)="selectImage($event)">
+                <!-- <mat-error *ngIf="accountForm.get('account')?.errors">{{getErrorMessage("account")}}</mat-error> -->
+            </div>
+
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="card-actions">
+        <button mat-flat-button color="primary" [disabled]="categoryForm.invalid" (click)="onSubmit()">Submit</button>
+        <button mat-flat-button routerLink="/accounts">Cancel</button>
+    </mat-card-actions>
+</mat-card>

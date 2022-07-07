@@ -24,7 +24,7 @@ require("./routes/category.routes")(app);
 require("./routes/products.routes")(app);
 require("./routes/users.routes")(app);
 require("./routes/cart.routes")(app);
-// require("./routes/cartProducts.routes")(app);
+require("./routes/uploadFiles.routes")(app);
 // require("./routes/products.routes")(app);
 
 app.listen(serverConnections.port, () => {

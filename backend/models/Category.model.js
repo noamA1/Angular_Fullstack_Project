@@ -5,6 +5,7 @@ const mongoose = require("mongoose"),
 const CategorySchema = mongoose.Schema(
   {
     name: String,
+    image: String,
     products: [
       {
         type: Schema.Types.ObjectId,

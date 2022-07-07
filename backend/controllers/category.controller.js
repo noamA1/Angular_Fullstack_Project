@@ -13,6 +13,7 @@ exports.create = (req, res) => {
   // Create a Category
   const category = new Category({
     name: req.body.name,
+    image: req.body.image,
   });
 
   // Save Category in the database
@@ -56,17 +57,25 @@ exports.findOne = async (req, res) => {
 
 // Update a category identified by the categoryId in the request
 exports.update = (req, res) => {
+  let image;
   if (!req.body.name) {
     return res.status(400).send({
       message: "Name can't be empty",
     });
   }
-
+  if (req.body.image) {
+    image = req.body.image;
+  } else {
+    Category.findOne({ _id: req.params.categoryId }).then((data) => {
+      image = data.image;
+    });
+  }
   // Find category and update it with the request body
   Category.findByIdAndUpdate(
     req.params.categoryId,
     {
       name: req.body.name,
+      image,
     },
     { new: true }
   )

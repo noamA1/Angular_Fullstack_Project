@@ -1,14 +1,15 @@
 <nav>
     <mat-toolbar class="app-header" color="primary">
 
-        <span>Bank App</span>
+        <span>Shopping App</span>
         <div>
             <button mat-button [matMenuTriggerFor]="menu">Categories</button>
             <mat-menu #menu="matMenu" class="categories_menu">
                 <div *ngFor="let category of categoriesMenu">
                     <button class="categories_menu-btn" mat-menu-item>{{category.name}}</button>
                 </div>
-
+                <mat-divider></mat-divider>
+                <button mat-menu-item routerLink="/categories/add">Add Category</button>
             </mat-menu>
             <button mat-button routerLink="/add-operation">Add Operation</button>
             <button mat-button routerLink="/accounts">All Clients Accounts</button>
