@@ -8,5 +8,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+@import "app/sass/main.scss";
+
 @import "../src/app/components/layout/header/header.component.scss";
 @import "../src/app/components/layout/nav-bar/nav-bar.component.scss";
