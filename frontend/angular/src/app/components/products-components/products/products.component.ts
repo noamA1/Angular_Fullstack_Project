@@ -31,7 +31,6 @@ export class ProductsComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.router.events.subscribe((event: Event) => {
-      console.log(event);
       if (event instanceof NavigationEnd) {
         this.categoryName = this.route.snapshot.params['categoryName'];
         this.getProducts();

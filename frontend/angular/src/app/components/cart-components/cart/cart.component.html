@@ -1,6 +1,5 @@
-<div *ngFor="let product of cartProducts">
-    <app-cart-products [id]="product._id" [productQuantity]="product.quantity" [productId]="product.product"
-        [totalPrice]="product.totalPrice">
+<div *ngFor="let product of displayProducts">
+    <app-cart-products [displayProduct]="product">
     </app-cart-products>
 
 </div>

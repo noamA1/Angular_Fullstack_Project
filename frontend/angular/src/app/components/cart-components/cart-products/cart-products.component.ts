@@ -9,34 +9,33 @@ import { ProductsService } from 'src/app/shared/services/products.service';
   styleUrls: ['./cart-products.component.scss'],
 })
 export class CartProductsComponent implements OnInit {
-  @Input() productQuantity: Number | undefined;
-  @Input() id: String | undefined;
-  @Input() productId: String | undefined;
-  @Input() price: Number | undefined;
-  @Input() image: String | undefined;
-  @Input() totalPrice: Number | undefined;
-  name: String | undefined;
-  allProducts: Product[] | undefined;
+  @Input() displayProduct: any;
+  // @Input() id: String | undefined;
+  // @Input() productId: String | undefined;
+  // @Input() price: Number | undefined;
+  // @Input() image: String | undefined;
+  // @Input() totalPrice: Number | undefined;
+  // name: String | undefined;
+  // allProducts: Product[] | undefined;
   // quantity: FormControl = new FormControl();
 
   constructor(private productsService: ProductsService) {}
 
-  findProductDetails() {
-    const cartProductDetails = this.allProducts?.find(
-      (product) => product._id === this.productId
-    );
-    this.price = cartProductDetails?.price;
-    this.image = cartProductDetails?.image;
-    this.name = cartProductDetails?.name;
-    // this.productQuantity = this.quantity
-  }
+  // findProductDetails() {
+  //   const cartProductDetails = this.allProducts?.find(
+  //     (product) => product._id === this.productId
+  //   );
+  //   this.price = cartProductDetails?.price;
+  //   this.image = cartProductDetails?.image;
+  //   this.name = cartProductDetails?.name;
+  //   // this.productQuantity = this.quantity
+  // }
 
   ngOnInit(): void {
     // this.quantity = this.productQuantity
-    console.log(this.productQuantity);
-    this.productsService.getAllProducts().subscribe((result) => {
-      this.allProducts = result;
-      this.findProductDetails();
-    });
+    // this.productsService.getAllProducts().subscribe((result) => {
+    //   this.allProducts = result;
+    //   this.findProductDetails();
+    // });
   }
 }

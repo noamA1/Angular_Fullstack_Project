@@ -36,7 +36,6 @@ export class CategoriesService {
   }
 
   getProducts(categoryName: String): Observable<Category[]> {
-    console.log(categoryName);
     return this.http.get<Category[]>(
       `${this.URL}/categories/products/${categoryName}`
     );

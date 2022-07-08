@@ -2,12 +2,13 @@
     <mat-card>
         <mat-card-content>
             <span>
-                <img style="width: 45px; height:45px ;" src="../../../../assets/products-images/{{image}}">
+                <img style="width: 45px; height:45px ;"
+                    src="../../../../assets/products-images/{{displayProduct.image}}">
             </span>
-            <b>Name: </b> {{name}}
-            <b>Price: </b> {{price}}
+            <b>Name: </b> {{displayProduct.name}}
+            <b>Price: </b> {{displayProduct.price}}
             <b>quantity: </b>
-            <mat-select style="width: 40px;" [(ngModel)]="productQuantity">
+            <mat-select style="width: 40px;" [(ngModel)]="displayProduct.quantity">
                 <mat-option value=1>1</mat-option>
                 <mat-option value=2>2</mat-option>
                 <mat-option value=3>3</mat-option>
@@ -19,7 +20,7 @@
                 <mat-option value=9>9</mat-option>
                 <mat-option value=10>10</mat-option>
             </mat-select>
-            <b>TotalPrice: </b> {{totalPrice}}
+            <b>TotalPrice: </b> {{displayProduct.totalPrice}}
 
             <mat-card-actions>
                 <button mat-icon-button color="warn">
