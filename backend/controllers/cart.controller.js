@@ -37,7 +37,7 @@ exports.findOne = async (req, res) => {
       _id: req.params.cartId,
     }).populate("products");
 
-    res.json(products);
+    res.json(products[0]);
   } catch (err) {
     if (err) {
       if (err.kind === "ObjectId") {

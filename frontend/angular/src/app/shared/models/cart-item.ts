@@ -1,6 +1,7 @@
 export class CartItem {
   product: String = '';
-  totalPrice?: Number = 0;
+  totalPrice?: number = 0;
   quantity: Number = 0;
   cartId: String = '';
+  _id?: String = '';
 }

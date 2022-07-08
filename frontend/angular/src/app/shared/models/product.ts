@@ -1,6 +1,6 @@
 export class Product {
   name: String = '';
-  price: String = '';
+  price: Number = 0;
   image: String = '';
   stock: Number = 0;
   category: String = '';

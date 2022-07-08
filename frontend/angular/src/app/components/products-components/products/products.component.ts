@@ -1,4 +1,10 @@
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  Event,
+  NavigationEnd,
+  Route,
+  Router,
+} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/product';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
@@ -24,8 +30,13 @@ export class ProductsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.getProducts();
-    console.log(this.products);
+    this.router.events.subscribe((event: Event) => {
+      console.log(event);
+      if (event instanceof NavigationEnd) {
+        this.categoryName = this.route.snapshot.params['categoryName'];
+        this.getProducts();
+      }
+    });
   }
 
   getProducts() {
@@ -37,7 +48,6 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryName = this.route.snapshot.params['categoryName'];
     // console.log(this.categoryName);
     this.getProducts();
   }

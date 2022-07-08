@@ -1,1 +1,12 @@
-<p>cart works!</p>
+<div *ngFor="let product of cartProducts">
+    <app-cart-products [id]="product._id" [productQuantity]="product.quantity" [productId]="product.product"
+        [totalPrice]="product.totalPrice">
+    </app-cart-products>
+
+</div>
+<mat-card-footer>
+    Overall Price: {{overallPrice}}
+    <button mat-icon-button color="primary">
+        Checkout
+    </button>
+</mat-card-footer>

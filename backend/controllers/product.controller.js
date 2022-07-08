@@ -96,6 +96,19 @@ exports.update = (req, res) => {
     });
 };
 
+exports.getAllProducts = (req, res) => {
+  Product.find()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving categories.",
+      });
+    });
+};
+
 // Delete a product with the specified productId in the request
 exports.delete = (req, res) => {
   let categoryId;

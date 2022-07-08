@@ -16,6 +16,11 @@
             <button mat-button routerLink="/accounts">All Clients Accounts</button>
         </div>
         <span class="example-spacer"></span>
+
+        <button type="button" mat-button (click)="sidenav.toggle()">
+            Cart
+        </button>
+
         <!-- <div *ngIf="auth.isLoggedIn">
             <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon>account_circle</mat-icon>
@@ -45,4 +50,16 @@
         </div> -->
 
     </mat-toolbar>
+    <app-header></app-header>
+    <mat-sidenav-container>
+        <mat-sidenav position="end" #sidenav>
+            <app-cart></app-cart>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div style="height: 88vh;">
+
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </nav>

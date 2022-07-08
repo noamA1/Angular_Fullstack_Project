@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Cart } from '../models/cart';
 import { CartItem } from '../models/cart-item';
 
 @Injectable({
@@ -17,5 +18,9 @@ export class CartService {
       `${this.CART_ITEM_URL}/add-product`,
       newItem
     );
+  }
+
+  getCartItems(docId: String): Observable<Cart> {
+    return this.http.get<Cart>(`${this.CART_ITEM_URL}/${docId}`);
   }
 }

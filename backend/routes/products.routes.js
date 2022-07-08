@@ -6,12 +6,12 @@ module.exports = (app) => {
   // Create a new products
   app.post(`${urlConfig}/products`, products.create);
 
+  // Retrieve all productss
+  app.get(`${urlConfig}/products`, products.getAllProducts);
+
   // Update a product with productId
   app.put(`${urlConfig}/products/:productId`, products.update);
 
   // Delete a product with productId
   app.delete(`${urlConfig}/products/:productId`, products.delete);
-
-  // Retrieve all productss
-  // app.get(`${urlConfig}/products/:categoryId`, products.findByCategoryId);
 };
