@@ -17,6 +17,7 @@ export class AddCategoryComponent implements OnInit {
   category: Category | undefined;
   editMode = false;
   docId: String = '';
+  fileError: boolean = false;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -40,8 +41,26 @@ export class AddCategoryComponent implements OnInit {
   }
 
   categoryForm = this.fb.group({
-    name: ['', [Validators.required]],
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern("^(a-z|A-Z|0-9)*[^#$^&*()'@;{}!?|,/~.+=]*$"),
+      ],
+    ],
   });
+
+  getErrorMessage(key: string) {
+    if (this.categoryForm.get(key)?.errors?.['required']) {
+      return 'You must enter a value';
+    }
+    if (this.categoryForm.get(key)?.errors?.['pattern']) {
+      return `The category ${key} can contain only letters, number and special characters like % or -`;
+    }
+
+    return;
+  }
+
   selectImage(event: any) {
     if (event.target.files.length > 0) {
       const file = {
@@ -49,12 +68,18 @@ export class AddCategoryComponent implements OnInit {
         data: event.target.files[0],
       };
       this.image = file;
-      console.log(this.image.data.name);
+      this.fileError = false;
     }
   }
 
   onSubmit() {
     const formData = new FormData();
+
+    if (!this.editMode && !this.image) {
+      this.fileError = true;
+      return;
+    }
+
     if (this.image) {
       formData.append('file', this.image.data);
       this.categoriesService.uploadImage(formData);
