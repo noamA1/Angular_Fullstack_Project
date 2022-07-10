@@ -23,4 +23,8 @@ export class CartService {
   getCartItems(docId: String): Observable<Cart> {
     return this.http.get<Cart>(`${this.CART_ITEM_URL}/${docId}`);
   }
+
+  deleteItem(docId: String): Observable<CartItem> {
+    return this.http.delete<CartItem>(`${this.CART_ITEM_URL}/${docId}`);
+  }
 }

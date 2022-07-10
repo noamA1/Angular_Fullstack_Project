@@ -68,7 +68,7 @@ export class CartComponent implements OnInit {
         price: cartProductDetails?.price,
         quantity: cartProduct.quantity,
         totalPrice: cartProduct.totalPrice,
-        id: cartProduct.product,
+        id: cartProduct._id,
       });
     });
     console.log(this.displayProducts);

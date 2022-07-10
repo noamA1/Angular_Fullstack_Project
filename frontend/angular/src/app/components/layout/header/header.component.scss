@@ -1,8 +1,16 @@
 .banner-innerpage {
-  padding: 150px 0 100px;
+  padding: 50px 0 33.5px;
   background-size: cover;
   background-position: center center;
+  max-height: 10%;
   // position: absolute;
+}
+
+.title,
+.subtitle {
+  // position: absolute;
+  display: flex;
+  justify-content: center;
 }
 .banner-innerpage .title {
   color: #ffffff;
@@ -10,30 +18,34 @@
   font-weight: 700;
   font-size: 40px;
   line-height: 40px;
+
+  top: 0;
 }
 .banner-innerpage .subtitle {
   color: #ffffff;
+
+  top: 15vh;
 }
-.shop-listing .shop-hover {
-  position: relative;
-}
-.shop-listing .shop-hover .card-img-overlay {
-  display: none;
-  background: rgba(255, 255, 255, 0.5);
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-.shop-listing .shop-hover:hover .card-img-overlay {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-.shop-listing .shop-hover .label {
-  padding: 5px 10px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
+// .shop-listing .shop-hover {
+//   position: relative;
+// }
+// .shop-listing .shop-hover .card-img-overlay {
+//   display: none;
+//   background: rgba(255, 255, 255, 0.5);
+//   -webkit-box-pack: center;
+//   -webkit-justify-content: center;
+//   -ms-flex-pack: center;
+//   justify-content: center;
+// }
+// .shop-listing .shop-hover:hover .card-img-overlay {
+//   display: -webkit-box;
+//   display: -webkit-flex;
+//   display: -ms-flexbox;
+//   display: flex;
+// }
+// .shop-listing .shop-hover .label {
+//   padding: 5px 10px;
+//   position: absolute;
+//   top: 10px;
+//   right: 10px;
+// }

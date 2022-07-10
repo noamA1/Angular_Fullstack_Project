@@ -18,6 +18,7 @@ export class AddCategoryComponent implements OnInit {
   editMode = false;
   docId: String = '';
   fileError: boolean = false;
+  fileName = '';
 
   constructor(
     private categoriesService: CategoriesService,
@@ -68,6 +69,7 @@ export class AddCategoryComponent implements OnInit {
         data: event.target.files[0],
       };
       this.image = file;
+      this.fileName = file.data.name;
       this.fileError = false;
     }
   }

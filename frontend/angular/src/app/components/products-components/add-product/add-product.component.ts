@@ -23,6 +23,7 @@ export class AddProductComponent implements OnInit {
   product: Product | undefined;
   editMode: boolean = false;
   docId: String = '';
+  fileName = '';
   fileError: boolean = false;
 
   productForm = this.fb.group({
@@ -55,7 +56,7 @@ export class AddProductComponent implements OnInit {
       try {
         // console.log(window.history.state.product.category);
         this.editMode = true;
-        this.title = 'Edit Category';
+        this.title = 'Edit Product';
         this.productCategory = new FormControl(
           window.history.state.product.category,
           Validators.required
@@ -94,6 +95,7 @@ export class AddProductComponent implements OnInit {
         data: event.target.files[0],
       };
       this.image = file;
+      this.fileName = file.data.name;
       this.fileError = false;
     }
   }

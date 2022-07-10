@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit {
   categoryName: String = '';
   quantity: Number = 1;
   cartItem: CartItem | undefined;
+  quantityArray: Number[] | undefined;
 
   constructor(
     private categoriesService: CategoriesService,

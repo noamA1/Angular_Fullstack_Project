@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
@@ -19,7 +20,10 @@ export class CartProductsComponent implements OnInit {
   // allProducts: Product[] | undefined;
   // quantity: FormControl = new FormControl();
 
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private cartsService: CartService
+  ) {}
 
   // findProductDetails() {
   //   const cartProductDetails = this.allProducts?.find(
@@ -37,5 +41,11 @@ export class CartProductsComponent implements OnInit {
     //   this.allProducts = result;
     //   this.findProductDetails();
     // });
+  }
+
+  deleteCartItem(docId: String) {
+    this.cartsService.deleteItem(docId).subscribe((result) => {
+      console.log(result);
+    });
   }
 }

@@ -1,8 +1,48 @@
 .card {
-  width: 100%;
+  width: fit-content;
+  height: fit-content;
+  &__form {
+    box-shadow: 5px 5px 15px #777 !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    text-align: center;
+    left: 30%;
+    right: 30%;
+    max-width: 40%;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__form {
+      margin: 10px !important;
+    }
+  }
   &__picture {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+  }
+  &__file-input {
+    display: none;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__form-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+  }
+  &__footer {
+    text-align: center;
+  }
+  &__buttons {
+    display: flex !important;
+    justify-content: space-around;
   }
 }

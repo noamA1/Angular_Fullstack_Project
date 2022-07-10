@@ -23,7 +23,7 @@
             <b>TotalPrice: </b> {{displayProduct.totalPrice}}
 
             <mat-card-actions>
-                <button mat-icon-button color="warn">
+                <button mat-icon-button (click)="deleteCartItem(displayProduct.id)" color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-card-actions>
