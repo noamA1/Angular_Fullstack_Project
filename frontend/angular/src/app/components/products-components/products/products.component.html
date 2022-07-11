@@ -1,37 +1,7 @@
 <div class="container">
     <div class="container__cards">
-        <div *ngFor="let product of products">
-            <mat-card class="card">
-                <mat-card-content>
-                    <img class="card__picture" src="../../../../../../assets/products-images/{{product.image}}">
-                    <div class="card__info">
-                        <h4>{{product.name}}</h4>
-                        <p>Price: {{product.price}}</p>
-                        <div class="card__form-field">
-                            <mat-form-field appearance="standard">
-                                <mat-label>Quantity:</mat-label>
-                                <input matInput type="number" [(ngModel)]="quantity">
-                                <mat-error *ngIf="!quantity">
-                                    Please choose an category</mat-error>
-                            </mat-form-field>
-                            <button mat-icon-button (click)="addToCart(product)" color="primary">
-                                <mat-icon>add_shopping_cart</mat-icon>
-                            </button>
-                        </div>
-
-                    </div>
-                </mat-card-content>
-                <mat-card-footer class="card__footer">
-
-                    <mat-card-actions class="card__buttons">
-                        <button mat-icon-button (click)="editProduct(product)" color="primary">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-icon-button (click)="delProduct(product._id)" color="warn">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </mat-card-actions>
-                </mat-card-footer>
-            </mat-card>
-        </div>
+        <app-product-card *ngFor="let product of products" [product]="product" [categoryName]="categoryName">
+        </app-product-card>
     </div>
+
+</div>

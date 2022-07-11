@@ -66,7 +66,7 @@ export class AddProductComponent implements OnInit {
         this.productPrice = window.history.state.product.price;
         this.productStock = window.history.state.product.stock;
       } catch (error) {
-        this.router.navigate(['/accounts']);
+        // this.router.navigate(['/accounts']);
       }
     }
   }
