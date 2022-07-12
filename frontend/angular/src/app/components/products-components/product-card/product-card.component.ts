@@ -1,8 +1,8 @@
 import { FormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 
@@ -14,6 +14,7 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 export class ProductCardComponent implements OnInit {
   @Input() product: Product | undefined;
   @Input() categoryName: String | undefined;
+
   quantity = new FormControl('', Validators.required);
   cartItem: CartItem | undefined;
   quantityArray: Number[] = [];
@@ -60,6 +61,7 @@ export class ProductCardComponent implements OnInit {
     };
 
     this.cartService.addItemToCart(this.cartItem).subscribe((result) => {
+      this.cartService.refreshData();
       console.log(result);
     });
   }

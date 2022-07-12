@@ -1,9 +1,12 @@
-<div *ngFor="let product of displayProducts">
-    <app-cart-products [displayProduct]="product">
-    </app-cart-products>
+<div class="container__cart">
+    <div *ngFor="let product of displayProducts">
+        <app-cart-products [displayProduct]="product" (removeItem)="updateCart($event)">
+        </app-cart-products>
+
+    </div>
 
 </div>
-<mat-card-footer>
+<mat-card-footer class="card__footer">
     Overall Price: {{overallPrice}}
     <button mat-icon-button color="primary">
         Checkout

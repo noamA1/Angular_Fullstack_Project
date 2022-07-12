@@ -1,8 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Product } from 'src/app/shared/models/product';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartService } from 'src/app/shared/services/cart.service';
-import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-cart-products',
@@ -11,40 +8,16 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 })
 export class CartProductsComponent implements OnInit {
   @Input() displayProduct: any;
-  // @Input() id: String | undefined;
-  // @Input() productId: String | undefined;
-  // @Input() price: Number | undefined;
-  // @Input() image: String | undefined;
-  // @Input() totalPrice: Number | undefined;
-  // name: String | undefined;
-  // allProducts: Product[] | undefined;
-  // quantity: FormControl = new FormControl();
+  @Output() removeItem = new EventEmitter<any>();
 
-  constructor(
-    private productsService: ProductsService,
-    private cartsService: CartService
-  ) {}
+  constructor(private cartsService: CartService) {}
 
-  // findProductDetails() {
-  //   const cartProductDetails = this.allProducts?.find(
-  //     (product) => product._id === this.productId
-  //   );
-  //   this.price = cartProductDetails?.price;
-  //   this.image = cartProductDetails?.image;
-  //   this.name = cartProductDetails?.name;
-  //   // this.productQuantity = this.quantity
-  // }
-
-  ngOnInit(): void {
-    // this.quantity = this.productQuantity
-    // this.productsService.getAllProducts().subscribe((result) => {
-    //   this.allProducts = result;
-    //   this.findProductDetails();
-    // });
-  }
+  ngOnInit(): void {}
 
   deleteCartItem(docId: String) {
     this.cartsService.deleteItem(docId).subscribe((result) => {
+      this.removeItem.emit();
+      this.cartsService.refreshData();
       console.log(result);
     });
   }

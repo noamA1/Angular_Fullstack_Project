@@ -2,3 +2,11 @@
   display: grid;
   grid-template-rows: 100%;
 }
+
+.mat-drawer,
+.mat-drawer-inner-container {
+  overflow: hidden !important;
+}
+.mat-drawer-inner-container {
+  height: 90vh !important;
+}

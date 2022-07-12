@@ -5,4 +5,14 @@
   right: 5vw;
   left: 5vw;
   z-index: 100;
+  &__cart {
+    display: grid;
+    grid-template-columns: 80%;
+    margin: 10px;
+    gap: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    height: 90%;
+  }
 }

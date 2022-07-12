@@ -32,36 +32,48 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.cartService.getCartItems(this.cartId).subscribe((result) => {
-      this.cartProducts = result.products;
-      if (this.cartProducts) {
-        this.sumOverallPrice();
-        this.prepareToDisplay();
-      }
+    this.cartService.subject$.subscribe(() => {
+      this.getAllProducts();
     });
-
-    // this.productsService.getAllProducts().subscribe((result) => {
-    //   this.allProducts = result;
-    // });
   }
 
   getAllProducts() {
     this.productsService.getAllProducts().subscribe((result) => {
       this.allProducts = result;
     });
+    this.cartService.getCartItems(this.cartId).subscribe((result) => {
+      this.cartProducts = result.products;
+
+      if (this.cartProducts) {
+        this.sumOverallPrice('add');
+        this.prepareToDisplay();
+      }
+    });
   }
 
-  sumOverallPrice() {
+  updateCart(product: CartItem) {
+    this.sumOverallPrice('remove');
+  }
+
+  sumOverallPrice(operation: string) {
+    this.overallPrice = 0;
     this.cartProducts?.forEach((product) => {
-      this.overallPrice += +product.totalPrice!;
+      if (operation === 'add') {
+        this.overallPrice += +product.totalPrice!;
+      }
+      if (operation === 'remove') {
+        this.overallPrice -= +product.totalPrice!;
+      }
     });
   }
 
   prepareToDisplay() {
-    this.cartProducts?.forEach((cartProduct) => {
+    this.displayProducts = [];
+    this.cartProducts!.forEach((cartProduct) => {
       const cartProductDetails = this.allProducts?.find(
         (product) => product._id === cartProduct.product
       );
+
       this.displayProducts?.push({
         name: cartProductDetails?.name,
         image: cartProductDetails?.image,
@@ -71,6 +83,5 @@ export class CartComponent implements OnInit {
         id: cartProduct._id,
       });
     });
-    console.log(this.displayProducts);
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Cart } from '../models/cart';
 import { CartItem } from '../models/cart-item';
 
@@ -10,7 +10,12 @@ import { CartItem } from '../models/cart-item';
 export class CartService {
   CART_ITEM_URL = 'http://localhost:5000/api/carts/products';
   CART_URL = 'http://localhost:5000/api/carts';
+  subject$: Subject<any> = new Subject<any>();
   constructor(private http: HttpClient) {}
+
+  refreshData() {
+    this.subject$.next('refreshed');
+  }
 
   addItemToCart(newItem: CartItem) {
     // console.log(newItem);

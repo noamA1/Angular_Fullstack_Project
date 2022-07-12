@@ -1,27 +1,16 @@
-<div>
+<div class="card">
     <mat-card>
-        <mat-card-content>
+        <mat-card-content class="card__cart-product">
             <span>
                 <img style="width: 45px; height:45px ;"
                     src="../../../../assets/products-images/{{displayProduct.image}}">
             </span>
-            <b>Name: </b> {{displayProduct.name}}
-            <b>Price: </b> {{displayProduct.price}}
-            <b>quantity: </b>
-            <mat-select style="width: 40px;" [(ngModel)]="displayProduct.quantity">
-                <mat-option value=1>1</mat-option>
-                <mat-option value=2>2</mat-option>
-                <mat-option value=3>3</mat-option>
-                <mat-option value=4>4</mat-option>
-                <mat-option value=5>5</mat-option>
-                <mat-option value=6>6</mat-option>
-                <mat-option value=7>7</mat-option>
-                <mat-option value=8>8</mat-option>
-                <mat-option value=9>9</mat-option>
-                <mat-option value=10>10</mat-option>
-            </mat-select>
-            <b>TotalPrice: </b> {{displayProduct.totalPrice}}
-
+            <span>
+                <p class="card__cart-text"><strong>Name:</strong>{{displayProduct.name}}</p>
+                <p class="card__cart-text"><strong>Price:</strong>{{displayProduct.price}}</p>
+                <p class="card__cart-text"><strong>quantity:</strong>{{displayProduct.quantity}}</p>
+                <p class="card__cart-text"><strong>TotalPrice:</strong>{{displayProduct.totalPrice}}</p>
+            </span>
             <mat-card-actions>
                 <button mat-icon-button (click)="deleteCartItem(displayProduct.id)" color="warn">
                     <mat-icon>delete</mat-icon>

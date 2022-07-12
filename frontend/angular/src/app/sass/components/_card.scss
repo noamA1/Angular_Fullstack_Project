@@ -1,6 +1,6 @@
 .card {
   width: fit-content;
-  height: fit-content;
+
   &__form {
     box-shadow: 5px 5px 15px #777 !important;
     display: flex !important;
@@ -17,6 +17,20 @@
     align-items: center;
     &__form {
       margin: 10px !important;
+    }
+  }
+  &__cart-product {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    // margin: 10px;
+  }
+  &__cart-text {
+    margin: 10px;
+    width: 100%;
+    strong {
+      padding: 10px;
     }
   }
   &__picture {
