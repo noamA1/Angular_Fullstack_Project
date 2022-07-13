@@ -10,7 +10,11 @@ const OrderSchema = mongoose.Schema(
     orderDate: Date,
     deliveryDate: Date,
     totalPrice: Number,
-    creditCard: String,
+    creditCard: {
+      cardNumber: String,
+      expirationDate: String,
+      cvv: String,
+    },
     status: String,
     user: {
       type: Schema.Types.ObjectId,

@@ -17,6 +17,12 @@ import { AddProductComponent } from './components/products-components/add-produc
 import { CartComponent } from './components/cart-components/cart/cart.component';
 import { CartProductsComponent } from './components/cart-components/cart-products/cart-products.component';
 import { ProductCardComponent } from './components/products-components/product-card/product-card.component';
+import { OrderComponent } from './components/orders-components/order/order.component';
+import { OrderItemComponent } from './components/orders-components/order-item/order-item.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { CreditCardDirective } from './shared/directives/credit-card.directive';
+import { ExpirationDateDirective } from './shared/directives/expiration-date.directive';
+import { PhoneNumberDirective } from './shared/directives/phone-number.directive';
 
 @NgModule({
   declarations: [
@@ -30,6 +36,11 @@ import { ProductCardComponent } from './components/products-components/product-c
     CartComponent,
     CartProductsComponent,
     ProductCardComponent,
+    OrderComponent,
+    OrderItemComponent,
+    CreditCardDirective,
+    ExpirationDateDirective,
+    PhoneNumberDirective,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +52,7 @@ import { ProductCardComponent } from './components/products-components/product-c
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

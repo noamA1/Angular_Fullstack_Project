@@ -1,0 +1,13 @@
+.image {
+  &__credit-card {
+    width: 90px;
+    height: 85px;
+  }
+  &__border {
+    border: 8px solid #00f;
+    border-radius: 7px;
+  }
+  &__scale {
+    transform: scale(1.05);
+  }
+}

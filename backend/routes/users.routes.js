@@ -17,7 +17,7 @@ module.exports = (app) => {
   app.get(`${urlConfig}/users/orders/:userId`, user.getUserOrders);
 
   // Create a new order
-  app.post(`${urlConfig}/users/order`, order.create);
+  app.post(`${urlConfig}/users/orders`, order.create);
 
   // Update order status by order id
   app.put(`${urlConfig}/users/orders/:orderId`, order.updateOrderStatus);

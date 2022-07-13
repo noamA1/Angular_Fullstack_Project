@@ -39,7 +39,11 @@ exports.create = async (req, res) => {
     orderDate: new Date(),
     deliveryDate: req.body.deliveryDate,
     totalPrice: await calculateOrderTotalPrice(req.body.cart),
-    creditCard: req.body.creditCard,
+    creditCard: {
+      cardNumber: req.body.creditCard.cardNumber,
+      expirationDate: req.body.creditCard.expirationDate,
+      cvv: req.body.creditCard.cvv,
+    },
     status: "on process",
     user: req.body.user,
     address: {

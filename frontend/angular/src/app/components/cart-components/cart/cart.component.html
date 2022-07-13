@@ -8,7 +8,7 @@
 </div>
 <mat-card-footer class="card__footer">
     Overall Price: {{overallPrice}}
-    <button mat-icon-button color="primary">
-        Checkout
+    <button (click)="placeOrder()" mat-icon-button color="primary">
+        Place order
     </button>
 </mat-card-footer>

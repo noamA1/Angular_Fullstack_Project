@@ -3,15 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { Router } from '@angular/router';
+import { DisplayProduct } from 'src/app/shared/interfaces/display-product';
 
-interface displyProduct {
-  price: Number | undefined;
-  image: String | undefined;
-  totalPrice: Number | undefined;
-  name: String | undefined;
-  id: String | undefined;
-  quantity: Number | undefined;
-}
+// interface displyProduct {
+//   price: Number | undefined;
+//   image: String | undefined;
+//   totalPrice: Number | undefined;
+//   name: String | undefined;
+//   id: String | undefined;
+//   quantity: Number | undefined;
+// }
 
 @Component({
   selector: 'app-cart',
@@ -22,12 +24,13 @@ export class CartComponent implements OnInit {
   cartProducts: CartItem[] | undefined;
   cartId: String = '62c2a37c6aa6b5c81de15933';
   overallPrice: number = 0;
-  displayProducts: displyProduct[] = [];
+  displayProducts: DisplayProduct[] = [];
   allProducts: Product[] | undefined;
 
   constructor(
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -82,6 +85,17 @@ export class CartComponent implements OnInit {
         totalPrice: cartProduct.totalPrice,
         id: cartProduct._id,
       });
+    });
+  }
+
+  placeOrder() {
+    console.log('place order clicked');
+    this.router.navigateByUrl('/order', {
+      state: {
+        products: this.displayProducts,
+        cartTotalPrice: this.overallPrice,
+        cart: this.cartId,
+      },
     });
   }
 }
