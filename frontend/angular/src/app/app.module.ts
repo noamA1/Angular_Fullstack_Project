@@ -23,6 +23,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CreditCardDirective } from './shared/directives/credit-card.directive';
 import { ExpirationDateDirective } from './shared/directives/expiration-date.directive';
 import { PhoneNumberDirective } from './shared/directives/phone-number.directive';
+import {
+  OrderDetailsDialog,
+  OrdersViewComponent,
+} from './components/orders-components/orders-view/orders-view.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,8 @@ import { PhoneNumberDirective } from './shared/directives/phone-number.directive
     CreditCardDirective,
     ExpirationDateDirective,
     PhoneNumberDirective,
+    OrdersViewComponent,
+    OrderDetailsDialog,
   ],
   imports: [
     BrowserModule,

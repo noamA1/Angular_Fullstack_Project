@@ -25,6 +25,8 @@ export class OrdersService {
   }
 
   updateOrderStatus(orderId: String, status: String): Observable<Order> {
-    return this.http.put<Order>(`${this.USERS_ORDERS_URL}/${orderId}`, status);
+    return this.http.put<Order>(`${this.USERS_ORDERS_URL}/${orderId}`, {
+      status,
+    });
   }
 }

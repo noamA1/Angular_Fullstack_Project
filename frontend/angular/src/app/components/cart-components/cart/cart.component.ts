@@ -49,7 +49,10 @@ export class CartComponent implements OnInit {
 
       if (this.cartProducts) {
         this.sumOverallPrice('add');
-        this.prepareToDisplay();
+        this.displayProducts = this.cartService.prepareToDisplay(
+          this.allProducts!,
+          this.cartId
+        );
       }
     });
   }
@@ -70,27 +73,26 @@ export class CartComponent implements OnInit {
     });
   }
 
-  prepareToDisplay() {
-    this.displayProducts = [];
-    this.cartProducts!.forEach((cartProduct) => {
-      const cartProductDetails = this.allProducts?.find(
-        (product) => product._id === cartProduct.product
-      );
+  // prepareToDisplay() {
+  //   this.displayProducts = [];
+  //   this.cartProducts!.forEach((cartProduct) => {
+  //     const cartProductDetails = this.allProducts?.find(
+  //       (product) => product._id === cartProduct.product
+  //     );
 
-      this.displayProducts?.push({
-        name: cartProductDetails?.name,
-        image: cartProductDetails?.image,
-        price: cartProductDetails?.price,
-        quantity: cartProduct.quantity,
-        totalPrice: cartProduct.totalPrice,
-        id: cartProduct._id,
-      });
-    });
-  }
+  //     this.displayProducts?.push({
+  //       name: cartProductDetails?.name,
+  //       image: cartProductDetails?.image,
+  //       price: cartProductDetails?.price,
+  //       quantity: cartProduct.quantity,
+  //       totalPrice: cartProduct.totalPrice,
+  //       id: cartProduct._id,
+  //     });
+  //   });
+  // }
 
   placeOrder() {
-    console.log('place order clicked');
-    this.router.navigateByUrl('/order', {
+    this.router.navigateByUrl('/orders/add', {
       state: {
         products: this.displayProducts,
         cartTotalPrice: this.overallPrice,

@@ -1,0 +1,19 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 13%;
+  text-align: center;
+}
+
+.dialog__content {
+  display: flex !important;
+  justify-content: space-around;
+}
