@@ -9,6 +9,8 @@ import { OrdersViewComponent } from './components/orders-components/orders-view/
 import { LoginComponent } from './components/auth-components/login/login.component';
 import { ForgotPasswordComponent } from './components/auth-components/forgot-password/forgot-password.component';
 import { RegistrationComponent } from './components/auth-components/registration/registration.component';
+import { ProfileComponent } from './components/user-components/profile/profile.component';
+import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -44,6 +46,14 @@ const routes: Routes = [
       { path: 'log-in', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
+    ],
+  },
+
+  {
+    path: 'profile',
+    children: [
+      { path: '', component: ProfileComponent },
+      { path: 'edit', component: EditProfileComponent },
     ],
   },
 ];

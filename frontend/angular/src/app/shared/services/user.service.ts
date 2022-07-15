@@ -16,5 +16,7 @@ export class UserService {
 
   getAllUsers() {}
 
-  updateUser() {}
+  updateUser(userInfo: User, docId: String): Observable<User> {
+    return this.http.put<User>(`${this.URL}/${docId}`, userInfo);
+  }
 }
