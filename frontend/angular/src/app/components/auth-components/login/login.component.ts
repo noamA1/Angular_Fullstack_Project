@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.userService.getSingleUser(res.user.uid).subscribe((userData) => {
           const user = {
             uid: userData._id,
+            displayName: `${userData.firstName} ${userData.lastName}`,
             role: userData.role,
           };
           localStorage.setItem('user', JSON.stringify(user));

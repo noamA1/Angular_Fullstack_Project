@@ -150,14 +150,15 @@ export class AuthService {
 
   getUser() {
     const user = JSON.parse(localStorage.getItem('user')!);
-    let role = localStorage.getItem('userRole');
-    if (role !== null) {
-      return {
-        user: user,
-        role: role,
-      };
-    }
-    return;
+
+    // let role = localStorage.getItem('userRole');
+    // if (role !== null) {
+    //   return {
+    //     user: user,
+    //     role: role,
+    //   };
+    // }
+    return user;
   }
 
   SetUserData(user: any) {
