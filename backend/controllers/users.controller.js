@@ -2,7 +2,7 @@ const User = require("../models/User.model");
 
 const validateRequest = (body, type) => {
   // validate request body fields to be not empty
-  if (!body.id) {
+  if (!body.userId) {
     return {
       isValid: false,
       message: "ID can't be empty",
@@ -50,7 +50,8 @@ exports.create = (req, res) => {
   if (validateCheck.isValid) {
     // Create a User
     const user = new User({
-      userId: req.body.id,
+      _id: req.body._id,
+      userId: req.body.userId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       phoneNumber: req.body.phone,

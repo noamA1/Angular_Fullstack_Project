@@ -6,6 +6,9 @@ import { CategoriesComponent } from './components/categories/categories/categori
 import { AddProductComponent } from './components/products-components/add-product/add-product.component';
 import { OrderComponent } from './components/orders-components/order/order.component';
 import { OrdersViewComponent } from './components/orders-components/orders-view/orders-view.component';
+import { LoginComponent } from './components/auth-components/login/login.component';
+import { ForgotPasswordComponent } from './components/auth-components/forgot-password/forgot-password.component';
+import { RegistrationComponent } from './components/auth-components/registration/registration.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,14 @@ const routes: Routes = [
     children: [
       { path: '', component: OrdersViewComponent },
       { path: 'add', component: OrderComponent },
+    ],
+  },
+  {
+    path: 'authentication',
+    children: [
+      { path: 'log-in', component: LoginComponent },
+      { path: 'registration', component: RegistrationComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
   },
 ];

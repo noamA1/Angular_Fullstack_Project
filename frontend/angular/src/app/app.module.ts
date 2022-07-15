@@ -27,6 +27,20 @@ import {
   OrderDetailsDialog,
   OrdersViewComponent,
 } from './components/orders-components/orders-view/orders-view.component';
+import { LoginComponent } from './components/auth-components/login/login.component';
+import { RegistrationComponent } from './components/auth-components/registration/registration.component';
+import { ForgotPasswordComponent } from './components/auth-components/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/auth-components/verify-email/verify-email.component';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment';
+import { AuthService } from './shared/services/auth.service';
+import { ProfileComponent } from './components/user-components/profile/profile.component';
+import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +61,12 @@ import {
     PhoneNumberDirective,
     OrdersViewComponent,
     OrderDetailsDialog,
+    LoginComponent,
+    RegistrationComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    ProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +77,13 @@ import {
     FileUploadModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
+  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
