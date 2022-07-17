@@ -13,6 +13,7 @@ import { ProfileComponent } from './components/user-components/profile/profile.c
 import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
 
 const routes: Routes = [
+  { path: '', component: CategoriesComponent },
   {
     path: 'categories',
     children: [

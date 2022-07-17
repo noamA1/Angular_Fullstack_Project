@@ -54,8 +54,10 @@ export class ProductCardComponent implements OnInit {
   }
 
   addToCart(product: Product) {
+    const cart = this.cartService.get();
+    // console.log(this.cartService.get());
     this.cartItem = {
-      cartId: '62c2a37c6aa6b5c81de15933',
+      cartId: cart!,
       quantity: this.quantity.value,
       product: `${product._id}`,
     };

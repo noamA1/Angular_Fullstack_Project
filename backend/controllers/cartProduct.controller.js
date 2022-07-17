@@ -50,6 +50,29 @@ exports.create = async (req, res) => {
     });
 };
 
+// Find all cart products by a cartId
+exports.getSingleCartProduts = async (req, res) => {
+  try {
+    let products = await Cart.findOne({ _id: req.params.cartId }).populate(
+      "products"
+    );
+
+    res.json(products);
+  } catch (err) {
+    if (err) {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Products not found with given cart id " + req.params.cartId,
+        });
+      }
+      return res.status(500).send({
+        message:
+          "Error retrieving Products with given cart id " + req.params.cartId,
+      });
+    }
+  }
+};
+
 exports.update = async (req, res) => {
   if (!req.body.quantity) {
     return res.status(400).send({

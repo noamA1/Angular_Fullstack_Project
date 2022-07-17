@@ -17,7 +17,7 @@ const validateRequest = (body, type) => {
       isValid: false,
       message: "Last name can't be empty",
     };
-  } else if (!body.phone) {
+  } else if (!body.phoneNumber) {
     return {
       isValid: false,
       message: "Phone number can't be empty",
@@ -54,14 +54,14 @@ exports.create = (req, res) => {
       userId: req.body.userId,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      phoneNumber: req.body.phone,
+      phoneNumber: req.body.phoneNumber,
       email: req.body.email,
       orders: [],
       role: req.body.role,
       address: {
         city: req.body.address.city,
         street: req.body.address.street,
-        houseNumber: req.body.address.house,
+        houseNumber: req.body.address.houseNumber,
         zipCode: req.body.address.zipCode,
       },
     });
@@ -95,12 +95,12 @@ exports.update = (req, res) => {
         userId: req.body.id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        phoneNumber: req.body.phone,
+        phoneNumber: req.body.phoneNumber,
         email: req.body.email,
         address: {
           city: req.body.address.city,
           street: req.body.address.street,
-          houseNumber: req.body.address.house,
+          houseNumber: req.body.address.houseNumber,
           zipCode: req.body.address.zipCode,
         },
       },

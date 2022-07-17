@@ -1,9 +1,9 @@
 import { Product } from 'src/app/shared/models/product';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { DisplayProduct } from 'src/app/shared/interfaces/display-product';
 
 // interface displyProduct {
@@ -21,11 +21,13 @@ import { DisplayProduct } from 'src/app/shared/interfaces/display-product';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  @Output() updateCartLength = new EventEmitter<any>();
   cartProducts: CartItem[] | undefined;
-  cartId: String = '62c2a37c6aa6b5c81de15933';
+  cartId: String | undefined;
   overallPrice: number = 0;
   displayProducts: DisplayProduct[] = [];
   allProducts: Product[] | undefined;
+  user: any;
 
   constructor(
     private cartService: CartService,
@@ -34,26 +36,59 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.router.events.subscribe((event) => {
+      if (
+        event instanceof NavigationEnd &&
+        !this.router.url.includes('authentication')
+      ) {
+        this.user = JSON.parse(localStorage.getItem('user')!);
+        this.getAllProducts();
+      }
+    });
     this.cartService.subject$.subscribe(() => {
       this.getAllProducts();
     });
   }
 
+  // refreshCart() {
+
+  // }
+
   getAllProducts() {
     this.productsService.getAllProducts().subscribe((result) => {
       this.allProducts = result;
     });
-    this.cartService.getCartItems(this.cartId).subscribe((result) => {
-      this.cartProducts = result.products;
 
-      if (this.cartProducts) {
-        this.sumOverallPrice('add');
-        this.displayProducts = this.cartService.prepareToDisplay(
-          this.allProducts!,
-          this.cartId
-        );
+    this.cartService.getCartItems(this.user.uid).subscribe((result) => {
+      console.log(result);
+      if (result !== null) {
+        if (result) {
+          this.cartId = result._id;
+          this.cartService.set(this.cartId!);
+          // this.refreshCart();
+          this.cartProducts = result.products;
+          this.sumOverallPrice('add');
+          this.displayProducts = this.cartService.prepareToDisplay(
+            this.allProducts!,
+            result.products
+          );
+          // console.log(result.products.length);
+          this.updateCartLength.emit(result.products.length);
+        }
+      } else {
+        this.cartService.creatNewCart(this.user.uid).subscribe((data) => {
+          this.cartId = data._id;
+        });
       }
+      // console.log(result);
+
+      // if (this.cartProducts) {
+      //   this.sumOverallPrice('add');
+      //   this.displayProducts = this.cartService.prepareToDisplay(
+      //     this.allProducts!,
+      //     this.cartId
+      //   );
+      // }
     });
   }
 

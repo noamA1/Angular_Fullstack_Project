@@ -14,6 +14,7 @@ exports.create = (req, res) => {
   const cart = new Cart({
     clientId: req.body.clientId,
     openAt: new Date(),
+    status: "open",
     products: [],
   });
 
@@ -30,25 +31,53 @@ exports.create = (req, res) => {
     });
 };
 
-// Find all cart products by a CartId
+// Find all cart products by a userId
 exports.findOne = async (req, res) => {
   try {
     let products = await Cart.find({
-      _id: req.params.cartId,
+      clientId: req.params.userId,
     }).populate("products");
 
-    res.json(products[0]);
+    res.json(products.find((cart) => cart.status === "open"));
   } catch (err) {
     if (err) {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
-          message: "Products not found with given cart id " + req.params.CartId,
+          message: "Products not found with given cart id " + req.params.userId,
         });
       }
       return res.status(500).send({
         message:
-          "Error retrieving Products with given cart id " + req.params.CartId,
+          "Error retrieving Products with given cart id " + req.params.userId,
       });
     }
   }
+};
+
+exports.updateStatus = async (req, res) => {
+  Cart.findByIdAndUpdate(
+    req.params.cartId,
+    {
+      status: req.body.status,
+    },
+    { new: true }
+  )
+    .then((cart) => {
+      if (!cart) {
+        return res.status(404).send({
+          message: "Cart not found with id " + req.params.cartId,
+        });
+      }
+      res.send(cart);
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Cart not found with id " + req.params.cartId,
+        });
+      }
+      return res.status(500).send({
+        message: "Error updating Cart with id " + req.params.cartId,
+      });
+    });
 };

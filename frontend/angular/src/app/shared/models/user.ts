@@ -5,7 +5,7 @@ export class User {
   userId: String | undefined;
   firstName: String | undefined;
   lastName: String | undefined;
-  phone: String | undefined;
+  phoneNumber: String | undefined;
   email: String | undefined;
   orders?: Order[] | undefined;
   role?: String | undefined;

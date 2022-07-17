@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { Address } from '../interfaces/address';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,19 +22,26 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    private userService: UserService
   ) {}
 
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result: any) => {
-        // this.ngZone.run(() => {
-        //   // this.profileService.setUserRole(result.user?.uid);
-        //   localStorage.setItem('user', JSON.stringify(result.user));
-        //   JSON.parse(localStorage.getItem('user')!);
-        //   // this.router.navigate(['/']);
-        // });
+        this.ngZone.run(() => {
+          this.userService.getSingleUser(result.user.uid).subscribe((data) => {
+            const user = {
+              uid: result.user.uid,
+              displayName: result.user.displayName,
+              role: data.role,
+            };
+            localStorage.setItem('user', JSON.stringify(user));
+            JSON.parse(localStorage.getItem('user')!);
+            this.router.navigate(['/']);
+          });
+        });
         this.SetUserData(result.user);
         return result;
       })
@@ -125,7 +133,7 @@ export class AuthService {
       email: user.email,
       firstName: first,
       lastName: last,
-      phone: phone,
+      phoneNumber: phone,
       role,
       address,
     };

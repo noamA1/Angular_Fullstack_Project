@@ -44,6 +44,7 @@ export class OrdersViewComponent implements OnInit {
   orders: Order[] = [];
   orderProducts: DisplayProduct[] = [];
   allProducts: Product[] = [];
+  user: any;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator | null;
@@ -65,6 +66,7 @@ export class OrdersViewComponent implements OnInit {
     this.productsService.getAllProducts().subscribe((data) => {
       this.allProducts = data;
     });
+    this.user = JSON.parse(localStorage.getItem('user')!);
   }
 
   applyFilter(event: Event) {
@@ -82,17 +84,19 @@ export class OrdersViewComponent implements OnInit {
     cart: string,
     orderTotalPrice: string
   ): void {
-    console.log(orderTotalPrice);
-    this.orderProducts = this.cartService.prepareToDisplay(
-      this.allProducts!,
-      cart
-    );
-    this.dialog.open(OrderDetailsDialog, {
-      width: '500px',
+    console.log(cart);
+    this.cartService.getCartItemsByCartId(cart).subscribe((cartProducts) => {
+      this.orderProducts = this.cartService.prepareToDisplay(
+        this.allProducts!,
+        cartProducts.products
+      );
+      this.dialog.open(OrderDetailsDialog, {
+        width: '500px',
 
-      // enterAnimationDuration,
-      // exitAnimationDuration,
-      data: { orderProducts: this.orderProducts, orderTotalPrice },
+        // enterAnimationDuration,
+        // exitAnimationDuration,
+        data: { orderProducts: this.orderProducts, orderTotalPrice },
+      });
     });
   }
 

@@ -1,7 +1,9 @@
+import { CartService } from 'src/app/shared/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
   ]);
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -44,19 +47,22 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.authService
-      .SignIn(this.emailFormControl.value, this.passwordFormControl.value)
-      .then((res) => {
-        console.log(res.user.uid);
-        this.userService.getSingleUser(res.user.uid).subscribe((userData) => {
-          const user = {
-            uid: userData._id,
-            displayName: `${userData.firstName} ${userData.lastName}`,
-            role: userData.role,
-          };
-          localStorage.setItem('user', JSON.stringify(user));
-          JSON.parse(localStorage.getItem('user')!);
-        });
-      });
+    this.authService.SignIn(
+      this.emailFormControl.value,
+      this.passwordFormControl.value
+    );
+    // .then((res) => {
+    //   console.log(res.user.uid);
+    //   this.userService.getSingleUser(res.user.uid).subscribe((userData) => {
+    //     const user = {
+    //       uid: userData._id,
+    //       displayName: `${userData.firstName} ${userData.lastName}`,
+    //       role: userData.role,
+    //     };
+    //     localStorage.setItem('user', JSON.stringify(user));
+    //     // JSON.parse(localStorage.getItem('user')!);
+    //   });
+    //   this.router.navigate(['/']);
+    // });
   }
 }

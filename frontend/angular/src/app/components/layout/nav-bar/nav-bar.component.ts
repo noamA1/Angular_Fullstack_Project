@@ -1,3 +1,4 @@
+import { CartService } from './../../../shared/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,9 +16,11 @@ export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
   userRole: string | undefined;
   displayName: String | undefined;
+  numOfProductsInCart: number | undefined;
 
   constructor(
     private categoriesService: CategoriesService,
+    private cartService: CartService,
     private router: Router,
     public auth: AuthService
   ) {}
@@ -29,6 +32,11 @@ export class NavBarComponent implements OnInit {
     });
     this.userRole = JSON.parse(localStorage.getItem('user')!).role;
     this.isLogin = this.auth.isLoggedIn;
+  }
+
+  updateCartProducts(length: any) {
+    // console.log(length);
+    this.numOfProductsInCart = length;
   }
 
   navigateMenu(categry: String) {

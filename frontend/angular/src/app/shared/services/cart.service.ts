@@ -15,6 +15,7 @@ export class CartService {
 
   displayProducts: DisplayProduct[] = [];
   cartProducts: CartItem[] = [];
+  cartId: String | undefined;
 
   subject$: Subject<any> = new Subject<any>();
 
@@ -22,6 +23,20 @@ export class CartService {
 
   refreshData() {
     this.subject$.next('refreshed');
+  }
+
+  creatNewCart(userId: String): Observable<Cart> {
+    return this.http.post<Cart>(`${this.CART_URL}`, { clientId: userId });
+  }
+
+  getCartItems(userId: String): Observable<Cart> {
+    return this.http.get<Cart>(`${this.CART_ITEM_URL}/${userId}`);
+  }
+
+  getCartItemsByCartId(cartId: String): Observable<Cart> {
+    return this.http.get<Cart>(
+      `http://localhost:5000/api/cart/products/${cartId}`
+    );
   }
 
   addItemToCart(newItem: CartItem) {
@@ -32,33 +47,48 @@ export class CartService {
     );
   }
 
-  getCartItems(docId: String): Observable<Cart> {
-    return this.http.get<Cart>(`${this.CART_ITEM_URL}/${docId}`);
+  updateCartStatus(userId: String) {
+    return this.http
+      .put<Cart>(`${this.CART_URL}/${this.cartId}`, { status: 'close' })
+      .subscribe((res) => {
+        this.creatNewCart(userId).subscribe((resultCart) => {
+          this.set(resultCart._id!);
+        });
+        this.refreshData();
+      });
   }
 
   deleteItem(docId: String): Observable<CartItem> {
     return this.http.delete<CartItem>(`${this.CART_ITEM_URL}/${docId}`);
   }
 
-  prepareToDisplay(allProducts: Product[], docId: String) {
-    this.displayProducts = [];
-    this.getCartItems(docId).subscribe((data) => {
-      this.cartProducts = data.products;
-      this.cartProducts!.forEach((cartProduct) => {
-        const cartProductDetails = allProducts?.find(
-          (product) => product._id === cartProduct.product
-        );
+  set(cartId: String) {
+    this.cartId = cartId;
+  }
+  get() {
+    return this.cartId;
+  }
 
-        this.displayProducts?.push({
-          name: cartProductDetails?.name,
-          image: cartProductDetails?.image,
-          price: cartProductDetails?.price,
-          quantity: cartProduct.quantity,
-          totalPrice: cartProduct.totalPrice,
-          id: cartProduct._id,
-        });
+  prepareToDisplay(allProducts: Product[], cartItems: CartItem[]) {
+    this.displayProducts = [];
+    // this.getCartItems(userId).subscribe((data) => {
+    //   console.log(data);
+    //   this.cartProducts = data.products;
+    cartItems!.forEach((cartProduct) => {
+      const cartProductDetails = allProducts?.find(
+        (product) => product._id === cartProduct.product
+      );
+
+      this.displayProducts?.push({
+        name: cartProductDetails?.name,
+        image: cartProductDetails?.image,
+        price: cartProductDetails?.price,
+        quantity: cartProduct.quantity,
+        totalPrice: cartProduct.totalPrice,
+        id: cartProduct._id,
       });
     });
+    // });
     return this.displayProducts;
   }
 }

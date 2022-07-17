@@ -4,6 +4,7 @@ const mongoose = require("mongoose"),
 const CartSchema = mongoose.Schema(
   {
     clientId: String,
+    status: String,
     products: [
       {
         type: Schema.Types.ObjectId,

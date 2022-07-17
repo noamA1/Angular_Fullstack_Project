@@ -85,7 +85,7 @@ export class RegistrationComponent implements OnInit {
     this.userAddress = {
       city: this.addressForm.get('city')?.value,
       street: this.addressForm.get('street')?.value,
-      house: this.addressForm.get('house')?.value,
+      houseNumber: this.addressForm.get('house')?.value,
       zipCode: this.addressForm.get('zipCode')?.value,
     };
 

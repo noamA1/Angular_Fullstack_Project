@@ -8,13 +8,18 @@ module.exports = (app) => {
   app.post(`${urlConfig}/carts`, cart.create);
 
   // Retrieve all poducts by cart id
-  app.get(`${urlConfig}/carts/products/:cartId`, cart.findOne);
+  app.get(`${urlConfig}/carts/products/:userId`, cart.findOne);
+
+  app.put(`${urlConfig}/carts/:cartId`, cart.updateStatus);
 
   // Add new product to cart
   app.post(`${urlConfig}/carts/products/add-product`, cartProduct.create);
 
-  //   // Retrieve all poducts by cart id
-  //   app.get(`${urlConfig}/cart/products/:cartId`, cart.find);
+  // Retrieve all poducts by cart id
+  app.get(
+    `${urlConfig}/cart/products/:cartId`,
+    cartProduct.getSingleCartProduts
+  );
 
   // Update a category with categoryId
   app.put(`${urlConfig}/carts/products/:cartProductId`, cartProduct.update);

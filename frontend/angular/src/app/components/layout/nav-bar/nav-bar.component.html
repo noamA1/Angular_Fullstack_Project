@@ -16,9 +16,11 @@
             <!-- <button mat-button routerLink="/accounts">All Clients Accounts</button> -->
         </div>
         <span class="example-spacer"></span>
-
+        <!-- [matBadge]="numOfProductsInCart" MatBadgePosition="above before" matBadgeColor="warn" -->
         <button type="button" mat-button (click)="sidenav.toggle()">
-            <mat-icon>shopping_cart</mat-icon> Cart
+            <mat-icon>
+                shopping_cart
+            </mat-icon> Cart {{numOfProductsInCart}}
         </button>
 
         <div *ngIf="auth.isLoggedIn">
@@ -78,7 +80,7 @@
 
     <mat-sidenav-container style="overflow: none;">
         <mat-sidenav position="end" #sidenav>
-            <app-cart></app-cart>
+            <app-cart (click)="sidenav.toggle()" (updateCartLength)="updateCartProducts($event)"></app-cart>
         </mat-sidenav>
         <mat-sidenav-content>
             <div style="height: 90vh; ">

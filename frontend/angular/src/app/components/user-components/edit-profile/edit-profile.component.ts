@@ -85,7 +85,7 @@ export class EditProfileComponent implements OnInit {
     this.userAddress = {
       city: this.userForm.value.city,
       street: this.userForm.value.street,
-      house: this.userForm.value.house,
+      houseNumber: this.userForm.value.house,
       zipCode: this.userForm.value.zipCode,
     };
 
@@ -93,7 +93,7 @@ export class EditProfileComponent implements OnInit {
       userId: this.userForm.value.userId,
       firstName: this.userForm.value.fName,
       lastName: this.userForm.value.lName,
-      phone: this.userForm.value.tel,
+      phoneNumber: this.userForm.value.tel,
       email: this.userForm.value.email,
       address: this.userAddress,
     };

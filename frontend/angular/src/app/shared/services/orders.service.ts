@@ -17,6 +17,7 @@ export class OrdersService {
   }
 
   addOrder(newOrder: Order): Observable<Order> {
+    console.log(newOrder);
     return this.http.post<Order>(`${this.USERS_ORDERS_URL}`, newOrder);
   }
 

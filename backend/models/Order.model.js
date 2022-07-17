@@ -17,8 +17,8 @@ const OrderSchema = mongoose.Schema(
     },
     status: String,
     user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
+      ref: "User._id",
     },
     address: {
       city: String,

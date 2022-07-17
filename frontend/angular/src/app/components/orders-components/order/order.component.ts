@@ -13,6 +13,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import * as moment from 'moment';
 import { Address } from 'src/app/shared/interfaces/address';
 import { PaymentMethod } from 'src/app/shared/interfaces/payment-method';
+import { CartService } from 'src/app/shared/services/cart.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-order',
@@ -26,7 +28,7 @@ export class OrderComponent implements OnInit {
   allOrdersFromDB: Order[] = [];
   orderTotalPrice: Number | undefined;
   cartId: String | undefined;
-  userId = '62c2a2f76b571d9340bbfcfe';
+  userId: String | undefined;
   newOrder: Order | undefined;
 
   orderAddress: Address | undefined;
@@ -52,7 +54,9 @@ export class OrderComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private router: Router,
-    private ordersService: OrdersService
+    private ordersService: OrdersService,
+    private cartService: CartService,
+    private userService: UserService
   ) {
     // this.minDate = new Date();
   }
@@ -67,6 +71,14 @@ export class OrderComponent implements OnInit {
     this.orderProducts = window.history.state.products;
     this.orderTotalPrice = window.history.state.cartTotalPrice;
     this.cartId = window.history.state.cart;
+    this.userId = JSON.parse(localStorage.getItem('user')!).uid;
+    this.userService.getSingleUser(this.userId!).subscribe((user) => {
+      console.log(user.address);
+      this.addressForm.get('city')?.setValue(user.address?.city);
+      this.addressForm.get('street')?.setValue(user.address?.street);
+      this.addressForm.get('house')?.setValue(user.address?.houseNumber);
+      this.addressForm.get('zipCode')?.setValue(user.address?.zipCode);
+    });
 
     this.ordersService.getAllOrders().subscribe((result) => {
       this.allOrdersFromDB = result;
@@ -133,7 +145,7 @@ export class OrderComponent implements OnInit {
     this.orderAddress = {
       city: this.addressForm.get('city')?.value,
       street: this.addressForm.get('street')?.value,
-      house: this.addressForm.get('house')?.value,
+      houseNumber: this.addressForm.get('house')?.value,
       zipCode: this.addressForm.get('zipCode')?.value,
     };
     console.log(this.orderAddress);
@@ -172,7 +184,7 @@ export class OrderComponent implements OnInit {
   submit() {
     this.newOrder = {
       cart: this.cartId!,
-      user: this.userId,
+      user: this.userId!,
       deliveryDate: this.selectedShippingDate,
       totalPrice: this.orderTotalPrice,
       address: this.orderAddress,
@@ -181,5 +193,9 @@ export class OrderComponent implements OnInit {
     this.ordersService.addOrder(this.newOrder).subscribe((result) => {
       console.log(result);
     });
+    this.cartService.updateCartStatus(this.userId!);
+    // this.cartService.creatNewCart(this.userId!).subscribe((result) => {
+    //   this.cartService.set(result._id!);
+    // });
   }
 }

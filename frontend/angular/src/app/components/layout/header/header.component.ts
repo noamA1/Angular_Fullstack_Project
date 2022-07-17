@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   handleRouteChange = () => {
-    console.log(this.router.url);
+    console.log(this.auth.getUser());
     const url = this.router.url;
     const keys = this.router.url.split('/');
     if (this.router.url.endsWith('/')) {
@@ -56,6 +56,13 @@ export class HeaderComponent implements OnInit {
         this.title = 'edit your profile';
       } else if (this.router.url.endsWith('')) {
         this.title = 'Your profile';
+      }
+    }
+    if (this.router.url.endsWith('orders')) {
+      if (this.auth.getUser().role === 'user') {
+        this.title = 'Your Previous Orders';
+      } else {
+        this.title = 'All orders';
       }
     }
 
