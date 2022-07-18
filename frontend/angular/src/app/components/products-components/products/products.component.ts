@@ -2,6 +2,7 @@ import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-
+    private productsService: ProductsService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -23,6 +24,9 @@ export class ProductsComponent implements OnInit {
         this.categoryName = this.route.snapshot.params['categoryName'];
         this.getProducts();
       }
+    });
+    this.productsService.subject$.subscribe(() => {
+      this.getProducts();
     });
   }
 
@@ -33,6 +37,10 @@ export class ProductsComponent implements OnInit {
         this.products = productsData[0].products;
       });
   }
+
+  // updateProduct(quantity: number){
+  //   pro
+  // }
 
   ngOnInit(): void {}
 }

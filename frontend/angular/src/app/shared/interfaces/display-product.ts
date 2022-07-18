@@ -5,4 +5,6 @@ export interface DisplayProduct {
   name: String | undefined;
   id: String | undefined;
   quantity: Number | undefined;
+  productId: String | undefined;
+  category: String | undefined;
 }

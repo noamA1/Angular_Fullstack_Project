@@ -61,6 +61,11 @@ export class ProductCardComponent implements OnInit {
       quantity: this.quantity.value,
       product: `${product._id}`,
     };
+    this.productsService
+      .updateStock(+this.quantity.value, product._id!, 'subtract')
+      .subscribe(() => {
+        this.productsService.refreshData();
+      });
 
     this.cartService.addItemToCart(this.cartItem).subscribe((result) => {
       this.cartService.refreshData();

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-cart-products',
@@ -10,11 +11,21 @@ export class CartProductsComponent implements OnInit {
   @Input() displayProduct: any;
   @Output() removeItem = new EventEmitter<any>();
 
-  constructor(private cartsService: CartService) {}
+  constructor(
+    private cartsService: CartService,
+    private productsService: ProductsService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.displayProduct);
+  }
 
-  deleteCartItem(docId: String) {
+  deleteCartItem(docId: String, productToUpdate: String) {
+    this.productsService
+      .updateStock(this.displayProduct.quantity, productToUpdate, 'add')
+      .subscribe(() => {
+        this.productsService.refreshData();
+      });
     this.cartsService.deleteItem(docId).subscribe((result) => {
       this.removeItem.emit();
       this.cartsService.refreshData();

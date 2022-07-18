@@ -96,6 +96,42 @@ exports.update = (req, res) => {
     });
 };
 
+exports.updateProductStock = (req, res) => {
+  // Find product and update it with the request body
+
+  Product.findById(req.params.productId)
+    .then((product) => {
+      if (!product) {
+        return res.status(404).send({
+          message: "Product not found with id " + req.params.productId,
+        });
+      } else {
+        Product.updateOne(
+          { _id: req.params.productId },
+          {
+            stock:
+              req.body.operation === "subtract"
+                ? (product.stock -= req.body.quantity)
+                : (product.stock += req.body.quantity),
+          },
+          { new: true }
+        ).then((updatedProduct) => {
+          res.send(updatedProduct);
+        });
+      }
+    })
+    .catch((err) => {
+      if (err.kind === "ObjectId") {
+        return res.status(404).send({
+          message: "Product not found with id " + req.params.productId,
+        });
+      }
+      return res.status(500).send({
+        message: "Error updating product with id " + req.params.productId,
+      });
+    });
+};
+
 exports.getAllProducts = (req, res) => {
   Product.find()
     .then((data) => {

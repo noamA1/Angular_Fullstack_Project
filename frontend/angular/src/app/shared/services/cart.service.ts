@@ -83,9 +83,11 @@ export class CartService {
         name: cartProductDetails?.name,
         image: cartProductDetails?.image,
         price: cartProductDetails?.price,
+        category: cartProductDetails?.category,
         quantity: cartProduct.quantity,
         totalPrice: cartProduct.totalPrice,
         id: cartProduct._id,
+        productId: cartProduct.product,
       });
     });
     // });

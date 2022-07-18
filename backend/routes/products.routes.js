@@ -12,6 +12,12 @@ module.exports = (app) => {
   // Update a product with productId
   app.put(`${urlConfig}/products/:productId`, products.update);
 
+  // Update a product with productId
+  app.put(
+    `${urlConfig}/products/updateStock/:productId`,
+    products.updateProductStock
+  );
+
   // Delete a product with productId
   app.delete(`${urlConfig}/products/:productId`, products.delete);
 };

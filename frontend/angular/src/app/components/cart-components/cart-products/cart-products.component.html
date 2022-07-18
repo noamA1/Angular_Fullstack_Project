@@ -12,7 +12,8 @@
                 <p class="card__cart-text"><strong>TotalPrice:</strong>{{displayProduct.totalPrice}}</p>
             </span>
             <mat-card-actions>
-                <button mat-icon-button (click)="deleteCartItem(displayProduct.id)" color="warn">
+                <button mat-icon-button (click)="deleteCartItem(displayProduct.id, displayProduct.productId)"
+                    color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>
             </mat-card-actions>
