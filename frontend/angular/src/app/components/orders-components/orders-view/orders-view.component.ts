@@ -10,11 +10,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CartItem } from 'src/app/shared/models/cart-item';
+
 import { Order } from 'src/app/shared/models/order';
 import { OrdersService } from 'src/app/shared/services/orders.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { saveAs } from 'file-saver';
 
 export interface DialogData {
   orderProducts: string;
@@ -82,9 +83,9 @@ export class OrdersViewComponent implements OnInit {
     enterAnimationDuration: string,
     exitAnimationDuration: string,
     cart: string,
-    orderTotalPrice: string
+    orderTotalPrice: string,
+    orderId: string
   ): void {
-    console.log(cart);
     this.cartService.getCartItemsByCartId(cart).subscribe((cartProducts) => {
       this.orderProducts = this.cartService.prepareToDisplay(
         this.allProducts!,
@@ -92,16 +93,13 @@ export class OrdersViewComponent implements OnInit {
       );
       this.dialog.open(OrderDetailsDialog, {
         width: '500px',
-
-        // enterAnimationDuration,
-        // exitAnimationDuration,
-        data: { orderProducts: this.orderProducts, orderTotalPrice },
+        height: 'fit-content',
+        data: { orderProducts: this.orderProducts, orderTotalPrice, orderId },
       });
     });
   }
 
   updateStatus(docId: String, event: MatSelectChange) {
-    // console.log(event);
     console.log(docId);
     const status = event.value;
     this.ordersService.updateOrderStatus(docId, status).subscribe((res) => {
@@ -118,8 +116,16 @@ export class OrderDetailsDialog {
   displayProducts: DisplayProduct[] | undefined;
   constructor(
     public dialogRef: MatDialogRef<OrderDetailsDialog>,
+    private ordersService: OrdersService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  downloadFile(orderId: string) {
+    this.ordersService.downloadOrderBill(orderId).subscribe((data) => {
+      const file = new File([data as any], 'name');
+      saveAs(file);
+    });
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -1,6 +1,8 @@
 const Order = require("../models/Order.model");
 const Cart = require("../models/Cart.model");
 const User = require("../models/User.model");
+const fs = require("fs");
+const path = require("path");
 
 const calculateOrderTotalPrice = async (cartId) => {
   let orderProducts = await Cart.find({ _id: cartId }).populate("products");
@@ -123,4 +125,29 @@ exports.updateOrderStatus = (req, res) => {
         message: "Error updating order with id " + req.params.orderId,
       });
     });
+};
+
+exports.createBill = (req, res) => {
+  const orderDate = new Date(req.body.order.orderDate).toDateString();
+
+  let bill = `Shopping App \nOrder number: ${req.body.order._id} \nOrder Date: ${orderDate} \nProducts List: \n\n`;
+  req.body.order.products.forEach((item) => {
+    bill += `${item.name}\n ${item.price} ₪ X  ${item.quantity} = ${item.totalPrice} ₪ \n`;
+  });
+  bill += `\n\n\nTotal Products ${req.body.order.products.length}\n
+  Total price: ${req.body.order.totalPrice} ₪\n
+  credit card: ${req.body.order.cardNumber}`;
+  fs.writeFile(`assets/bills/${req.body.order._id}.txt`, bill, (error) => {
+    if (error) {
+      console.log("Error: ");
+      console.log(error);
+    }
+    console.log("The file was saved!");
+  });
+};
+
+exports.downloadBill = (req, res) => {
+  const file = `${req.params.file}.txt`;
+  const path = "./assets/bills/" + file;
+  res.download(path);
 };

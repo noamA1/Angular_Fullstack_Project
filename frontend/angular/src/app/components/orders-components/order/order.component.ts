@@ -1,8 +1,9 @@
+import { saveAs } from 'file-saver';
 import { OrdersService } from './../../../shared/services/orders.service';
 import { Order } from 'src/app/shared/models/order';
 import { DisplayProduct } from './../../../shared/interfaces/display-product';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -15,6 +16,11 @@ import { Address } from 'src/app/shared/interfaces/address';
 import { PaymentMethod } from 'src/app/shared/interfaces/payment-method';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order',
@@ -56,7 +62,8 @@ export class OrderComponent implements OnInit {
     private router: Router,
     private ordersService: OrdersService,
     private cartService: CartService,
-    private userService: UserService
+    private userService: UserService,
+    public dialog: MatDialog
   ) {
     // this.minDate = new Date();
   }
@@ -73,7 +80,6 @@ export class OrderComponent implements OnInit {
     this.cartId = window.history.state.cart;
     this.userId = JSON.parse(localStorage.getItem('user')!).uid;
     this.userService.getSingleUser(this.userId!).subscribe((user) => {
-      console.log(user.address);
       this.addressForm.get('city')?.setValue(user.address?.city);
       this.addressForm.get('street')?.setValue(user.address?.street);
       this.addressForm.get('house')?.setValue(user.address?.houseNumber);
@@ -181,6 +187,20 @@ export class OrderComponent implements OnInit {
     console.log(this.paymentForm.get('cardNumber')?.value);
   }
 
+  openDialog(
+    // enterAnimationDuration: string,
+    // exitAnimationDuration: string,
+    orderId: String
+  ): void {
+    this.dialog.open(OrderMessageDialog, {
+      width: '500px',
+
+      // enterAnimationDuration,
+      // exitAnimationDuration,
+      data: { orderId },
+    });
+  }
+
   submit() {
     this.newOrder = {
       cart: this.cartId!,
@@ -192,10 +212,44 @@ export class OrderComponent implements OnInit {
     };
     this.ordersService.addOrder(this.newOrder).subscribe((result) => {
       console.log(result);
+      const order = {
+        products: this.orderProducts,
+        _id: result._id,
+        orderDate: result.orderDate,
+        totalPrice: result.totalPrice,
+        cardNumber: result.creditCard?.cardNumber,
+      };
+      this.ordersService.createOrderBill(order);
+      this.openDialog(result._id!);
     });
     this.cartService.updateCartStatus(this.userId!);
     // this.cartService.creatNewCart(this.userId!).subscribe((result) => {
     //   this.cartService.set(result._id!);
     // });
+  }
+}
+
+@Component({
+  selector: 'order-message-dialog',
+  templateUrl: 'order-message-dialog.html',
+})
+export class OrderMessageDialog {
+  constructor(
+    public dialogRef: MatDialogRef<OrderMessageDialog>,
+    private ordersService: OrdersService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+  downloadBill() {
+    this.ordersService
+      .downloadOrderBill(this.data.orderId)
+      .subscribe((data) => {
+        const file = new File([data as any], 'name');
+        saveAs(file);
+      });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

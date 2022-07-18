@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dbConfig = require("./common/databaseConfig");
 const serverConnections = require("./common/config");
+// const path = require("path");
+// const { urlConfig } = require("./common/config");
 
 const app = express();
 app.use(cors());
@@ -26,6 +28,14 @@ require("./routes/users.routes")(app);
 require("./routes/cart.routes")(app);
 require("./routes/uploadFiles.routes")(app);
 // require("./routes/products.routes")(app);
+
+// app.get(`${urlConfig}/users/orders/bill/:file(*)`, function (req, res, next) {
+//   // this routes all types of file
+
+//   var file = req.params.file;
+//   var filePath = path.resolve(".") + "/assets/bills/" + file;
+//   res.download(filePath); // magic of download fuction
+// });
 
 app.listen(serverConnections.port, () => {
   console.log(`Server is listening on port ${serverConnections.port}`);

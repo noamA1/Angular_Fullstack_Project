@@ -48,7 +48,8 @@
             <ng-container matColumnDef="viewOrder">
                 <th mat-header-cell *matHeaderCellDef> View Order </th>
                 <td mat-cell *matCellDef="let row"> <button mat-button
-                        (click)="openDialog('1500ms', '1000ms', row.cart, row.totalPrice)" color="primary">View</button>
+                        (click)="openDialog('1500ms', '1000ms', row.cart, row.totalPrice, row._id)"
+                        color="primary">View</button>
                 </td>
             </ng-container>
 

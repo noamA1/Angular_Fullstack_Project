@@ -2,6 +2,7 @@ import { Address } from '../interfaces/address';
 import { PaymentMethod } from '../interfaces/payment-method';
 
 export class Order {
+  _id?: String | undefined;
   cart: String = '';
   orderDate?: Date | undefined;
   deliveryDate: Date | undefined;

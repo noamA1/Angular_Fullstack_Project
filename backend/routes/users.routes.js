@@ -24,4 +24,11 @@ module.exports = (app) => {
 
   // Retrieve all user orders by user id
   app.get(`${urlConfig}/orders`, order.findAll);
+
+  // routes for creating and download bills
+  // create order bill file
+  app.post(`${urlConfig}/users/orders/bill`, order.createBill);
+
+  // download order bill file
+  app.get(`${urlConfig}/users/orders/bill/:file`, order.downloadBill);
 };
