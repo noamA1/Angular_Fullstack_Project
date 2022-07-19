@@ -1,3 +1,4 @@
+import { Product } from './../../../shared/models/product';
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +11,7 @@ import { ProductsService } from 'src/app/shared/services/products.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  products: any;
+  products: Product[] | undefined;
   categoryName: String = '';
 
   constructor(
@@ -31,16 +32,17 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.categoriesService
-      .getProducts(this.categoryName)
-      .subscribe((productsData) => {
-        this.products = productsData[0].products;
-      });
+    if (this.categoryName) {
+      this.categoriesService
+        .getProducts(this.categoryName)
+        .subscribe((productsData) => {
+          this.productsService.setProducts = productsData[0].products;
+          this.products = this.productsService.getProducts;
+        });
+    } else {
+      this.products = this.productsService.getProducts;
+    }
   }
-
-  // updateProduct(quantity: number){
-  //   pro
-  // }
 
   ngOnInit(): void {}
 }

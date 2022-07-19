@@ -28,6 +28,7 @@ const routes: Routes = [
   {
     path: 'products',
     children: [
+      { path: '', component: ProductsComponent },
       { path: 'add', component: AddProductComponent },
       { path: 'edit', component: AddProductComponent },
       { path: ':categoryName', component: ProductsComponent },

@@ -24,41 +24,42 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   handleRouteChange = () => {
-    console.log(this.auth.getUser());
+    // console.log(this.auth.getUser());
     const url = this.router.url;
     const keys = this.router.url.split('/');
     if (this.router.url.endsWith('/')) {
       this.title = `Welcom back ${this.auth.getUser().displayName}`;
     }
-    if (this.router.url.endsWith('categories')) {
+    if (url.endsWith('categories')) {
       this.title = 'Our categoies';
-      console.log(this.title);
     }
-    if (this.router.url.includes('categories')) {
-      if (this.router.url.endsWith('edit')) {
+    if (url.includes('categories')) {
+      if (url.endsWith('edit')) {
         this.title = 'edit category';
       }
-      if (this.router.url.endsWith('add')) {
+      if (url.endsWith('add')) {
         this.title = 'add category';
       }
     }
-    if (this.router.url.includes('products')) {
-      if (this.router.url.endsWith('edit')) {
+    if (url.includes('products')) {
+      if (url.endsWith('edit')) {
         this.title = 'edit product';
-      } else if (this.router.url.endsWith('add')) {
+      } else if (url.endsWith('add')) {
         this.title = 'add product';
       } else if (keys[2]) {
         this.title = `our ${keys[2]} list`;
+      } else if (url.endsWith('')) {
+        this.title = 'Search result';
       }
     }
-    if (this.router.url.includes('profile')) {
-      if (this.router.url.endsWith('edit')) {
+    if (url.includes('profile')) {
+      if (url.endsWith('edit')) {
         this.title = 'edit your profile';
-      } else if (this.router.url.endsWith('')) {
+      } else if (url.endsWith('')) {
         this.title = 'Your profile';
       }
     }
-    if (this.router.url.endsWith('orders')) {
+    if (url.endsWith('orders')) {
       if (this.auth.getUser().role === 'user') {
         this.title = 'Your Previous Orders';
       } else {
@@ -66,12 +67,12 @@ export class HeaderComponent implements OnInit {
       }
     }
 
-    if (this.router.url.includes('authentication')) {
-      if (this.router.url.endsWith('log-in')) {
+    if (url.includes('authentication')) {
+      if (url.endsWith('log-in')) {
         this.title = 'log in';
-      } else if (this.router.url.endsWith('registration')) {
+      } else if (url.endsWith('registration')) {
         this.title = 'Register';
-      } else if (this.router.url.endsWith('forgot-password')) {
+      } else if (url.endsWith('forgot-password')) {
         this.title = 'forgot password';
       }
     }

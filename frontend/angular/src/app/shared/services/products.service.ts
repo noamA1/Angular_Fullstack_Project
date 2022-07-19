@@ -9,6 +9,7 @@ import { Product } from '../models/product';
 export class ProductsService {
   subject$: Subject<any> = new Subject<any>();
   URL = 'http://localhost:5000/api/products';
+  products: Product[] | undefined;
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,14 @@ export class ProductsService {
     return this.http.post(`${this.URL}-image`, image).subscribe((res) => {
       console.log(res);
     });
+  }
+
+  set setProducts(products: Product[]) {
+    this.products = products;
+  }
+
+  get getProducts() {
+    return this.products;
   }
 
   getAllProducts(): Observable<Product[]> {

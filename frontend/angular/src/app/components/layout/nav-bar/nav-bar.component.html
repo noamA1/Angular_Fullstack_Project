@@ -16,7 +16,26 @@
             <!-- <button mat-button routerLink="/accounts">All Clients Accounts</button> -->
         </div>
         <span class="example-spacer"></span>
+        <div>
+            <form class="example-form">
+                <mat-form-field class="search__form-field" appearance="standard">
+                    <mat-label>Search</mat-label>
+                    <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+                    <button mat-icon-button matSuffix (click)="search()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </form>
+        </div>
+        <span class="example-spacer"></span>
         <!-- [matBadge]="numOfProductsInCart" MatBadgePosition="above before" matBadgeColor="warn" -->
+
+
         <button type="button" mat-button (click)="sidenav.toggle()">
             <mat-icon>
                 shopping_cart
@@ -46,8 +65,8 @@
                 </button>
             </mat-menu>
 
-        </div>
 
+        </div>
         <!-- <div *ngIf="auth.isLoggedIn">
             <button mat-button [matMenuTriggerFor]="menu">
                 <mat-icon>account_circle</mat-icon>

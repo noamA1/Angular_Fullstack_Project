@@ -1,10 +1,15 @@
+import { FormControl } from '@angular/forms';
+import { map, Observable, startWith } from 'rxjs';
+import { Product } from './../../../shared/models/product';
+import { ProductsService } from 'src/app/shared/services/products.service';
 import { CartService } from './../../../shared/services/cart.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Category } from 'src/app/shared/models/category';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-nav-bar',
@@ -17,10 +22,18 @@ export class NavBarComponent implements OnInit {
   userRole: string | undefined;
   displayName: String | undefined;
   numOfProductsInCart: number | undefined;
+  allProducts: Product[] | undefined;
+  searchKey: string | undefined;
+  options: String[] = [];
+  filteredOptions: Observable<String[]> | undefined;
+  searchControl = new FormControl('');
+  @ViewChild(MatAutocompleteTrigger)
+  autocomplete!: MatAutocompleteTrigger;
 
   constructor(
     private categoriesService: CategoriesService,
     private cartService: CartService,
+    private productsService: ProductsService,
     private router: Router,
     public auth: AuthService
   ) {}
@@ -32,6 +45,28 @@ export class NavBarComponent implements OnInit {
     });
     this.userRole = JSON.parse(localStorage.getItem('user')!).role;
     this.isLogin = this.auth.isLoggedIn;
+    this.productsService.getAllProducts().subscribe((data) => {
+      this.allProducts = data;
+      this.setOptions();
+    });
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => this.filter(value || ''))
+    );
+  }
+
+  filter(value: string): String[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options?.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
+  }
+
+  setOptions() {
+    this.allProducts?.forEach((product) => {
+      this.options?.push(product.name);
+    });
   }
 
   updateCartProducts(length: any) {
@@ -41,6 +76,18 @@ export class NavBarComponent implements OnInit {
 
   navigateMenu(categry: String) {
     this.router.navigate([`/products/${categry}`]);
+  }
+
+  search() {
+    this.autocomplete.closePanel();
+    const searchKey = this.searchControl.value;
+
+    const fillteredProducts = this.allProducts!.filter((product) =>
+      product.name.toLocaleLowerCase().includes(searchKey)
+    );
+    this.productsService.setProducts = fillteredProducts;
+    this.productsService.refreshData();
+    this.router.navigate(['/products']);
   }
 
   signOut() {
