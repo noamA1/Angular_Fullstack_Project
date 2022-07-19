@@ -87,7 +87,9 @@ export class NavBarComponent implements OnInit {
     );
     this.productsService.setProducts = fillteredProducts;
     this.productsService.refreshData();
-    this.router.navigate(['/products']);
+    this.router.navigateByUrl('/products', {
+      state: { searchWord: this.searchControl.value },
+    });
   }
 
   signOut() {

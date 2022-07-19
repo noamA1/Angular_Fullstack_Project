@@ -1,4 +1,14 @@
 <div class="container">
+    <div *ngIf="products?.length === 0" class="no-results-container">
+        <div class="title">
+            No Results
+        </div>
+        <div class="content">
+            Sorry we couldn't find products any products matched your search,
+            <span>Please try again with different name</span>
+        </div>
+
+    </div>
     <div class="container__cards">
         <app-product-card *ngFor="let product of products" [product]="product" [categoryName]="categoryName">
         </app-product-card>
