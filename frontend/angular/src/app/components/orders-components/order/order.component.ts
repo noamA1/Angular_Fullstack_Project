@@ -21,6 +21,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { FilesHandleService } from 'src/app/shared/services/files-handle.service';
 
 @Component({
   selector: 'app-order',
@@ -63,6 +64,7 @@ export class OrderComponent implements OnInit {
     private ordersService: OrdersService,
     private cartService: CartService,
     private userService: UserService,
+    private filesService: FilesHandleService,
     public dialog: MatDialog
   ) {
     // this.minDate = new Date();
@@ -219,7 +221,7 @@ export class OrderComponent implements OnInit {
         totalPrice: result.totalPrice,
         cardNumber: result.creditCard?.cardNumber,
       };
-      this.ordersService.createOrderBill(order);
+      this.filesService.createOrderBill(order);
       this.openDialog(result._id!);
     });
     this.cartService.updateCartStatus(this.userId!);
@@ -237,16 +239,15 @@ export class OrderMessageDialog {
   constructor(
     public dialogRef: MatDialogRef<OrderMessageDialog>,
     private ordersService: OrdersService,
+    private filesService: FilesHandleService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   downloadBill() {
-    this.ordersService
-      .downloadOrderBill(this.data.orderId)
-      .subscribe((data) => {
-        const file = new File([data as any], 'name');
-        saveAs(file);
-      });
+    this.filesService.downloadOrderBill(this.data.orderId).subscribe((data) => {
+      const file = new File([data as any], 'name');
+      saveAs(file);
+    });
   }
 
   onNoClick(): void {

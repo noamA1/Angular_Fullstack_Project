@@ -1,3 +1,4 @@
+import { FilesHandleService } from './../../../shared/services/files-handle.service';
 import { Product } from './../../../shared/models/product';
 import { DisplayProduct } from './../../../shared/interfaces/display-product';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
@@ -55,7 +56,8 @@ export class OrdersViewComponent implements OnInit {
     private ordersService: OrdersService,
     public dialog: MatDialog,
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private filesService: FilesHandleService
   ) {}
   ngOnInit(): void {
     this.ordersService.getAllOrders().subscribe((result) => {
@@ -116,12 +118,12 @@ export class OrderDetailsDialog {
   displayProducts: DisplayProduct[] | undefined;
   constructor(
     public dialogRef: MatDialogRef<OrderDetailsDialog>,
-    private ordersService: OrdersService,
+    private filesService: FilesHandleService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   downloadFile(orderId: string) {
-    this.ordersService.downloadOrderBill(orderId).subscribe((data) => {
+    this.filesService.downloadOrderBill(orderId).subscribe((data) => {
       const file = new File([data as any], 'name');
       saveAs(file);
     });

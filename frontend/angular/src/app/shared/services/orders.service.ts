@@ -9,7 +9,6 @@ import { Order } from '../models/order';
 export class OrdersService {
   USERS_ORDERS_URL = 'http://localhost:5000/api/users/orders';
   ORDERS_URL = 'http://localhost:5000/api/orders';
-  BILL_URL = 'http://localhost:5000/api/users/orders/bill';
 
   constructor(private http: HttpClient) {}
 
@@ -29,18 +28,6 @@ export class OrdersService {
   updateOrderStatus(orderId: String, status: String): Observable<Order> {
     return this.http.put<Order>(`${this.USERS_ORDERS_URL}/${orderId}`, {
       status,
-    });
-  }
-
-  downloadOrderBill(orderId: String) {
-    return this.http.get(`${this.BILL_URL}/${orderId}`, {
-      responseType: 'base64' as 'json',
-    });
-  }
-
-  createOrderBill(order: any) {
-    this.http.post(`${this.BILL_URL}`, { order }).subscribe((res) => {
-      console.log(res);
     });
   }
 }

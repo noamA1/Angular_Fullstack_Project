@@ -1,3 +1,4 @@
+import { FilesHandleService } from './../../../shared/services/files-handle.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -43,6 +44,7 @@ export class AddProductComponent implements OnInit {
     private fb: FormBuilder,
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
+    private filesService: FilesHandleService,
     private location: Location
   ) {}
 
@@ -110,7 +112,7 @@ export class AddProductComponent implements OnInit {
 
     if (this.image) {
       formData.append('file', this.image.data);
-      this.productsService.uploadImage(formData);
+      this.filesService.uploadImage(formData, 'products-image');
     }
 
     this.product = {

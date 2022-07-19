@@ -15,14 +15,6 @@ export class CategoriesService {
     return this.http.get<Category[]>(`${this.URL}/categories`);
   }
 
-  uploadImage(image: FormData) {
-    return this.http
-      .post(`${this.URL}/category-image`, image)
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
-
   addCategory(newCategory: Category): Observable<Category> {
     return this.http.post<Category>(`${this.URL}/categories`, newCategory);
   }

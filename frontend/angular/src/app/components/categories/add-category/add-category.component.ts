@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Router } from '@angular/router';
+import { FilesHandleService } from 'src/app/shared/services/files-handle.service';
 
 @Component({
   selector: 'app-add-category',
@@ -23,6 +24,7 @@ export class AddCategoryComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private fb: FormBuilder,
+    private filesService: FilesHandleService,
     private router: Router
   ) {}
 
@@ -84,7 +86,7 @@ export class AddCategoryComponent implements OnInit {
 
     if (this.image) {
       formData.append('file', this.image.data);
-      this.categoriesService.uploadImage(formData);
+      this.filesService.uploadImage(formData, 'category-image');
     }
     this.category = {
       name: this.categoryForm.value.name,
