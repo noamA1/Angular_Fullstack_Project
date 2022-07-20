@@ -1,41 +1,44 @@
 <div class="container">
-    <mat-card class="card__form">
+    <mat-card class="form">
         <mat-card-content>
             <!-- <img class="card__picture" src="../../../../../../assets/products-images/{{product!.image}}"> -->
             <div class="card__info">
                 <mat-list role="list">
-                    <mat-list-item role="listitem"><strong>First name: </strong>{{user?.firstName}}</mat-list-item>
-                    <mat-list-item role="listitem"><strong>Last name: </strong>{{user?.lastName}}</mat-list-item>
-                    <mat-list-item role="listitem"><strong>ID: </strong>{{user?.userId}}</mat-list-item>
-                    <mat-list-item role="listitem"><strong>Email: </strong>{{user?.email}}</mat-list-item>
-                    <mat-list-item role="listitem"><strong>Phone: </strong>{{user?.phoneNumber}}</mat-list-item>
-                    <mat-list-item role="listitem"><strong>Address: </strong>
-                        <address>
-                            <!-- <mat-list role="list"> -->
-                            <!-- <mat-list-item role="listitem"> -->
-                            <strong>City: </strong>{{user?.address?.city}}
-                            <!-- </mat-list-item> -->
-                            <!-- <mat-list-item role="listitem"> -->
-                            <strong>Street: </strong>{{user?.address?.street}}
-                            <!-- </mat-list-item> -->
-                            <!-- <mat-list-item role="listitem"> -->
-                            <strong>House number: </strong>{{user?.address?.houseNumber}}
-                            <!-- </mat-list-item> -->
-                            <!-- <mat-list-item role="listitem"> -->
-                            <strong>Zip code: </strong>{{user?.address?.zipCode}}
-                            <!-- </mat-list-item> -->
-                            <!-- </mat-list> -->
-                        </address>
-                    </mat-list-item>
-
+                    <h3>First name: </h3>
+                    <p>{{user?.firstName}}</p>
+                    <h3>Last name: </h3>
+                    <p>{{user?.lastName}}</p>
+                    <h3>ID: </h3>
+                    <p>{{user?.userId}}</p>
+                    <h3>Email: </h3>
+                    <p>{{user?.email}}</p>
+                    <h3>Phone: </h3>
+                    <p>{{user?.phoneNumber}}</p>
+                    <h3>Address: </h3>
+                    <div class="address-container">
+                        <div>
+                            <h4>City: </h4>
+                            <p>{{user?.address?.city}}</p>
+                        </div>
+                        <div>
+                            <h4>Street: </h4>
+                            <p>{{user?.address?.street}}</p>
+                        </div>
+                        <div>
+                            <h4>House: </h4>
+                            <p>{{user?.address?.houseNumber}}</p>
+                        </div>
+                        <div>
+                            <h4>Zip code: </h4>
+                            <p>{{user?.address?.zipCode}}</p>
+                        </div>
+                    </div>
                 </mat-list>
-
             </div>
         </mat-card-content>
         <mat-card-footer class="card__footer">
-
             <mat-card-actions class="card__buttons">
-                <button mat-icon-button (click)="edit()" color="primary">
+                <button mat-icon-button (click)="edit()" color="primary"> Edit
                     <mat-icon>edit</mat-icon>
                 </button>
             </mat-card-actions>

@@ -1,11 +1,17 @@
-<mat-list-item role="listitem">
-    <span>
-        <img style="width: 45px; height:45px ;" src="../../../../assets/products-images/{{displayItem!.image}}">
-    </span>
-    <span>
-        <strong>Name:</strong>{{displayItem!.name}}
-        <strong>Price:</strong>{{displayItem!.price}}
-        <strong>quantity:</strong>{{displayItem!.quantity}}
-        <strong>TotalPrice:</strong>{{displayItem!.totalPrice}}
-    </span>
-</mat-list-item>
+<div class="card card__order-item">
+    <mat-card>
+        <mat-card-content>
+            <span>
+                <img style="width: 60px; height:60px ;" src="../../../../assets/products-images/{{displayItem!.image}}">
+            </span>
+            <!-- <span> -->
+            <p class="card__cart-text"><strong>Name:</strong>{{displayItem!.name}}</p>
+            <p class="card__cart-text"><strong>Price:</strong>{{displayItem!.price}}</p>
+            <p class="card__cart-text"><strong>quantity:</strong>{{displayItem!.quantity}}</p>
+            <p class="card__cart-text"><strong>TotalPrice:</strong>{{displayItem!.totalPrice}}</p>
+            <!-- </span> -->
+
+        </mat-card-content>
+    </mat-card>
+
+</div>

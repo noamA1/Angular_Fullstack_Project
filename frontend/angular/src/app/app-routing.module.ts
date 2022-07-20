@@ -1,3 +1,4 @@
+import { VerifyEmailComponent } from './components/auth-components/verify-email/verify-email.component';
 import { ProductsComponent } from './components/products-components/products/products.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'log-in', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
+      { path: 'verification', component: VerifyEmailComponent },
     ],
   },
 

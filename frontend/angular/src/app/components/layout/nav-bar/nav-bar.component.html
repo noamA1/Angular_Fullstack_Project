@@ -1,23 +1,25 @@
 <nav>
-    <mat-toolbar class="app-header" color="primary">
-
+    <mat-toolbar class="nav-bar">
         <span>Shopping App</span>
         <div>
-            <button mat-button [matMenuTriggerFor]="menu">Categories</button>
-            <mat-menu #menu="matMenu" class="categories_menu">
-                <div *ngFor="let category of categoriesMenu">
-                    <button class="categories_menu-btn" (click)="navigateMenu(category.name)"
-                        mat-menu-item>{{category.name}}</button>
-                </div>
-                <mat-divider></mat-divider>
-                <button mat-menu-item routerLink="/categories/add">Add Category</button>
+            <button mat-button class="nav-btn" [matMenuTriggerFor]="menu">Categories</button>
+            <mat-menu #menu="matMenu" class="nav-bar__menu">
+                <mat-grid-list cols="2" rowHeight="2:1">
+                    <mat-grid-tile *ngFor="let category of categoriesMenu">
+                        <button class="menu__btn" (click)="navigateMenu(category.name)"
+                            mat-menu-item>{{category.name}}</button>
+                    </mat-grid-tile>
+                    <mat-divider></mat-divider>
+                </mat-grid-list>
+                <button class="menu__btn" mat-menu-item routerLink="/categories/add">Add Category</button>
             </mat-menu>
-            <button mat-button routerLink="/orders">All Orders</button>
+            <button class="nav-btn" mat-button routerLink="/products/add"> Add Product</button>
+            <button class="nav-btn" mat-button routerLink="/orders">All Orders</button>
             <!-- <button mat-button routerLink="/accounts">All Clients Accounts</button> -->
         </div>
         <span class="example-spacer"></span>
         <div>
-            <form class="example-form">
+            <form class="form">
                 <mat-form-field class="search__form-field" appearance="standard">
                     <mat-label>Search</mat-label>
                     <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">

@@ -1,5 +1,5 @@
 <div class="container">
-    <mat-card class="card__form">
+    <mat-card class="form">
         <!-- <mat-card-header>
             <mat-card-title class="card-header">
                 Login
@@ -7,14 +7,14 @@
         </mat-card-header> -->
         <mat-card-content>
             <div class="card__content">
-                <mat-form-field appearance="standard">
+                <mat-form-field class="form__field" appearance="standard">
                     <mat-label>Enter your email</mat-label>
                     <input matInput placeholder="pat@example.com" [formControl]="emailFormControl" required>
                     <mat-icon class="input-icon" matSuffix>mail</mat-icon>
                     <mat-error *ngIf="emailFormControl.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="form__field">
                     <mat-label>Enter your password</mat-label>
                     <input matInput type="text" [formControl]="passwordFormControl" #userPassword minlength="6"
                         [type]="hide ? 'password' : 'text'">
@@ -30,7 +30,7 @@
             </div>
         </mat-card-content>
         <mat-card-actions class="card-actions">
-            <button mat-raised-button color="primary" (click)="signIn()">
+            <button class="btn" (click)="signIn()">
                 Log In
             </button>
         </mat-card-actions>

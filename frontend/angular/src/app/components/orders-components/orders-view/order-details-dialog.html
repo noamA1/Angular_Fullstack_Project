@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Order Details</h1>
+<h1 mat-dialog-title class="heading-3">Order Details</h1>
 <div mat-dialog-content>
     <!-- <div > -->
     <div *ngFor="let product of data.orderProducts">
@@ -29,9 +29,11 @@
     <!-- </span> -->
 
 </div>
-<div mat-dialog-actions style="justify-content: center; padding: 0;">
-    <button mat-button (click)="onNoClick()">OK</button>
-    <button mat-button (click)="downloadFile(data.orderId)">Download</button>
+<div mat-dialog-actions class="buttons-group">
+    <button class="btn btn__dialog" (click)="onNoClick()">OK</button>
+    <button class="btn btn__download" (click)="downloadFile(data.orderId)">
+        <mat-icon class="icon">cloud_download</mat-icon> Download
+    </button>
 
 </div>
 <!-- </div> -->

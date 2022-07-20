@@ -2,13 +2,13 @@
     <div *ngFor="let product of displayProducts">
         <app-cart-products [displayProduct]="product" (removeItem)="updateCart($event)">
         </app-cart-products>
-
     </div>
-
 </div>
+
 <mat-card-footer class="card__footer">
     Overall Price: {{overallPrice}}
-    <button (click)="placeOrder()" mat-icon-button color="primary">
+    <br>
+    <button class="btn btn__download" (click)="placeOrder()">
         Place order
     </button>
 </mat-card-footer>

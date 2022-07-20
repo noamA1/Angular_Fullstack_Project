@@ -1,7 +1,7 @@
 <div class="container">
-    <mat-card class="card__form">
+    <mat-card class="form">
         <mat-card-header>
-            <mat-card-title>{{title}}</mat-card-title>
+            <mat-card-title class="heading-3">{{title}}</mat-card-title>
         </mat-card-header>
 
         <mat-card-content class="card__content">
@@ -32,14 +32,14 @@
                 </mat-form-field>
 
                 <div class="file-upload">
-                    <mat-label>Choose product image</mat-label>
+                    <mat-label class="heading-4">Choose product image</mat-label>
                     <input MatFormFieldControl accept="image/*" class="card__file-input" #fileUpload type="file"
                         name="image" (change)="selectImage($event)">
-                    <div class="file-upload">
+                    <div class="heading-4">
 
                         {{fileName || "No file uploaded yet."}}
 
-                        <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+                        <button mat-mini-fab color="primary" class="btn__upload" (click)="fileUpload.click()">
                             <mat-icon>attach_file</mat-icon>
                         </button>
                     </div>
@@ -49,7 +49,7 @@
             </div>
         </mat-card-content>
         <mat-card-actions class="card-actions">
-            <button mat-flat-button color="primary" (click)="onSubmit()"
+            <button class="btn" color="primary" (click)="onSubmit()"
                 [disabled]="productForm.invalid || productCategory.hasError('required')">Submit</button>
             <!-- <button mat-flat-button routerLink="/accounts">Cancel</button> -->
         </mat-card-actions>

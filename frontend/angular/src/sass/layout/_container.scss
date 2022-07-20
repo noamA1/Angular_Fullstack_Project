@@ -1,10 +1,12 @@
+@import "../abstracts/variables";
 .container {
   width: 90vw;
   position: absolute;
-  top: 15vh;
+  top: 20vh;
   right: 5vw;
   left: 5vw;
   z-index: 100;
+  font-family: $font-display;
   &__cart {
     display: grid;
     grid-template-columns: 80%;

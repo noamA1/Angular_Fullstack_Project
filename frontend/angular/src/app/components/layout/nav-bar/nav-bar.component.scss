@@ -1,8 +1,3 @@
-.categories_menu {
-  display: grid;
-  grid-template-rows: 100%;
-}
-
 .mat-drawer,
 .mat-drawer-inner-container {
   overflow: hidden !important;
@@ -13,4 +8,11 @@
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.search__form-field {
+  font-size: 0.9rem;
+}
+::ng-deep .mat-menu-panel {
+  padding: 0 10px !important;
 }

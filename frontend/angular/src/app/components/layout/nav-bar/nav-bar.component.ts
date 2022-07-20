@@ -65,7 +65,7 @@ export class NavBarComponent implements OnInit {
 
   setOptions() {
     this.allProducts?.forEach((product) => {
-      this.options?.push(product.name);
+      this.options?.push(product.name.toLocaleLowerCase());
     });
   }
 

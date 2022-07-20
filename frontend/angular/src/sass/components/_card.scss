@@ -1,16 +1,12 @@
+// @import "../../sass/abstracts/variables";
 .card {
   width: fit-content;
+  height: fit-content;
 
-  &__form {
-    box-shadow: 5px 5px 15px #777 !important;
-    display: flex !important;
-    flex-direction: column;
-    align-items: center !important;
-    text-align: center;
-    left: 30%;
-    right: 30%;
-    max-width: 40%;
+  &__title-group {
+    justify-content: center !important;
   }
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -26,6 +22,14 @@
     width: 100%;
     // margin: 10px;
   }
+  &__item-product {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    // margin: 10px;
+  }
+
   &__cart-text {
     margin: 10px;
     width: 100%;
@@ -47,12 +51,7 @@
     flex-direction: column;
     align-items: center;
   }
-  &__form-field {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 75%;
-  }
+
   &__footer {
     text-align: center;
   }

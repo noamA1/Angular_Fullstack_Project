@@ -2,15 +2,14 @@
     <div class="container__cards">
         <div *ngFor="let category of allCategories">
             <mat-card class="card">
-                <mat-card-title-group>
-                    <mat-card-title>{{category.name}}</mat-card-title>
-
+                <mat-card-title-group class="card__title-group">
+                    <mat-card-title class="heading-3">{{category.name}}</mat-card-title>
                 </mat-card-title-group>
                 <mat-card-content>
                     <img class="card__picture" src="../../../../../../assets/categoriesImeges/{{category.image}}">
                 </mat-card-content>
                 <mat-card-footer class="card__footer">
-                    <button mat-stroked-button routerLink="/products/{{category.name}}" color="primary">Show
+                    <button class="btn" routerLink="/products/{{category.name}}" color="primary">Show
                         products</button>
                     <mat-card-actions class="card__buttons">
                         <button mat-icon-button (click)="editCategory(category)" color="primary">

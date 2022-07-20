@@ -13,9 +13,10 @@ export class VerifyEmailComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    // this.authService.userData.subscribe(data => {
+    this.userData = JSON.parse(localStorage.getItem('user')!);
+    // this.authService.userData.subscribe((data) => {
     //   this.userData = data;
-    // })
+    // });
   }
 
   // navigateToLogin(){

@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "abstracts/variables";
+html,
+body {
+  height: 100vh;
+}
+body {
+  margin: 0;
+  font-family: $font-display;
+  font-weight: 400;
+}
+
+.mat-card {
+  font-family: $font-display;
+}
+.mat-card-header {
+  justify-content: center;
+}
+
+@import "abstracts/typography";
+@import "abstracts/variables";
+
+@import "layout/grid";
+@import "layout/container";
+@import "layout/images";
+
+@import "components/card";
+@import "components/form";
+@import "components/nav-bar";
+
+// @import "../src/app/components/layout/header/header.component.scss";
+// @import "../src/app/components/layout/nav-bar/nav-bar.component.scss";
