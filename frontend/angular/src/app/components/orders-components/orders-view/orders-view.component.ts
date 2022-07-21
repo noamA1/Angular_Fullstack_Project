@@ -56,20 +56,35 @@ export class OrdersViewComponent implements OnInit {
     private ordersService: OrdersService,
     public dialog: MatDialog,
     private cartService: CartService,
-    private productsService: ProductsService,
-    private filesService: FilesHandleService
+    private productsService: ProductsService
   ) {}
   ngOnInit(): void {
-    this.ordersService.getAllOrders().subscribe((result) => {
-      this.orders = result;
-      this.dataSource = new MatTableDataSource(this.orders);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+    this.user = JSON.parse(localStorage.getItem('user')!);
+    this.getOrders();
     this.productsService.getAllProducts().subscribe((data) => {
       this.allProducts = data;
     });
-    this.user = JSON.parse(localStorage.getItem('user')!);
+  }
+
+  getOrders() {
+    if (this.user.role === 'user') {
+      this.ordersService.getUserOrders(this.user.uid).subscribe((result) => {
+        this.orders = result;
+        console.log(result);
+        this.setTableDataSource(result);
+      });
+    } else {
+      this.ordersService.getAllOrders().subscribe((result) => {
+        this.orders = result;
+        this.setTableDataSource(result);
+      });
+    }
+  }
+
+  setTableDataSource(orders: Order[]) {
+    this.dataSource = new MatTableDataSource(orders);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {

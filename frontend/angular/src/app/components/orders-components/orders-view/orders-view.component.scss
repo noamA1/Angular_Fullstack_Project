@@ -14,8 +14,10 @@ table {
   font-family: $font-display;
 }
 
-th {
+::ng-deep.mat-sort-header-container {
+  justify-content: center;
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 td,

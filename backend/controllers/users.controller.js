@@ -151,7 +151,7 @@ exports.getUserOrders = async (req, res) => {
     let orders = await User.find({
       _id: req.params.userId,
     }).populate("orders");
-    res.json(orders);
+    res.json(orders[0].orders);
   } catch (err) {
     if (err) {
       if (err.kind === "ObjectId") {
