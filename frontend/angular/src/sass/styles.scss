@@ -10,7 +10,8 @@ body {
   font-weight: 400;
 }
 
-.mat-card {
+.mat-card,
+.mat-expansion-panel-headerl {
   font-family: $font-display;
 }
 .mat-card-header {

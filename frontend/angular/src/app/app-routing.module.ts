@@ -48,6 +48,7 @@ const routes: Routes = [
     children: [
       { path: 'log-in', component: LoginComponent },
       { path: 'registration', component: RegistrationComponent },
+      { path: 'add-employee', component: RegistrationComponent },
       { path: 'forgot-password', component: ForgotPasswordComponent },
       { path: 'verification', component: VerifyEmailComponent },
     ],

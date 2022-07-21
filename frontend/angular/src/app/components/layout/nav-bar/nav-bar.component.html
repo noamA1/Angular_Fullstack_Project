@@ -20,7 +20,7 @@
         <span class="example-spacer"></span>
         <div>
             <form class="form">
-                <mat-form-field class="search__form-field" appearance="standard">
+                <mat-form-field class="search__form-field form__field" appearance="standard">
                     <mat-label>Search</mat-label>
                     <input type="text" matInput [formControl]="searchControl" [matAutocomplete]="auto">
                     <button mat-icon-button matSuffix (click)="search()">
@@ -53,7 +53,8 @@
                     Welcome,&nbsp;<span>{{auth.getUser()?.displayName}}</span>
                 </button>
                 <mat-divider></mat-divider>
-                <button *ngIf="auth.getUser()?.role === 'manager'" routerLink="/add-user" mat-menu-item>
+                <button *ngIf="auth.getUser()?.role === 'manager'" routerLink="authentication/add-employee"
+                    mat-menu-item>
                     <mat-icon>person_add</mat-icon>
                     <span>Add Employee</span>
                 </button>

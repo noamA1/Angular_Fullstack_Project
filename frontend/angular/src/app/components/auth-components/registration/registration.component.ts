@@ -1,7 +1,7 @@
 import { CdkStepper } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'src/app/shared/interfaces/address';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -15,7 +15,8 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   hide = true;
@@ -25,6 +26,8 @@ export class RegistrationComponent implements OnInit {
   displayName: string | undefined;
   step = 0;
   userAddress: Address | undefined;
+  isLogin: boolean | undefined;
+  title: string = 'Register';
 
   registerForm = this.fb.group({
     tel: [
@@ -50,7 +53,17 @@ export class RegistrationComponent implements OnInit {
     zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const url = this.router.url;
+    if (url.endsWith('registration')) {
+      this.isLogin = false;
+      this.registerForm.get('role')?.disable();
+    } else {
+      this.registerForm.get('role')?.enable();
+      this.title = 'add employee';
+      this.isLogin = true;
+    }
+  }
 
   setStep(index: number) {
     this.step = index;

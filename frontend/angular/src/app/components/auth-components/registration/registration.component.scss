@@ -1,4 +1,10 @@
 @import "../../../../sass/abstracts/variables";
+::ng-deep.mat-expansion-panel-content,
+.mat-radio-button,
+.mat-expansion-panel-header {
+  font-family: inherit;
+  font-size: 16px;
+}
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
   flex-basis: 0;

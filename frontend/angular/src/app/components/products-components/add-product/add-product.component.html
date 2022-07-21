@@ -6,22 +6,22 @@
 
         <mat-card-content class="card__content">
             <div [formGroup]="productForm">
-                <mat-form-field class="card__content__form" MatFormFieldControl appearance="standard">
+                <mat-form-field class="card__content__form form__field" MatFormFieldControl appearance="standard">
                     <mat-label>Enter product name</mat-label>
                     <input matInput type="text" [(ngModel)]="productName" formControlName="name" required>
                     <mat-error *ngIf="productForm.get('name')?.errors">{{getErrorMessage("name")}}</mat-error>
                 </mat-form-field>
-                <mat-form-field class="card__content__form" MatFormFieldControl appearance="standard">
+                <mat-form-field class="card__content__form form__field" MatFormFieldControl appearance="standard">
                     <mat-label>Enter product price</mat-label>
                     <input matInput type="number" [(ngModel)]="productPrice" formControlName="price" required>
                     <mat-error *ngIf="productForm.get('price')?.errors">{{getErrorMessage("price")}}</mat-error>
                 </mat-form-field>
-                <mat-form-field class="card__content__form" MatFormFieldControl appearance="standard">
+                <mat-form-field class="card__content__form form__field" MatFormFieldControl appearance="standard">
                     <mat-label>Enter product stock</mat-label>
                     <input matInput type="number" [(ngModel)]="productStock" formControlName="stock" required>
                     <mat-error *ngIf="productForm.get('stock')?.errors">{{getErrorMessage("stock")}}</mat-error>
                 </mat-form-field>
-                <mat-form-field class="card__content__form" appearance="standard">
+                <mat-form-field class="card__content__form form__field" appearance="standard">
                     <mat-label>Choose category</mat-label>
                     <mat-select [formControl]="productCategory">
                         <mat-option *ngFor="let category of categories" [value]="category._id">
