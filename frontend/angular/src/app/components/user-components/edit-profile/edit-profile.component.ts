@@ -37,13 +37,16 @@ export class EditProfileComponent implements OnInit {
       '',
       [
         Validators.required,
-        Validators.pattern('[0-9]{3}-[0-9]{7}'),
+        Validators.pattern('05[0|2|3|4|5|6|8]{1}-[0-9]{7}'),
         Validators.maxLength(11),
       ],
     ],
     fName: ['', [Validators.required]],
     lName: ['', [Validators.required]],
-    userId: ['', [Validators.required]],
+    userId: [
+      '',
+      [Validators.required, Validators.minLength(8), Validators.maxLength(9)],
+    ],
     email: ['', [Validators.required]],
     city: ['', [Validators.required]],
     street: ['', [Validators.required]],
@@ -75,8 +78,16 @@ export class EditProfileComponent implements OnInit {
     if (this.userForm.get(key)?.errors?.['pattern']) {
       return 'The phone number must be in the format 050-1234567';
     }
-    if (this.userForm.get(key)?.errors?.['maxLength']) {
-      return 'Phone number need to be 10 digits and 1 dash only';
+
+    if (this.userForm.get(key)?.errors?.['maxlength']) {
+      if (key === 'tel') {
+        return 'Phone number need to be 10 digits and 1 dash only';
+      } else {
+        return "ID number can't contain more then 9 digits";
+      }
+    }
+    if (this.userForm.get(key)?.errors?.['minlength']) {
+      return 'ID number must contain at least 8 digits';
     }
     return;
   }
@@ -88,7 +99,7 @@ export class EditProfileComponent implements OnInit {
       houseNumber: this.userForm.value.house,
       zipCode: this.userForm.value.zipCode,
     };
-
+    console.log(this.userForm.value.tel);
     this.userInfo = {
       userId: this.userForm.value.userId,
       firstName: this.userForm.value.fName,
@@ -97,7 +108,7 @@ export class EditProfileComponent implements OnInit {
       email: this.userForm.value.email,
       address: this.userAddress,
     };
-    console.log(this.userInfo);
+
     this.userSer.updateUser(this.userInfo, this.docId).subscribe((res) => {
       console.log(res);
     });

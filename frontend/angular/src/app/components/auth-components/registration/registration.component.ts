@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit {
       '',
       [
         Validators.required,
-        Validators.pattern('[0-9]{3}-[0-9]{7}'),
+        Validators.pattern('05[0|2|3|4|5|6|8]{1}-[0-9]{7}'),
         Validators.maxLength(11),
       ],
     ],

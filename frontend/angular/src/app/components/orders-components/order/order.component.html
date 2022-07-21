@@ -28,25 +28,29 @@
                 <mat-form-field class="form__field">
                     <mat-label>City:</mat-label>
                     <input matInput formControlName="city" required>
-                    <mat-error *ngIf="addressForm.get('city')?.errors">{{getErrorMessage("city")}}</mat-error>
+                    <mat-error class="form__error" class="form__error" *ngIf="addressForm.get('city')?.errors">
+                        {{getErrorMessage("city")}}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="form__field">
                     <mat-label>Street:</mat-label>
                     <input matInput formControlName="street" required>
-                    <mat-error *ngIf="addressForm.get('street')?.errors">{{getErrorMessage("street")}}</mat-error>
+                    <mat-error class="form__error" *ngIf="addressForm.get('street')?.errors">
+                        {{getErrorMessage("street")}}</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="form__field">
                     <mat-label>House number:</mat-label>
                     <input matInput type="number" formControlName="house" required>
-                    <mat-error *ngIf="addressForm.get('house')?.errors">{{getErrorMessage("house")}}</mat-error>
+                    <mat-error class="form__error" *ngIf="addressForm.get('house')?.errors">{{getErrorMessage("house")}}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="form__field">
                     <mat-label>ZipCode:</mat-label>
                     <input matInput type="number" formControlName="zipCode" required>
-                    <mat-error *ngIf="addressForm.get('zipCode')?.errors">{{getErrorMessage("zipCode")}}</mat-error>
+                    <mat-error class="form__error" *ngIf="addressForm.get('zipCode')?.errors">
+                        {{getErrorMessage("zipCode")}}</mat-error>
                 </mat-form-field>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
@@ -66,7 +70,8 @@
                     </mat-datepicker-toggle>
                     <mat-datepicker #picker2 color="primary" [disabled]="false"></mat-datepicker>
                 </mat-form-field>
-                <mat-error *ngIf="deliveryDateError">The date you selected is full, please select another date
+                <mat-error class="form__error" *ngIf="deliveryDateError">The date you selected is full, please select
+                    another date
                 </mat-error>
             </form>
             <div>
@@ -91,20 +96,23 @@
                 <mat-form-field class="form__field">
                     <mat-label>Card number:</mat-label>
                     <input matInput #credit type="text" appCreditCard formControlName="cardNumber" required>
-                    <mat-error *ngIf="paymentForm.get('cardNumber')?.errors">{{getErrorMessage("cardNumber")}}
+                    <mat-error class="form__error" *ngIf="paymentForm.get('cardNumber')?.errors">
+                        {{getErrorMessage("cardNumber")}}
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="form__field">
                     <mat-label>Expiration Date:</mat-label>
                     <input matInput type="text" appExpirationDate formControlName="valid" required>
-                    <mat-error *ngIf="paymentForm.get('valid')?.errors">{{getErrorMessage("valid")}}</mat-error>
+                    <mat-error class="form__error" *ngIf="paymentForm.get('valid')?.errors">{{getErrorMessage("valid")}}
+                    </mat-error>
                     <!-- <mat-error *ngIf="!paymentForm.get('valid')?.errors?.['validateInput']">
                     Please enter a vaild expiration date</mat-error> -->
                 </mat-form-field>
                 <mat-form-field class="form__field">
                     <mat-label>cvv:</mat-label>
                     <input matInput type="number" formControlName="cvv" required>
-                    <mat-error *ngIf="paymentForm.get('cvv')?.errors">{{getErrorMessage("cvv")}}</mat-error>
+                    <mat-error class="form__error" class="form__error" *ngIf="paymentForm.get('cvv')?.errors">
+                        {{getErrorMessage("cvv")}}</mat-error>
                 </mat-form-field>
                 <div>
                     <!-- [disabled]="paymentForm.invalid" -->
