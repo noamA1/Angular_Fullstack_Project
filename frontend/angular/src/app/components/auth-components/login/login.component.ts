@@ -47,10 +47,11 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.authService.SignIn(
-      this.emailFormControl.value,
-      this.passwordFormControl.value
-    );
+    this.authService
+      .SignIn(this.emailFormControl.value, this.passwordFormControl.value)
+      .then(() => {
+        this.router.navigate(['/']);
+      });
     // .then((res) => {
     //   console.log(res.user.uid);
     //   this.userService.getSingleUser(res.user.uid).subscribe((userData) => {
@@ -59,10 +60,10 @@ export class LoginComponent implements OnInit {
     //       displayName: `${userData.firstName} ${userData.lastName}`,
     //       role: userData.role,
     //     };
-    //     localStorage.setItem('user', JSON.stringify(user));
-    //     // JSON.parse(localStorage.getItem('user')!);
+    //     window.sessionStorage.setItem('user', JSON.stringify(user));
+    //     // JSON.parse(sessionStorage.getItem('user')!);
+    //     this.router.navigate(['/']);
     //   });
-    //   this.router.navigate(['/']);
     // });
   }
 }

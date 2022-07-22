@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.docId = JSON.parse(localStorage.getItem('user')!).uid;
+    this.docId = JSON.parse(sessionStorage.getItem('user')!).uid;
     this.userService.getSingleUser(this.docId).subscribe((data) => {
       console.log(data);
       this.user = data;

@@ -59,7 +59,7 @@ export class OrdersViewComponent implements OnInit {
     private productsService: ProductsService
   ) {}
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user')!);
+    this.user = JSON.parse(sessionStorage.getItem('user')!);
     this.getOrders();
     this.productsService.getAllProducts().subscribe((data) => {
       this.allProducts = data;

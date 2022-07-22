@@ -13,7 +13,7 @@ export class VerifyEmailComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.userData = JSON.parse(localStorage.getItem('user')!);
+    this.userData = JSON.parse(sessionStorage.getItem('user')!);
     // this.authService.userData.subscribe((data) => {
     //   this.userData = data;
     // });

@@ -21,14 +21,16 @@ export class HeaderComponent implements OnInit {
     );
   }
   url = 'http://localhost:4200/';
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.handleRouteChange();
+  }
 
   handleRouteChange = () => {
     // console.log(this.auth.getUser());
     const url = this.router.url;
     const keys = this.router.url.split('/');
     if (this.router.url.endsWith('/')) {
-      this.title = `Welcom back ${this.auth.getUser().displayName}`;
+      this.title = `Welcom back ${this.auth.getUser().displayName!}`;
     }
     if (url.endsWith('categories')) {
       this.title = 'Our categoies';

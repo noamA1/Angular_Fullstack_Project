@@ -5,13 +5,14 @@
                 <mat-card-title-group class="card__title-group">
                     <mat-card-title class="heading-3">{{category.name}}</mat-card-title>
                 </mat-card-title-group>
-                <mat-card-content>
+                <mat-card-content class="card__content">
                     <img class="card__picture" src="../../../../../../assets/categoriesImeges/{{category.image}}">
-                </mat-card-content>
-                <mat-card-footer class="card__footer">
                     <button class="btn" routerLink="/products/{{category.name}}" color="primary">Show
                         products</button>
-                    <mat-card-actions class="card__buttons">
+                </mat-card-content>
+                <mat-card-footer class="card__footer">
+
+                    <mat-card-actions *ngIf="auth.getUser().role === 'manager'" class="card__buttons">
                         <button mat-icon-button (click)="editCategory(category)" color="primary">
                             <mat-icon>edit</mat-icon>
                         </button>

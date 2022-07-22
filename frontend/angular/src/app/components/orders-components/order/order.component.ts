@@ -80,7 +80,7 @@ export class OrderComponent implements OnInit {
     this.orderProducts = window.history.state.products;
     this.orderTotalPrice = window.history.state.cartTotalPrice;
     this.cartId = window.history.state.cart;
-    this.userId = JSON.parse(localStorage.getItem('user')!).uid;
+    this.userId = JSON.parse(sessionStorage.getItem('user')!).uid;
     this.userService.getSingleUser(this.userId!).subscribe((user) => {
       this.addressForm.get('city')?.setValue(user.address?.city);
       this.addressForm.get('street')?.setValue(user.address?.street);

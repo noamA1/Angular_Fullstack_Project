@@ -18,8 +18,6 @@ import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 })
 export class NavBarComponent implements OnInit {
   categoriesMenu: Category[] = [];
-  isLogin: boolean = false;
-  userRole: string | undefined;
   displayName: String | undefined;
   numOfProductsInCart: number | undefined;
   allProducts: Product[] | undefined;
@@ -40,19 +38,19 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.auth.getUser().displayName);
-    this.categoriesService.getAllCategories().subscribe((data) => {
-      this.categoriesMenu = data;
-    });
-    this.userRole = JSON.parse(localStorage.getItem('user')!).role;
-    this.isLogin = this.auth.isLoggedIn;
-    this.productsService.getAllProducts().subscribe((data) => {
-      this.allProducts = data;
-      this.setOptions();
-    });
-    this.filteredOptions = this.searchControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this.filter(value || ''))
-    );
+    if (this.auth.isLoggedIn) {
+      this.categoriesService.getAllCategories().subscribe((data) => {
+        this.categoriesMenu = data;
+      });
+      this.productsService.getAllProducts().subscribe((data) => {
+        this.allProducts = data;
+        this.setOptions();
+      });
+      this.filteredOptions = this.searchControl.valueChanges.pipe(
+        startWith(''),
+        map((value) => this.filter(value || ''))
+      );
+    }
   }
 
   filter(value: string): String[] {

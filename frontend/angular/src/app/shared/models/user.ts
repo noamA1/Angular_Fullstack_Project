@@ -8,6 +8,6 @@ export class User {
   phoneNumber: String | undefined;
   email: String | undefined;
   orders?: Order[] | undefined;
-  role?: String | undefined;
+  role?: string | undefined;
   address: Address | undefined;
 }

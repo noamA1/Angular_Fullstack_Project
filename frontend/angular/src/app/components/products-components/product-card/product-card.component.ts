@@ -5,6 +5,7 @@ import { CartItem } from 'src/app/shared/models/cart-item';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-product-card',
@@ -22,7 +23,8 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {

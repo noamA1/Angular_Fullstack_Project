@@ -26,7 +26,7 @@ export class AuthService {
     private userService: UserService
   ) {}
 
-  SignIn(email: string, password: string) {
+  async SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result: any) => {
@@ -37,9 +37,9 @@ export class AuthService {
               displayName: result.user.displayName,
               role: data.role,
             };
-            localStorage.setItem('user', JSON.stringify(user));
-            JSON.parse(localStorage.getItem('user')!);
-            this.router.navigate(['/']);
+            sessionStorage.setItem('user', JSON.stringify(user));
+            JSON.parse(sessionStorage.getItem('user')!);
+            // this.router.navigate(['/']);
           });
         });
         this.SetUserData(result.user);
@@ -152,14 +152,14 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
+    const user = JSON.parse(sessionStorage.getItem('user')!);
     return user !== null ? true : false;
   }
 
   getUser() {
-    const user = JSON.parse(localStorage.getItem('user')!);
+    const user = JSON.parse(sessionStorage.getItem('user')!);
 
-    // let role = localStorage.getItem('userRole');
+    // let role = sessionStorage.getItem('userRole');
     // if (role !== null) {
     //   return {
     //     user: user,
@@ -179,10 +179,9 @@ export class AuthService {
     });
   }
 
-  SignOut() {
+  async SignOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      localStorage.removeItem('userRole');
+      window.sessionStorage.removeItem('user');
       this.router.navigate(['/authentication/log-in']);
     });
   }

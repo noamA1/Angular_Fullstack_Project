@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
@@ -13,7 +14,8 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private router: Router
+    private router: Router,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {

@@ -1,10 +1,10 @@
 <mat-card class="card">
-    <mat-card-content>
+    <mat-card-content class="card__content">
         <img class="card__picture" src="../../../../../../assets/products-images/{{product!.image}}">
         <div class="card__info">
             <h4>{{product!.name}}</h4>
             <p>Price: {{product!.price}}</p>
-            <div class="card__form-field">
+            <div>
                 <mat-form-field class="form__field" appearance="standard">
                     <mat-label>Quantity:</mat-label>
                     <mat-select [formControl]="quantity">
@@ -22,7 +22,7 @@
 
         </div>
     </mat-card-content>
-    <mat-card-footer class="card__footer">
+    <mat-card-footer *ngIf="auth.getUser().role === 'manager'" class="card__footer">
 
         <mat-card-actions class="card__buttons">
             <button mat-icon-button (click)="editProduct(product!)" color="primary">

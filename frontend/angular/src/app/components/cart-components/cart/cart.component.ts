@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Product } from 'src/app/shared/models/product';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
@@ -32,23 +33,26 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private productsService: ProductsService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
+    private router: Router,
+    private auth: AuthService
+  ) {
     this.router.events.subscribe((event) => {
       if (
         event instanceof NavigationEnd &&
         !this.router.url.includes('authentication')
       ) {
-        this.user = JSON.parse(localStorage.getItem('user')!);
-        this.getAllProducts();
+        this.user = this.auth.getUser();
+        if (this.user !== null) {
+          this.getAllProducts();
+        }
       }
     });
     this.cartService.subject$.subscribe(() => {
       this.getAllProducts();
     });
   }
+
+  ngOnInit(): void {}
 
   // refreshCart() {
 
