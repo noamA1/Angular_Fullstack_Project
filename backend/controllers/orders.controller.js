@@ -2,7 +2,6 @@ const Order = require("../models/Order.model");
 const Cart = require("../models/Cart.model");
 const User = require("../models/User.model");
 const fs = require("fs");
-const path = require("path");
 
 const calculateOrderTotalPrice = async (cartId) => {
   let orderProducts = await Cart.find({ _id: cartId }).populate("products");

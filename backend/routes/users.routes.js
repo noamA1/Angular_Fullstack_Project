@@ -22,7 +22,7 @@ module.exports = (app) => {
   // Update order status by order id
   app.put(`${urlConfig}/users/orders/:orderId`, order.updateOrderStatus);
 
-  // Retrieve all user orders by user id
+  // Retrieve all orders
   app.get(`${urlConfig}/orders`, order.findAll);
 
   // routes for creating and download bills

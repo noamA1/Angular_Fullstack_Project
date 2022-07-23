@@ -1,4 +1,3 @@
-// const Product = require("../models/Product.model.js");
 const mongoose = require("mongoose"),
   Schema = mongoose.Schema;
 

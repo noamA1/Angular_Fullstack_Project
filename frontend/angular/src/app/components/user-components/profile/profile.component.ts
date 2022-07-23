@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.docId = JSON.parse(sessionStorage.getItem('user')!).uid;
     this.userService.getSingleUser(this.docId).subscribe((data) => {
-      console.log(data);
       this.user = data;
     });
   }

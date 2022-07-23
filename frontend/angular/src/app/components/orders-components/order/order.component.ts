@@ -67,13 +67,12 @@ export class OrderComponent implements OnInit {
     private filesService: FilesHandleService,
     public dialog: MatDialog
   ) {
-    // this.minDate = new Date();
+    this.minDate = new Date();
   }
 
   date = moment();
 
   ngOnInit(): void {
-    console.log(window.history);
     if (window.history.state.navigationId === 1) {
       this.router.navigate(['/']);
     }
@@ -90,7 +89,6 @@ export class OrderComponent implements OnInit {
 
     this.ordersService.getAllOrders().subscribe((result) => {
       this.allOrdersFromDB = result;
-      console.log(this.allOrdersFromDB);
     });
   }
 
@@ -156,7 +154,6 @@ export class OrderComponent implements OnInit {
       houseNumber: this.addressForm.get('house')?.value,
       zipCode: this.addressForm.get('zipCode')?.value,
     };
-    console.log(this.orderAddress);
   }
 
   selectedDate(event: MatDatepickerInputEvent<Date>) {
@@ -186,19 +183,11 @@ export class OrderComponent implements OnInit {
       expirationDate: this.paymentForm.get('valid')?.value,
       cvv: this.paymentForm.get('cvv')?.value,
     };
-    console.log(this.paymentForm.get('cardNumber')?.value);
   }
 
-  openDialog(
-    // enterAnimationDuration: string,
-    // exitAnimationDuration: string,
-    orderId: String
-  ): void {
+  openDialog(orderId: String): void {
     this.dialog.open(OrderMessageDialog, {
       width: '500px',
-
-      // enterAnimationDuration,
-      // exitAnimationDuration,
       data: { orderId },
     });
   }
@@ -213,7 +202,6 @@ export class OrderComponent implements OnInit {
       creditCard: this.orderPaymentMethod,
     };
     this.ordersService.addOrder(this.newOrder).subscribe((result) => {
-      console.log(result);
       const order = {
         products: this.orderProducts,
         _id: result._id,
@@ -225,9 +213,6 @@ export class OrderComponent implements OnInit {
       this.openDialog(result._id!);
     });
     this.cartService.updateCartStatus(this.userId!);
-    // this.cartService.creatNewCart(this.userId!).subscribe((result) => {
-    //   this.cartService.set(result._id!);
-    // });
   }
 }
 
@@ -238,7 +223,6 @@ export class OrderComponent implements OnInit {
 export class OrderMessageDialog {
   constructor(
     public dialogRef: MatDialogRef<OrderMessageDialog>,
-    private ordersService: OrdersService,
     private filesService: FilesHandleService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}

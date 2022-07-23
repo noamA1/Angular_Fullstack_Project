@@ -70,7 +70,6 @@ export class OrdersViewComponent implements OnInit {
     if (this.user.role === 'user') {
       this.ordersService.getUserOrders(this.user.uid).subscribe((result) => {
         this.orders = result;
-        console.log(result);
         this.setTableDataSource(result);
       });
     } else {
@@ -117,7 +116,6 @@ export class OrdersViewComponent implements OnInit {
   }
 
   updateStatus(docId: String, event: MatSelectChange) {
-    console.log(docId);
     const status = event.value;
     this.ordersService.updateOrderStatus(docId, status).subscribe((res) => {
       console.log(res);

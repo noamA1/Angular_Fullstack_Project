@@ -1,7 +1,7 @@
 import { CdkStepper } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/shared/interfaces/address';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -15,8 +15,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
   hide = true;
@@ -118,10 +117,5 @@ export class RegistrationComponent implements OnInit {
       this.userAddress!,
       this.displayName
     );
-    // this.router.navigate(['/']);
-    // this.notificationService.showSnackBar(
-    //   'The employee was added successfully',
-    //   'success-snackbar'
-    // );
   }
 }

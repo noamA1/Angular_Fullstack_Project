@@ -123,10 +123,6 @@ export class AuthService {
     userID: string,
     address: any
   ): Observable<User> {
-    // const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-    //   `users/${user.uid}`
-    // );
-
     const userData: User = {
       _id: user.uid,
       userId: userID,
@@ -158,14 +154,6 @@ export class AuthService {
 
   getUser() {
     const user = JSON.parse(sessionStorage.getItem('user')!);
-
-    // let role = sessionStorage.getItem('userRole');
-    // if (role !== null) {
-    //   return {
-    //     user: user,
-    //     role: role,
-    //   };
-    // }
     return user;
   }
 

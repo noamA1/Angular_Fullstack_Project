@@ -17,13 +17,6 @@ export class ProductsService {
     this.subject$.next('refreshed');
   }
 
-  // uploadImage(image: FormData) {
-  //   console.log(image);
-  //   return this.http.post(`${this.URL}-image`, image).subscribe((res) => {
-  //     console.log(res);
-  //   });
-  // }
-
   set setProducts(products: Product[]) {
     this.products = products;
   }

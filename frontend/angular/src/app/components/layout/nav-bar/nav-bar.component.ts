@@ -2,7 +2,6 @@ import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { Product } from './../../../shared/models/product';
 import { ProductsService } from 'src/app/shared/services/products.service';
-import { CartService } from './../../../shared/services/cart.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -30,14 +29,12 @@ export class NavBarComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private cartService: CartService,
     private productsService: ProductsService,
     private router: Router,
     public auth: AuthService
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.auth.getUser().displayName);
     if (this.auth.isLoggedIn) {
       this.categoriesService.getAllCategories().subscribe((data) => {
         this.categoriesMenu = data;
@@ -68,7 +65,6 @@ export class NavBarComponent implements OnInit {
   }
 
   updateCartProducts(length: any) {
-    // console.log(length);
     this.numOfProductsInCart = length;
   }
 

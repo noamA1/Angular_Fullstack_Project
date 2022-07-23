@@ -73,46 +73,6 @@ exports.getSingleCartProduts = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {
-  if (!req.body.quantity) {
-    return res.status(400).send({
-      message: "Quantity can't be empty",
-    });
-  } else if (!req.body.productId) {
-    return res.status(400).send({
-      message: "Product id can't be empty",
-    });
-  }
-  const productPrice = await getProductPrice(req.body.productId);
-  // Find a cart product and update it with the request body
-  CartProduct.findByIdAndUpdate(
-    req.params.cartProductId,
-    {
-      quantity: req.body.quantity,
-      totalPrice: productPrice * req.body.quantity,
-    },
-    { new: true }
-  )
-    .then((cartProduct) => {
-      if (!cartProduct) {
-        return res.status(404).send({
-          message: "Product not found with id " + req.params.cartProductId,
-        });
-      }
-      res.send(cartProduct);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: "Product not found with id " + req.params.cartProductId,
-        });
-      }
-      return res.status(500).send({
-        message: "Error updating Product with id " + req.params.cartProductId,
-      });
-    });
-};
-
 // Delete a product with the specified productId in the request
 exports.delete = (req, res) => {
   let cartId;

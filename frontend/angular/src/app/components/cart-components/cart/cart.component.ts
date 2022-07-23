@@ -7,15 +7,6 @@ import { ProductsService } from 'src/app/shared/services/products.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { DisplayProduct } from 'src/app/shared/interfaces/display-product';
 
-// interface displyProduct {
-//   price: Number | undefined;
-//   image: String | undefined;
-//   totalPrice: Number | undefined;
-//   name: String | undefined;
-//   id: String | undefined;
-//   quantity: Number | undefined;
-// }
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -54,29 +45,23 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // refreshCart() {
-
-  // }
-
   getAllProducts() {
     this.productsService.getAllProducts().subscribe((result) => {
       this.allProducts = result;
     });
 
     this.cartService.getCartItems(this.user.uid).subscribe((result) => {
-      console.log(result);
       if (result !== null) {
         if (result) {
           this.cartId = result._id;
           this.cartService.set(this.cartId!);
-          // this.refreshCart();
           this.cartProducts = result.products;
           this.sumOverallPrice('add');
           this.displayProducts = this.cartService.prepareToDisplay(
             this.allProducts!,
             result.products
           );
-          // console.log(result.products.length);
+
           this.updateCartLength.emit(result.products.length);
         }
       } else {
@@ -84,15 +69,6 @@ export class CartComponent implements OnInit {
           this.cartId = data._id;
         });
       }
-      // console.log(result);
-
-      // if (this.cartProducts) {
-      //   this.sumOverallPrice('add');
-      //   this.displayProducts = this.cartService.prepareToDisplay(
-      //     this.allProducts!,
-      //     this.cartId
-      //   );
-      // }
     });
   }
 
@@ -111,24 +87,6 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
-  // prepareToDisplay() {
-  //   this.displayProducts = [];
-  //   this.cartProducts!.forEach((cartProduct) => {
-  //     const cartProductDetails = this.allProducts?.find(
-  //       (product) => product._id === cartProduct.product
-  //     );
-
-  //     this.displayProducts?.push({
-  //       name: cartProductDetails?.name,
-  //       image: cartProductDetails?.image,
-  //       price: cartProductDetails?.price,
-  //       quantity: cartProduct.quantity,
-  //       totalPrice: cartProduct.totalPrice,
-  //       id: cartProduct._id,
-  //     });
-  //   });
-  // }
 
   placeOrder() {
     this.router.navigateByUrl('/orders/add', {

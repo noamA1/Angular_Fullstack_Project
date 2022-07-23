@@ -9,7 +9,7 @@ module.exports = (app) => {
   // Retrieve all categorys
   app.get(`${urlConfig}/categories`, category.getAllCategories);
 
-  // Retrieve all poducts by category id
+  // Retrieve all poducts by category name
   app.get(`${urlConfig}/categories/products/:categoryName`, category.findOne);
 
   // Update a category with categoryId

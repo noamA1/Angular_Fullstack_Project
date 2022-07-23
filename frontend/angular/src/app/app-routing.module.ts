@@ -60,7 +60,6 @@ const routes: Routes = [
       },
     ],
   },
-  // { path: 'order', component: OrderComponent },
   {
     path: 'orders',
     children: [

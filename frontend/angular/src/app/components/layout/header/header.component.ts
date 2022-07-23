@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -12,11 +11,7 @@ export class HeaderComponent implements OnInit {
   title: String | undefined;
   currentTime: number | undefined;
 
-  constructor(
-    private location: Location,
-    private router: Router,
-    private auth: AuthService
-  ) {
+  constructor(private router: Router, private auth: AuthService) {
     router.events.subscribe(
       (event) => event instanceof NavigationEnd && this.handleRouteChange()
     );
@@ -42,13 +37,11 @@ export class HeaderComponent implements OnInit {
   }
 
   handleRouteChange = () => {
-    // console.log(this.auth.getUser());
     this.setTitle();
     const url = this.router.url;
     const keys = this.router.url.split('/');
     if (this.router.url.endsWith('/')) {
       this.title += `${this.auth.getUser().displayName!}`;
-      console.log(this.title);
     }
     if (url.endsWith('categories')) {
       this.title = 'Our categoies';

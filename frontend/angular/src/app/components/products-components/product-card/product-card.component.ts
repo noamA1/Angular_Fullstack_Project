@@ -2,7 +2,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -57,7 +57,6 @@ export class ProductCardComponent implements OnInit {
 
   addToCart(product: Product) {
     const cart = this.cartService.get();
-    // console.log(this.cartService.get());
     this.cartItem = {
       cartId: cart!,
       quantity: this.quantity.value,

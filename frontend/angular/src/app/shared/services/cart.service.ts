@@ -40,7 +40,6 @@ export class CartService {
   }
 
   addItemToCart(newItem: CartItem) {
-    // console.log(newItem);
     return this.http.post<CartItem>(
       `${this.CART_ITEM_URL}/add-product`,
       newItem
@@ -71,9 +70,6 @@ export class CartService {
 
   prepareToDisplay(allProducts: Product[], cartItems: CartItem[]) {
     this.displayProducts = [];
-    // this.getCartItems(userId).subscribe((data) => {
-    //   console.log(data);
-    //   this.cartProducts = data.products;
     cartItems!.forEach((cartProduct) => {
       const cartProductDetails = allProducts?.find(
         (product) => product._id === cartProduct.product
@@ -90,7 +86,6 @@ export class CartService {
         productId: cartProduct.product,
       });
     });
-    // });
     return this.displayProducts;
   }
 }

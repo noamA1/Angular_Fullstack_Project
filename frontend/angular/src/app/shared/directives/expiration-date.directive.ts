@@ -8,11 +8,6 @@ export class ExpirationDateDirective {
   onKeyDown(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
 
-    // let trimmed = input.value.replace(/\s+/g, '');
-    // if (trimmed.length >= 5) {
-    //   trimmed = trimmed.substr(0, 5);
-    // }
-
     const trimmed = input.value
       .replace(/\s+/g, '')
       .slice(0, input.value.indexOf('/') == -1 ? 4 : 5);
@@ -22,13 +17,5 @@ export class ExpirationDateDirective {
       )}`;
     }
     return input;
-    // let numbers = [];
-    // for (let i = 0; i <= trimmed.length - 1; i += 2) {
-    //   numbers.push(trimmed.substr(i, 2));
-    //   // console.log(i);
-    //   // console.log(numbers);
-    // }
-    // // console.log(numbers.join('/'));
-    // input.value = numbers.join('/');
   }
 }

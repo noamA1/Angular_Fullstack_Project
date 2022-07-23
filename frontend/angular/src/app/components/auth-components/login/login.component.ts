@@ -1,9 +1,6 @@
-import { CartService } from 'src/app/shared/services/cart.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { UserService } from 'src/app/shared/services/user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +19,7 @@ export class LoginComponent implements OnInit {
     Validators.required,
     Validators.minLength(6),
   ]);
-  constructor(
-    private authService: AuthService,
-    private userService: UserService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -51,21 +44,5 @@ export class LoginComponent implements OnInit {
       this.emailFormControl.value,
       this.passwordFormControl.value
     );
-    // .then(() => {
-    //   this.router.navigate(['/']);
-    // });
-    // .then((res) => {
-    //   console.log(res.user.uid);
-    //   this.userService.getSingleUser(res.user.uid).subscribe((userData) => {
-    //     const user = {
-    //       uid: userData._id,
-    //       displayName: `${userData.firstName} ${userData.lastName}`,
-    //       role: userData.role,
-    //     };
-    //     window.sessionStorage.setItem('user', JSON.stringify(user));
-    //     // JSON.parse(sessionStorage.getItem('user')!);
-    //     this.router.navigate(['/']);
-    //   });
-    // });
   }
 }

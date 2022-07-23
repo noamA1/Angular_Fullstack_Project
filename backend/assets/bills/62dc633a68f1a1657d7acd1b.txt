@@ -1,0 +1,15 @@
+Shopping App 
+Order number: 62dc633a68f1a1657d7acd1b 
+Order Date: Sun Jul 24 2022 
+Products List: 
+
+3% Milk
+ 9 ₪ X  2 = 18 ₪ 
+
+
+
+Total Products 1
+
+  Total price: 18 ₪
+
+  credit card: 5555 5555 5333 3222

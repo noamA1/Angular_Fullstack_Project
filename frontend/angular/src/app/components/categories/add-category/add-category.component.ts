@@ -37,9 +37,7 @@ export class AddCategoryComponent implements OnInit {
         this.title = 'Edit Category';
         this.categoryName = window.history.state.category.name;
         this.docId = window.history.state.category._id;
-      } catch (error) {
-        // this.router.navigate(['/accounts']);
-      }
+      } catch (error) {}
     }
   }
 

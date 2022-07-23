@@ -1,4 +1,3 @@
-// @import "../../sass/abstracts/variables";
 .card {
   width: fit-content;
   height: fit-content;
@@ -22,14 +21,12 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    // margin: 10px;
   }
   &__item-product {
     display: flex !important;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    // margin: 10px;
   }
 
   &__cart-text {
@@ -58,9 +55,9 @@
 
   &__footer {
     text-align: center;
-    // margin-top: 10px !important;
+
     line-height: 2;
-    // margin-bottom: 8px !important;
+
     display: flex !important;
     flex-direction: column;
     align-items: center;

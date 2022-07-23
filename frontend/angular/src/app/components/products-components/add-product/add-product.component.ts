@@ -56,7 +56,6 @@ export class AddProductComponent implements OnInit {
 
     if (url.endsWith('edit')) {
       try {
-        // console.log(window.history.state.product.category);
         this.editMode = true;
         this.title = 'Edit Product';
         this.productCategory = new FormControl(
@@ -67,9 +66,7 @@ export class AddProductComponent implements OnInit {
         this.productName = window.history.state.product.name;
         this.productPrice = window.history.state.product.price;
         this.productStock = window.history.state.product.stock;
-      } catch (error) {
-        // this.router.navigate(['/accounts']);
-      }
+      } catch (error) {}
     }
   }
 

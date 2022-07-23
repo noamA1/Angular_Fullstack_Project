@@ -25,7 +25,6 @@ export class EditProfileComponent implements OnInit {
   lastName: string = '';
   phone: string = '';
   userEmail: string = '';
-  // userId: string = '';
   id: string = '';
   userCity: string = '';
   userStreet: string = '';
@@ -99,7 +98,6 @@ export class EditProfileComponent implements OnInit {
       houseNumber: this.userForm.value.house,
       zipCode: this.userForm.value.zipCode,
     };
-    console.log(this.userForm.value.tel);
     this.userInfo = {
       userId: this.userForm.value.userId,
       firstName: this.userForm.value.fName,

@@ -16,9 +16,7 @@ export class CartProductsComponent implements OnInit {
     private productsService: ProductsService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.displayProduct);
-  }
+  ngOnInit(): void {}
 
   deleteCartItem(docId: String, productToUpdate: String) {
     this.productsService
@@ -29,7 +27,6 @@ export class CartProductsComponent implements OnInit {
     this.cartsService.deleteItem(docId).subscribe((result) => {
       this.removeItem.emit();
       this.cartsService.refreshData();
-      console.log(result);
     });
   }
 }

@@ -21,9 +21,6 @@ module.exports = (app) => {
     cartProduct.getSingleCartProduts
   );
 
-  // Update a category with categoryId
-  app.put(`${urlConfig}/carts/products/:cartProductId`, cartProduct.update);
-
-  // Delete a category with categoryId
+  // Delete a cart product with cartProductId
   app.delete(`${urlConfig}/carts/products/:cartProductId`, cartProduct.delete);
 };
