@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Category } from '../models/category';
 import { Product } from '../models/product';
 
@@ -9,7 +9,13 @@ import { Product } from '../models/product';
 })
 export class CategoriesService {
   URL = 'http://localhost:5000/api';
+  subject$: Subject<any> = new Subject<any>();
+
   constructor(private http: HttpClient) {}
+
+  refreshData() {
+    this.subject$.next('refreshed');
+  }
 
   getAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.URL}/categories`);

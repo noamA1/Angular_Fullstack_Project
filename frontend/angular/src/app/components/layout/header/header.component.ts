@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   title: String | undefined;
+  currentTime: number | undefined;
 
   constructor(
     private location: Location,
@@ -23,6 +24,23 @@ export class HeaderComponent implements OnInit {
   url = 'http://localhost:4200/';
   ngOnInit(): void {
     this.handleRouteChange();
+    this.currentTime = new Date().getHours();
+    this.setTitle();
+  }
+
+  setTitle() {
+    if (this.currentTime! > 6 && this.currentTime! < 12) {
+      this.title = 'Good morning ';
+    } else if (this.currentTime! > 12 && this.currentTime! < 16) {
+      this.title = 'Good noon ';
+    } else if (this.currentTime! > 16 && this.currentTime! < 19) {
+      this.title = 'Good afternoon ';
+    } else if (this.currentTime! > 19 && this.currentTime! < 22) {
+      this.title = 'Good evening ';
+    } else {
+      this.title = 'Good night ';
+    }
+    console.log(this.title);
   }
 
   handleRouteChange = () => {
@@ -30,7 +48,7 @@ export class HeaderComponent implements OnInit {
     const url = this.router.url;
     const keys = this.router.url.split('/');
     if (this.router.url.endsWith('/')) {
-      this.title = `Welcom back ${this.auth.getUser().displayName!}`;
+      this.title += `${this.auth.getUser().displayName!}`;
     }
     if (url.endsWith('categories')) {
       this.title = 'Our categoies';

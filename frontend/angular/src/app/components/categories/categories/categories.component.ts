@@ -36,7 +36,8 @@ export class CategoriesComponent implements OnInit {
 
   delCategory(doc: any) {
     this.categoriesService.deleteCategory(doc._id).subscribe((result) => {
-      console.log(result);
+      this.categoriesService.refreshData();
+      this.getAllCategories();
     });
   }
 }
