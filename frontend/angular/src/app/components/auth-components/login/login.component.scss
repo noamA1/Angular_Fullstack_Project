@@ -1,0 +1,14 @@
+@import "../../../../sass/abstracts/variables";
+.login {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__image {
+    // width: 270px;
+    // height: 200px;
+    border: none;
+    border-radius: 5%;
+    box-shadow: 5px 10px 18px $color-grey-dark-1;
+  }
+}
