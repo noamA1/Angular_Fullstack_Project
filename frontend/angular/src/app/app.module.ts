@@ -41,6 +41,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './shared/services/auth.service';
 import { ProfileComponent } from './components/user-components/profile/profile.component';
 import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { EditProfileComponent } from './components/user-components/edit-profile/
     VerifyEmailComponent,
     ProfileComponent,
     EditProfileComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

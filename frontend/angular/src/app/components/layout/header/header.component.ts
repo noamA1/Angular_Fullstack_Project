@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.handleRouteChange();
     this.currentTime = new Date().getHours();
-    this.setTitle();
   }
 
   setTitle() {
@@ -40,15 +39,16 @@ export class HeaderComponent implements OnInit {
     } else {
       this.title = 'Good night ';
     }
-    console.log(this.title);
   }
 
   handleRouteChange = () => {
     // console.log(this.auth.getUser());
+    this.setTitle();
     const url = this.router.url;
     const keys = this.router.url.split('/');
     if (this.router.url.endsWith('/')) {
       this.title += `${this.auth.getUser().displayName!}`;
+      console.log(this.title);
     }
     if (url.endsWith('categories')) {
       this.title = 'Our categoies';

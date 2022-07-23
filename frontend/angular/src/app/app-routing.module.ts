@@ -12,6 +12,7 @@ import { ForgotPasswordComponent } from './components/auth-components/forgot-pas
 import { RegistrationComponent } from './components/auth-components/registration/registration.component';
 import { ProfileComponent } from './components/user-components/profile/profile.component';
 import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
@@ -61,6 +62,9 @@ const routes: Routes = [
       { path: 'edit', component: EditProfileComponent },
     ],
   },
+
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
