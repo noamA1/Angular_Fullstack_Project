@@ -13,53 +13,101 @@ import { RegistrationComponent } from './components/auth-components/registration
 import { ProfileComponent } from './components/user-components/profile/profile.component';
 import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
+import { AuthGuard } from './shared/guard/auth.guard';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
-  { path: '', component: CategoriesComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'categories',
     children: [
       {
         path: '',
         component: CategoriesComponent,
+        canActivate: [AuthGuard],
       },
-      { path: 'add', component: AddCategoryComponent },
-      { path: 'edit', component: AddCategoryComponent },
+      {
+        path: 'add',
+        component: AddCategoryComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
+      {
+        path: 'edit',
+        component: AddCategoryComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
     ],
   },
   {
     path: 'products',
     children: [
-      { path: '', component: ProductsComponent },
-      { path: 'add', component: AddProductComponent },
-      { path: 'edit', component: AddProductComponent },
-      { path: ':categoryName', component: ProductsComponent },
+      { path: '', component: ProductsComponent, canActivate: [AuthGuard] },
+      {
+        path: 'add',
+        component: AddProductComponent,
+        canActivate: [SecureInnerPagesGuard, AuthGuard],
+      },
+      {
+        path: 'edit',
+        component: AddProductComponent,
+        canActivate: [SecureInnerPagesGuard, AuthGuard],
+      },
+      {
+        path: ':categoryName',
+        component: ProductsComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
   // { path: 'order', component: OrderComponent },
   {
     path: 'orders',
     children: [
-      { path: '', component: OrdersViewComponent },
-      { path: 'add', component: OrderComponent },
+      { path: '', component: OrdersViewComponent, canActivate: [AuthGuard] },
+      { path: 'add', component: OrderComponent, canActivate: [AuthGuard] },
     ],
   },
   {
     path: 'authentication',
     children: [
-      { path: 'log-in', component: LoginComponent },
-      { path: 'registration', component: RegistrationComponent },
-      { path: 'add-employee', component: RegistrationComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent },
-      { path: 'verification', component: VerifyEmailComponent },
+      {
+        path: 'log-in',
+        component: LoginComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
+      {
+        path: 'registration',
+        component: RegistrationComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
+      {
+        path: 'add-employee',
+        component: RegistrationComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
+      {
+        path: 'verification',
+        component: VerifyEmailComponent,
+        canActivate: [SecureInnerPagesGuard],
+      },
     ],
   },
 
   {
     path: 'profile',
     children: [
-      { path: '', component: ProfileComponent },
-      { path: 'edit', component: EditProfileComponent },
+      { path: '', component: ProfileComponent, canActivate: [AuthGuard] },
+      {
+        path: 'edit',
+        component: EditProfileComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
 

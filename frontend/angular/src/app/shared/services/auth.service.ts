@@ -39,7 +39,7 @@ export class AuthService {
             };
             sessionStorage.setItem('user', JSON.stringify(user));
             JSON.parse(sessionStorage.getItem('user')!);
-            // this.router.navigate(['/']);
+            this.router.navigate(['/']);
           });
         });
         this.SetUserData(result.user);

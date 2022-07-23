@@ -47,11 +47,13 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
-    this.authService
-      .SignIn(this.emailFormControl.value, this.passwordFormControl.value)
-      .then(() => {
-        this.router.navigate(['/']);
-      });
+    this.authService.SignIn(
+      this.emailFormControl.value,
+      this.passwordFormControl.value
+    );
+    // .then(() => {
+    //   this.router.navigate(['/']);
+    // });
     // .then((res) => {
     //   console.log(res.user.uid);
     //   this.userService.getSingleUser(res.user.uid).subscribe((userData) => {
