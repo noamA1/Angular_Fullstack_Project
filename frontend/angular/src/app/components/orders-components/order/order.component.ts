@@ -43,8 +43,8 @@ export class OrderComponent implements OnInit {
   deliveryDateError: boolean = false;
 
   addressForm: FormGroup = this._formBuilder.group({
-    city: ['', [Validators.required, Validators.pattern('^[a-z|A-Z]*$')]],
-    street: ['', [Validators.required, Validators.pattern('^[a-z|A-Z]*$')]],
+    city: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
+    street: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
     house: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
   });
@@ -178,8 +178,11 @@ export class OrderComponent implements OnInit {
   }
 
   setOrderPayment() {
+    const lastFourDigits = String(
+      this.paymentForm.controls['cardNumber'].value
+    ).substring(15);
     this.orderPaymentMethod = {
-      cardNumber: this.paymentForm.get('cardNumber')?.value,
+      cardNumber: lastFourDigits,
       expirationDate: this.paymentForm.get('valid')?.value,
       cvv: this.paymentForm.get('cvv')?.value,
     };
@@ -224,6 +227,7 @@ export class OrderMessageDialog {
   constructor(
     public dialogRef: MatDialogRef<OrderMessageDialog>,
     private filesService: FilesHandleService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -231,10 +235,12 @@ export class OrderMessageDialog {
     this.filesService.downloadOrderBill(this.data.orderId).subscribe((data) => {
       const file = new File([data as any], 'name');
       saveAs(file);
+      this.router.navigate(['orders']);
     });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+    this.router.navigate(['orders']);
   }
 }

@@ -44,8 +44,7 @@ export class AddProductComponent implements OnInit {
     private fb: FormBuilder,
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
-    private filesService: FilesHandleService,
-    private location: Location
+    private filesService: FilesHandleService
   ) {}
 
   ngOnInit(): void {
@@ -101,7 +100,10 @@ export class AddProductComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-
+    const categoryName = this.categories?.find(
+      (category) => category._id === this.productCategory.value
+    )?.name;
+    console.log(categoryName);
     if (!this.editMode && !this.image) {
       this.fileError = true;
       return;
@@ -125,12 +127,13 @@ export class AddProductComponent implements OnInit {
         .editProduct(this.product, this.docId)
         .subscribe((result) => {
           console.log(result);
+          this.router.navigate([`products/${categoryName}`]);
         });
     } else {
       this.productsService.addProduct(this.product).subscribe((result) => {
         console.log(result);
+        this.router.navigate([`products/${categoryName}`]);
       });
     }
-    this.location.back();
   }
 }

@@ -1,7 +1,18 @@
+@import "../abstracts/variables";
 .card {
   width: fit-content;
   height: fit-content;
 
+  &__disabled {
+    background-color: $color-grey-dark-2;
+    opacity: 0.5;
+    &-text {
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      font-size: 2rem;
+    }
+  }
   &__title-group {
     justify-content: center !important;
   }

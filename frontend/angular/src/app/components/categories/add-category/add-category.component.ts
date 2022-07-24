@@ -96,12 +96,13 @@ export class AddCategoryComponent implements OnInit {
         .editCategory(this.category, this.docId)
         .subscribe((result) => {
           console.log(result);
+          this.router.navigate(['/categories']);
         });
     } else {
       this.categoriesService.addCategory(this.category).subscribe((result) => {
         console.log(result);
+        this.router.navigate(['/categories']);
       });
     }
-    this.router.navigate(['/categories']);
   }
 }

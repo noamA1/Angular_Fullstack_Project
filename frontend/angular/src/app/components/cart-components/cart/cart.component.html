@@ -8,7 +8,7 @@
 <mat-card-footer class="card__footer">
     Overall Price: {{overallPrice}}
     <br>
-    <button class="btn btn__download" (click)="placeOrder()">
+    <button class="btn btn__download" [disabled]="displayProducts.length === 0" (click)="placeOrder()">
         Place order
     </button>
 </mat-card-footer>

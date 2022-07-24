@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   title: String | undefined;
-  currentTime: number | undefined;
+  // currentTime: number | undefined;
 
   constructor(private router: Router, private auth: AuthService) {
     router.events.subscribe(
@@ -19,17 +19,19 @@ export class HeaderComponent implements OnInit {
   url = 'http://localhost:4200/';
   ngOnInit(): void {
     this.handleRouteChange();
-    this.currentTime = new Date().getHours();
   }
 
   setTitle() {
-    if (this.currentTime! > 6 && this.currentTime! < 12) {
+    const date = new Date();
+    const currentTime = +date.toLocaleTimeString().substring(0, 2);
+
+    if (currentTime > 6 && currentTime < 12) {
       this.title = 'Good morning ';
-    } else if (this.currentTime! > 12 && this.currentTime! < 16) {
+    } else if (currentTime > 12 && currentTime < 16) {
       this.title = 'Good noon ';
-    } else if (this.currentTime! > 16 && this.currentTime! < 19) {
+    } else if (currentTime > 16 && currentTime < 19) {
       this.title = 'Good afternoon ';
-    } else if (this.currentTime! > 19 && this.currentTime! < 22) {
+    } else if (currentTime > 19 && currentTime < 22) {
       this.title = 'Good evening ';
     } else {
       this.title = 'Good night ';
@@ -72,11 +74,16 @@ export class HeaderComponent implements OnInit {
         this.title = 'Your profile';
       }
     }
-    if (url.endsWith('orders')) {
-      if (this.auth.getUser().role === 'user') {
-        this.title = 'Your Previous Orders';
-      } else {
-        this.title = 'All orders';
+    if (url.includes('orders')) {
+      if (url.endsWith('/')) {
+        if (this.auth.getUser().role === 'user') {
+          this.title = 'Your Previous Orders';
+        } else {
+          this.title = 'All orders';
+        }
+      }
+      if (url.endsWith('add')) {
+        this.title = 'Place your order';
       }
     }
 
