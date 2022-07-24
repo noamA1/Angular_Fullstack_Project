@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 mongoose
-  .connect(`${dbConfig.url}/shop`)
+  .connect(`${dbConfig.url}`)
   .then(() => {
     console.log("Successfully connected to the database");
   })
