@@ -22,7 +22,7 @@ const validateRequest = (body, type) => {
       isValid: false,
       message: "Phone number can't be empty",
     };
-  } else if (!body.email) {
+  } else if (!body.email && type === "create") {
     return {
       isValid: false,
       message: "Email can't be empty",

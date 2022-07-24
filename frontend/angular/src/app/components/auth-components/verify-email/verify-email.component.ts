@@ -14,16 +14,18 @@ export class VerifyEmailComponent implements OnInit {
 
   ngOnInit() {
     this.userData = JSON.parse(sessionStorage.getItem('user')!);
-    // this.authService.userData.subscribe((data) => {
-    //   this.userData = data;
-    // });
+    this.authService.userData.subscribe((data: any) => {
+      this.userData = data;
+    });
   }
 
-  // navigateToLogin(){
-  //   this.router.navigateByUrl('/authentication/log-in', {state: { email: this.userData.email }})
-  // }
+  navigateToLogin() {
+    this.router.navigateByUrl('/authentication/log-in', {
+      state: { email: this.userData.email },
+    });
+  }
 
-  // SendMail(){
-  //   this.authService.SendVerificationMail();
-  // }
+  SendMail() {
+    this.authService.SendVerificationMail();
+  }
 }

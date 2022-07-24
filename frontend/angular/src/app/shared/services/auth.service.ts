@@ -16,6 +16,7 @@ import { UserService } from './user.service';
 })
 export class AuthService {
   USER_URL = 'http://localhost:5000/api/users';
+  userData: any;
 
   constructor(
     public afs: AngularFirestore,
@@ -24,12 +25,15 @@ export class AuthService {
     public ngZone: NgZone,
     private http: HttpClient,
     private userService: UserService
-  ) {}
+  ) {
+    this.userData = this.afAuth.authState;
+  }
 
   async SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result: any) => {
+        console.log(result);
         this.ngZone.run(() => {
           this.userService.getSingleUser(result.user.uid).subscribe((data) => {
             const user = {
@@ -39,10 +43,11 @@ export class AuthService {
             };
             sessionStorage.setItem('user', JSON.stringify(user));
             JSON.parse(sessionStorage.getItem('user')!);
+            this.SetUserData(result.user);
             this.router.navigate(['/']);
           });
         });
-        this.SetUserData(result.user);
+
         return result;
       })
       .catch((error) => {
@@ -93,6 +98,11 @@ export class AuthService {
         ).subscribe((res) => {
           console.log(res);
         });
+        if (role === 'user') {
+          this.SendVerificationMail();
+        } else {
+          this.router.navigate(['/']);
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -114,6 +124,17 @@ export class AuthService {
       });
   }
 
+  // Send email verfificaiton when new user sign up
+  SendVerificationMail() {
+    return this.afAuth.currentUser
+      .then((user) => {
+        return user?.sendEmailVerification();
+      })
+      .then(() => {
+        this.router.navigate(['authentication/verification']);
+      });
+  }
+
   SetUserDataByEmailAndPassword(
     user: any,
     first: string,
@@ -123,6 +144,9 @@ export class AuthService {
     userID: string,
     address: any
   ): Observable<User> {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
     const userData: User = {
       _id: user.uid,
       userId: userID,
@@ -132,7 +156,11 @@ export class AuthService {
       phoneNumber: phone,
       role,
       address,
+      emailVerified: role === 'user' ? user.emailVerified : true,
     };
+    userRef.set(userData, {
+      merge: true,
+    });
     return this.http.post<User>(`${this.USER_URL}`, userData);
   }
 
@@ -165,6 +193,16 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
     });
+  }
+
+  updateEmail(newEmail: String) {
+    this.afAuth.currentUser
+      .then((user) => {
+        user?.updateEmail(newEmail.toString());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   async SignOut() {

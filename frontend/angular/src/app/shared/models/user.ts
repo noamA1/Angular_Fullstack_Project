@@ -6,8 +6,9 @@ export class User {
   firstName: String | undefined;
   lastName: String | undefined;
   phoneNumber: String | undefined;
-  email: String | undefined;
+  email?: String | undefined;
   orders?: Order[] | undefined;
   role?: string | undefined;
   address: Address | undefined;
+  emailVerified?: boolean | undefined;
 }

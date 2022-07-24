@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
       }
     }
     if (url.includes('orders')) {
-      if (url.endsWith('/')) {
+      if (url.endsWith('')) {
         if (this.auth.getUser().role === 'user') {
           this.title = 'Your Previous Orders';
         } else {
@@ -88,12 +88,8 @@ export class HeaderComponent implements OnInit {
     }
 
     if (url.includes('authentication')) {
-      if (url.endsWith('log-in')) {
-        this.title = 'log in';
-      } else if (url.endsWith('registration')) {
-        this.title = 'Register';
-      } else if (url.endsWith('forgot-password')) {
-        this.title = 'forgot password';
+      if (url.endsWith('add-employee')) {
+        this.title = 'Add new employee';
       }
     }
   };

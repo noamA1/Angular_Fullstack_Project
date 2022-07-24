@@ -42,12 +42,17 @@ export class RegistrationComponent implements OnInit {
     fName: ['', [Validators.required]],
     lName: ['', [Validators.required]],
     role: [null, [Validators.required]],
-    userId: ['', [Validators.required]],
+    userId: [
+      '',
+      [Validators.required],
+      Validators.minLength(8),
+      Validators.maxLength(9),
+    ],
   });
 
   addressForm = this.fb.group({
-    city: ['', [Validators.required, Validators.pattern('^[a-z|A-Z]*$')]],
-    street: ['', [Validators.required, Validators.pattern('^[a-z|A-Z]*$')]],
+    city: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
+    street: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
     house: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
   });
@@ -77,17 +82,42 @@ export class RegistrationComponent implements OnInit {
   }
 
   getErrorMessage(key: string) {
-    if (this.registerForm.get(key)?.errors?.['required']) {
+    if (this.registerForm.get(key)?.errors?.['email']) {
+      return 'Enter a valid email address';
+    }
+    if (
+      this.registerForm.get(key)?.errors?.['required'] ||
+      this.addressForm.get(key)?.errors?.['required']
+    ) {
       return 'You must enter a value';
     }
-    if (this.registerForm.get(key)?.errors?.['pattern']) {
-      return 'The phone number must be in the format 050-1234567';
+    if (
+      this.registerForm.get(key)?.errors?.['pattern'] ||
+      this.addressForm.get(key)?.errors?.['pattern']
+    ) {
+      if (key === 'tel') {
+        return 'The phone number must be in the format 050-1234567';
+      } else if (key === 'city' || key === 'street') {
+        return `${key} can contain letters only`;
+      } else if (key === 'house' || key === 'zipCode') {
+        return `${
+          key === 'house' ? 'house number' : key
+        } can contain numbers only`;
+      }
     }
     if (this.registerForm.get(key)?.errors?.['minLength']) {
-      return 'Password must contain at least 6 characters';
+      if (key === 'password') {
+        return 'Password must contain at least 6 characters';
+      } else {
+        return 'ID number must contain at least 8 digits';
+      }
     }
     if (this.registerForm.get(key)?.errors?.['maxLength']) {
-      return 'Phone number need to be 10 digits and 1 dash only';
+      if (key === 'tel') {
+        return 'Phone number need to be 10 digits and 1 dash only';
+      } else {
+        return "ID number can't contain more then 9 digits";
+      }
     }
 
     return null;
@@ -112,7 +142,7 @@ export class RegistrationComponent implements OnInit {
       this.registerForm.value.fName,
       this.registerForm.value.lName,
       this.registerForm.value.tel,
-      this.registerForm.value.role,
+      this.isLogin ? this.registerForm.value.role : 'user',
       this.registerForm.value.userId,
       this.userAddress!,
       this.displayName

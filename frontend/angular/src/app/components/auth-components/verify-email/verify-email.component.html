@@ -14,13 +14,13 @@
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <!-- <button mat-raised-button (click)="SendMail()">
-          <i class="fas fa-redo-alt"></i>
-          Resend Verification Email
-        </button> -->
+            <button class="btn" mat-raised-button (click)="SendMail()">
+                <mat-icon>redo</mat-icon>
+                Resend Verification Email
+            </button>
         </mat-card-actions>
-        <mat-card-footer>
-            <!-- <span>Go back to?<a class="redirect" (click) = "navigateToLogin()"> Sign in</a></span> -->
+        <mat-card-footer class="card__footer">
+            <span>Go back to?<a class="redirect" (click)="navigateToLogin()"> Sign in</a></span>
         </mat-card-footer>
     </mat-card>
 </div>

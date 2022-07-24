@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Address } from 'src/app/shared/interfaces/address';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from './../../../shared/models/user';
@@ -17,14 +18,14 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userSer: UserService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {}
 
   docId: string = '';
   firstName: string = '';
   lastName: string = '';
   phone: string = '';
-  userEmail: string = '';
   id: string = '';
   userCity: string = '';
   userStreet: string = '';
@@ -46,7 +47,6 @@ export class EditProfileComponent implements OnInit {
       '',
       [Validators.required, Validators.minLength(8), Validators.maxLength(9)],
     ],
-    email: ['', [Validators.required]],
     city: ['', [Validators.required]],
     street: ['', [Validators.required]],
     house: ['', [Validators.required]],
@@ -59,7 +59,6 @@ export class EditProfileComponent implements OnInit {
       this.firstName = window.history.state.user.firstName;
       this.lastName = window.history.state.user.lastName;
       this.phone = window.history.state.user.phoneNumber;
-      this.userEmail = window.history.state.user.email;
       this.id = window.history.state.user.userId;
       this.userCity = window.history.state.user.address.city;
       this.userStreet = window.history.state.user.address.street;
@@ -103,13 +102,11 @@ export class EditProfileComponent implements OnInit {
       firstName: this.userForm.value.fName,
       lastName: this.userForm.value.lName,
       phoneNumber: this.userForm.value.tel,
-      email: this.userForm.value.email,
       address: this.userAddress,
     };
 
     this.userSer.updateUser(this.userInfo, this.docId).subscribe((res) => {
-      console.log(res);
+      this.router.navigate(['/profile']);
     });
-    this.router.navigate(['/profile']);
   }
 }

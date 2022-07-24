@@ -30,14 +30,6 @@
                 </mat-form-field>
 
                 <mat-form-field class="card__content__form form__field" appearance="standard">
-                    <mat-label>Enter your email</mat-label>
-                    <input matInput [(ngModel)]="userEmail" formControlName="email" required>
-                    <mat-error class="form__error" *ngIf="userForm.get('email')?.errors">{{getErrorMessage("email")}}
-                    </mat-error>
-                </mat-form-field>
-
-
-                <mat-form-field class="card__content__form form__field" appearance="standard">
                     <mat-label>Enter your phone number</mat-label>
                     <input matInput type="text" appPhoneNumber [(ngModel)]="phone" formControlName="tel" required>
                     <mat-icon matSuffix>phone</mat-icon>

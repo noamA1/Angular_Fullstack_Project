@@ -1,4 +1,4 @@
-<mat-card class="card" [ngClass]="{'card__disabled':product!.stock === 0 }">
+<mat-card class="card" [ngClass]="{'card__disabled':product!.stock === 0 && auth.getUser().role === 'user'}">
     <mat-card-content class="card__content">
         <img class="card__picture" src="../../../../../../assets/products-images/{{product!.image}}">
         <div class="card__info">
