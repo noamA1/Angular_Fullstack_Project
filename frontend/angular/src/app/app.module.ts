@@ -43,6 +43,12 @@ import { ProfileComponent } from './components/user-components/profile/profile.c
 import { EditProfileComponent } from './components/user-components/edit-profile/edit-profile.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
+import {
+  RECAPTCHA_SETTINGS,
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RecaptchaSettings,
+} from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -86,8 +92,19 @@ import { HomeComponent } from './pages/home/home.component';
     AngularFireStorageModule,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
-  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
+  providers: [
+    AuthService,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    // {
+    //   provide: RECAPTCHA_SETTINGS,
+    //   useValue: {
+    //     siteKey: environment.recaptcha.siteKey,
+    //   } as RecaptchaSettings,
+    // },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
