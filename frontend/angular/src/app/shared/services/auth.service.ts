@@ -33,7 +33,6 @@ export class AuthService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result: any) => {
-        console.log(result);
         this.ngZone.run(() => {
           this.userService.getSingleUser(result.user.uid).subscribe((data) => {
             const user = {

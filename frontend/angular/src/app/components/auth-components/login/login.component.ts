@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   recComp: RecaptchaComponent | any;
   token: string | undefined;
   // siteKey = environment.recaptcha.siteKey;
-  tokenError = false;
+  // tokenError = false;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -54,18 +54,17 @@ export class LoginComponent implements OnInit {
     return;
   }
 
-  public getToken(captchaResponse: string): void {
-    this.token = captchaResponse;
-    this.tokenError = false;
-    console.log(`Resolved captcha with response:`, captchaResponse);
-  }
+  // public getToken(captchaResponse: string): void {
+  //   this.token = captchaResponse;
+  //   this.tokenError = false;
+  //   console.log(`Resolved captcha with response:`, captchaResponse);
+  // }
 
-  public onError(errorDetails: RecaptchaErrorParameters): void {
-    console.log(`Recaptcha error encountered; details:`, errorDetails);
-  }
+  // public onError(errorDetails: RecaptchaErrorParameters): void {
+  //   console.log(`Recaptcha error encountered; details:`, errorDetails);
+  // }
 
   signIn() {
-    // console.log(this.loginForm.get('recaptcha')?.hasError('required'));
     // if (!this.token) {
     //   this.tokenError = true;
     //   return;

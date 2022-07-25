@@ -66,7 +66,6 @@ export class ProductCardComponent implements OnInit {
 
     this.cartService.addItemToCart(this.cartItem).subscribe((result) => {
       this.cartService.refreshData();
-      console.log(result);
     });
   }
 }

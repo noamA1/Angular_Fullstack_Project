@@ -95,12 +95,10 @@ export class AddCategoryComponent implements OnInit {
       this.categoriesService
         .editCategory(this.category, this.docId)
         .subscribe((result) => {
-          console.log(result);
           this.router.navigate(['/categories']);
         });
     } else {
       this.categoriesService.addCategory(this.category).subscribe((result) => {
-        console.log(result);
         this.router.navigate(['/categories']);
       });
     }

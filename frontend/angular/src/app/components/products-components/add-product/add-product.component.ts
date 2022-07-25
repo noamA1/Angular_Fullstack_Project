@@ -1,7 +1,11 @@
 import { FilesHandleService } from './../../../shared/services/files-handle.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
@@ -103,7 +107,6 @@ export class AddProductComponent implements OnInit {
     const categoryName = this.categories?.find(
       (category) => category._id === this.productCategory.value
     )?.name;
-    console.log(categoryName);
     if (!this.editMode && !this.image) {
       this.fileError = true;
       return;
@@ -126,12 +129,10 @@ export class AddProductComponent implements OnInit {
       this.productsService
         .editProduct(this.product, this.docId)
         .subscribe((result) => {
-          console.log(result);
           this.router.navigate([`products/${categoryName}`]);
         });
     } else {
       this.productsService.addProduct(this.product).subscribe((result) => {
-        console.log(result);
         this.router.navigate([`products/${categoryName}`]);
       });
     }

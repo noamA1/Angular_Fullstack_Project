@@ -18,7 +18,6 @@
             <button *ngIf="auth.getUser().role === 'manager'" class="nav-btn" mat-button routerLink="/products/add"> Add
                 Product</button>
             <button class="nav-btn" mat-button routerLink="/orders">All Orders</button>
-            <!-- <button mat-button routerLink="/accounts">All Clients Accounts</button> -->
         </div>
         <span class="example-spacer"></span>
         <div *ngIf="auth.isLoggedIn">

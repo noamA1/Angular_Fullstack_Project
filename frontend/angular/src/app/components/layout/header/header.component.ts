@@ -13,10 +13,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private auth: AuthService) {
     router.events.subscribe((event) => {
-      // if (event instanceof NavigationStart) {
-      // console.log('start');
-
-      // }
+      if (event instanceof NavigationStart) {
+        this.setCurrentTime();
+      }
       event instanceof NavigationEnd && this.handleRouteChange();
     });
   }
@@ -27,15 +26,11 @@ export class HeaderComponent implements OnInit {
   }
 
   setCurrentTime() {
-    console.log('current time function');
     const date = new Date();
     this.currentTime = +date.toLocaleTimeString().substring(0, 2);
   }
 
   setTitle() {
-    // const date = new Date();
-    // const currentTime = +date.toLocaleTimeString().substring(0, 2);
-    console.log(this.currentTime);
     if (this.currentTime! > 6 && this.currentTime! < 12) {
       this.title = 'Good morning ';
     } else if (this.currentTime! > 12 && this.currentTime! < 16) {

@@ -1,6 +1,5 @@
 <h1 mat-dialog-title class="heading-3">Order Details</h1>
 <div mat-dialog-content>
-    <!-- <div > -->
     <div *ngFor="let product of data.orderProducts">
         <mat-card style="margin: 15px;">
             <mat-card-content style="display: flex; justify-content:space-around;">
@@ -21,13 +20,8 @@
 
 </div>
 <div style="display: flex; justify-content: space-around; align-items: center;">
-    <!-- <span style="display: flex; justify-content: space-around;"> -->
     <h5>Total Products: </h5> {{data.orderProducts.length}}
-    <!-- </span> -->
-    <!-- <span style="display: flex; justify-content: space-around;"> -->
     <h5>Total Price: </h5> {{data.orderTotalPrice}}
-    <!-- </span> -->
-
 </div>
 <div mat-dialog-actions class="buttons-group">
     <button class="btn btn__dialog" (click)="onNoClick()">OK</button>
@@ -36,4 +30,3 @@
     </button>
 
 </div>
-<!-- </div> -->

@@ -1,7 +1,3 @@
-<!-- <div class="example-input-wrapper">
-    <label for="duration">Animation duration:</label>
-    <input id="duration" value="2000" type="number" min="0" step="100" #duration>
-  </div> -->
 <div class="container">
 
     <mat-vertical-stepper class="order__stepper" [linear]="true" #stepper>
@@ -105,8 +101,6 @@
                     <input matInput type="text" appExpirationDate formControlName="valid" required>
                     <mat-error class="form__error" *ngIf="paymentForm.get('valid')?.errors">{{getErrorMessage("valid")}}
                     </mat-error>
-                    <!-- <mat-error *ngIf="!paymentForm.get('valid')?.errors?.['validateInput']">
-                    Please enter a vaild expiration date</mat-error> -->
                 </mat-form-field>
                 <mat-form-field class="form__field">
                     <mat-label>cvv:</mat-label>
@@ -115,7 +109,6 @@
                         {{getErrorMessage("cvv")}}</mat-error>
                 </mat-form-field>
                 <div>
-                    <!-- [disabled]="paymentForm.invalid" -->
                     <button mat-button matStepperNext (click)="setOrderPayment()">Next</button>
                     <button mat-button matStepperPrevious>Back</button>
                 </div>
@@ -130,8 +123,6 @@
                 <h5>After clicking on the confirmation you will not be able to change the order</h5>
                 <button mat-flat-button color="primary" (click)="submit()">Confirm</button>
                 <div>
-                    <!-- [disabled]="paymentForm.invalid" -->
-
                     <button mat-button matStepperPrevious>Back</button>
                 </div>
             </form>
