@@ -66,10 +66,10 @@ export class LoginComponent implements OnInit {
 
   signIn() {
     // console.log(this.loginForm.get('recaptcha')?.hasError('required'));
-    if (!this.token) {
-      this.tokenError = true;
-      return;
-    }
+    // if (!this.token) {
+    //   this.tokenError = true;
+    //   return;
+    // }
     this.authService.SignIn(
       this.loginForm.value.email,
       this.loginForm.value.password

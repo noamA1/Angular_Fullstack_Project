@@ -12,7 +12,10 @@
 
 .search__form-field {
   font-size: 0.9rem;
+  width: 200px;
 }
 ::ng-deep .mat-menu-panel {
   padding: 0 10px !important;
+  max-width: 400px !important;
+  width: 300px !important;
 }

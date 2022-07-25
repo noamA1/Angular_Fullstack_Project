@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, NavigationStart } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -9,29 +9,40 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   title: String | undefined;
-  // currentTime: number | undefined;
+  currentTime: number | undefined;
 
   constructor(private router: Router, private auth: AuthService) {
-    router.events.subscribe(
-      (event) => event instanceof NavigationEnd && this.handleRouteChange()
-    );
+    router.events.subscribe((event) => {
+      // if (event instanceof NavigationStart) {
+      // console.log('start');
+
+      // }
+      event instanceof NavigationEnd && this.handleRouteChange();
+    });
   }
   url = 'http://localhost:4200/';
   ngOnInit(): void {
     this.handleRouteChange();
+    this.setCurrentTime();
+  }
+
+  setCurrentTime() {
+    console.log('current time function');
+    const date = new Date();
+    this.currentTime = +date.toLocaleTimeString().substring(0, 2);
   }
 
   setTitle() {
-    const date = new Date();
-    const currentTime = +date.toLocaleTimeString().substring(0, 2);
-
-    if (currentTime > 6 && currentTime < 12) {
+    // const date = new Date();
+    // const currentTime = +date.toLocaleTimeString().substring(0, 2);
+    console.log(this.currentTime);
+    if (this.currentTime! > 6 && this.currentTime! < 12) {
       this.title = 'Good morning ';
-    } else if (currentTime > 12 && currentTime < 16) {
+    } else if (this.currentTime! > 12 && this.currentTime! < 16) {
       this.title = 'Good noon ';
-    } else if (currentTime > 16 && currentTime < 19) {
+    } else if (this.currentTime! > 16 && this.currentTime! < 19) {
       this.title = 'Good afternoon ';
-    } else if (currentTime > 19 && currentTime < 22) {
+    } else if (this.currentTime! > 19 && this.currentTime! < 22) {
       this.title = 'Good evening ';
     } else {
       this.title = 'Good night ';
@@ -62,7 +73,7 @@ export class HeaderComponent implements OnInit {
       } else if (url.endsWith('add')) {
         this.title = 'add product';
       } else if (keys[2]) {
-        this.title = `our ${keys[2]} list`;
+        this.title = `${keys[2].toString().replaceAll('&', ' and ')} list`;
       } else if (url.endsWith('')) {
         this.title = 'Search result';
       }

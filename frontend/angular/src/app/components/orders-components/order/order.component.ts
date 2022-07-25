@@ -30,7 +30,9 @@ import { FilesHandleService } from 'src/app/shared/services/files-handle.service
 })
 export class OrderComponent implements OnInit {
   minDate: Date | undefined;
-  firstFormGroup: UntypedFormGroup = this._formBuilder.group({ firstCtrl: [''] });
+  firstFormGroup: UntypedFormGroup = this._formBuilder.group({
+    firstCtrl: [''],
+  });
   selectedShippingDate: Date | undefined;
   allOrdersFromDB: Order[] = [];
   orderTotalPrice: Number | undefined;
@@ -235,6 +237,7 @@ export class OrderMessageDialog {
     this.filesService.downloadOrderBill(this.data.orderId).subscribe((data) => {
       const file = new File([data as any], 'name');
       saveAs(file);
+      this.dialogRef.close();
       this.router.navigate(['orders']);
     });
   }

@@ -32,12 +32,8 @@ export class ProductCardComponent implements OnInit {
   }
 
   setQuantityArray() {
-    let maxQuantity;
-    if (this.categoryName === 'Drinks') {
-      maxQuantity = 24;
-    } else {
-      maxQuantity = 10;
-    }
+    let maxQuantity = 10;
+
     for (let i = 1; i <= maxQuantity; i++) {
       this.quantityArray.push(i);
     }
