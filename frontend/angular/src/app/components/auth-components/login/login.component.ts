@@ -5,13 +5,7 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import {
-  FormControl,
-  NgForm,
-  Validators,
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { Validators, UntypedFormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { RecaptchaComponent, RecaptchaErrorParameters } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
@@ -25,52 +19,44 @@ export class LoginComponent implements OnInit {
   hide = true;
   version = VERSION.full;
   lang = 'en';
-  FormGroup: FormGroup | any;
+
   @ViewChild('captchaElem') captchaElem: RecaptchaComponent | any;
   @ViewChild('langInput') langInput: ElementRef | any;
   recComp: RecaptchaComponent | any;
   token: string | undefined;
   // siteKey = environment.recaptcha.siteKey;
+  tokenError = false;
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    recaptcha: ['', Validators.required],
+  });
 
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-  ]);
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder
-  ) {
-    this.token = undefined;
-  }
+    private fb: UntypedFormBuilder
+  ) {}
 
-  ngOnInit(): void {
-    this.FormGroup = this.formBuilder.group({
-      recaptcha: ['', Validators.required],
-    });
-  }
+  ngOnInit(): void {}
 
-  getErrorMessage() {
-    if (this.emailFormControl.hasError('required')) {
-      return 'You must enter your email address';
+  getErrorMessage(key: string) {
+    if (this.loginForm.get(key)?.errors?.['required']) {
+      return `You must enter your ${key} address`;
     }
-    if (this.emailFormControl.hasError('email')) {
+    if (this.loginForm.get(key)?.errors?.['email']) {
       return 'Enter a vaild email address';
     }
-    if (this.passwordFormControl.hasError('required')) {
-      return 'You must enter your email address';
-    }
-    if (this.passwordFormControl.hasError('minLength')) {
+    if (this.loginForm.get(key)?.errors?.['minLength']) {
       return 'Password must contain at least 6 characters';
     }
+
     return;
   }
 
   public getToken(captchaResponse: string): void {
+    this.token = captchaResponse;
+    this.tokenError = false;
     console.log(`Resolved captcha with response:`, captchaResponse);
   }
 
@@ -78,21 +64,15 @@ export class LoginComponent implements OnInit {
     console.log(`Recaptcha error encountered; details:`, errorDetails);
   }
 
-  // send(form: NgForm): void {
-  //   if (form.invalid) {
-  //     for (const control of Object.keys(form.controls)) {
-  //       form.controls[control].markAsTouched();
-  //     }
-  //     return;
-  //   }
-
-  //   console.debug(`Token [${this.token}] generated`);
-  // }
-
   signIn() {
+    // console.log(this.loginForm.get('recaptcha')?.hasError('required'));
+    if (!this.token) {
+      this.tokenError = true;
+      return;
+    }
     this.authService.SignIn(
-      this.emailFormControl.value,
-      this.passwordFormControl.value
+      this.loginForm.value.email,
+      this.loginForm.value.password
     );
   }
 }

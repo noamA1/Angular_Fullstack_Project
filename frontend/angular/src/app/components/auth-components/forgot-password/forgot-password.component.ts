@@ -1,6 +1,6 @@
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,7 +8,7 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
-  emailFormControl = new FormControl('', [
+  emailFormControl = new UntypedFormControl('', [
     Validators.required,
     Validators.email,
   ]);

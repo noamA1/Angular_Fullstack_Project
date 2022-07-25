@@ -1,6 +1,6 @@
 import { CdkStepper } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/shared/interfaces/address';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class RegistrationComponent implements OnInit {
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
     private router: Router
   ) {}

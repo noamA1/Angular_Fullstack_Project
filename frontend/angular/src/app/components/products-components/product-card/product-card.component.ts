@@ -1,4 +1,4 @@
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
@@ -16,7 +16,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product | undefined;
   @Input() categoryName: String | undefined;
 
-  quantity = new FormControl('', Validators.required);
+  quantity = new UntypedFormControl('', Validators.required);
   cartItem: CartItem | undefined;
   quantityArray: Number[] = [];
 

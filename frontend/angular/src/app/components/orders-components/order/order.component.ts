@@ -5,9 +5,9 @@ import { DisplayProduct } from './../../../shared/interfaces/display-product';
 import { Router } from '@angular/router';
 import { Component, Inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -30,7 +30,7 @@ import { FilesHandleService } from 'src/app/shared/services/files-handle.service
 })
 export class OrderComponent implements OnInit {
   minDate: Date | undefined;
-  firstFormGroup: FormGroup = this._formBuilder.group({ firstCtrl: [''] });
+  firstFormGroup: UntypedFormGroup = this._formBuilder.group({ firstCtrl: [''] });
   selectedShippingDate: Date | undefined;
   allOrdersFromDB: Order[] = [];
   orderTotalPrice: Number | undefined;
@@ -42,24 +42,24 @@ export class OrderComponent implements OnInit {
   orderPaymentMethod: PaymentMethod | undefined;
   deliveryDateError: boolean = false;
 
-  addressForm: FormGroup = this._formBuilder.group({
+  addressForm: UntypedFormGroup = this._formBuilder.group({
     city: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
     street: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
     house: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
   });
 
-  paymentForm: FormGroup = this._formBuilder.group({
+  paymentForm: UntypedFormGroup = this._formBuilder.group({
     cardNumber: ['', [Validators.required, this.cardNumberValidators]],
     valid: ['', [Validators.required, this.expDateValidators]],
     cvv: ['', [Validators.required, Validators.pattern('^[0-9]{3}')]],
   });
 
   orderProducts: DisplayProduct[] | undefined;
-  itemQuantity = new FormControl('', Validators.required);
+  itemQuantity = new UntypedFormControl('', Validators.required);
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private router: Router,
     private ordersService: OrdersService,
     private cartService: CartService,
@@ -121,7 +121,7 @@ export class OrderComponent implements OnInit {
     return;
   }
 
-  expDateValidators(c: FormControl) {
+  expDateValidators(c: UntypedFormControl) {
     const monthAndYear = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
 
     return monthAndYear.test(c.value)
@@ -133,7 +133,7 @@ export class OrderComponent implements OnInit {
         };
   }
 
-  cardNumberValidators(c: FormControl) {
+  cardNumberValidators(c: UntypedFormControl) {
     const cardNumberPattern =
       /^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11})$/;
     const value = c.value as string;

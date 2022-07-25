@@ -1,6 +1,6 @@
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Address } from 'src/app/shared/interfaces/address';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { User } from './../../../shared/models/user';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +16,7 @@ export class EditProfileComponent implements OnInit {
   userAddress: Address | undefined;
   editMode = true;
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private userSer: UserService,
     private router: Router,
     private auth: AuthService

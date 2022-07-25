@@ -1,7 +1,7 @@
 import { FilesHandleService } from './../../../shared/services/files-handle.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
@@ -19,7 +19,7 @@ export class AddProductComponent implements OnInit {
   productName: String | undefined;
   productPrice: number | undefined;
   productStock: number | undefined;
-  productCategory = new FormControl('', Validators.required);
+  productCategory = new UntypedFormControl('', Validators.required);
   categories: Category[] | undefined;
   product: Product | undefined;
   editMode: boolean = false;
@@ -41,7 +41,7 @@ export class AddProductComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
     private filesService: FilesHandleService
@@ -57,7 +57,7 @@ export class AddProductComponent implements OnInit {
       try {
         this.editMode = true;
         this.title = 'Edit Product';
-        this.productCategory = new FormControl(
+        this.productCategory = new UntypedFormControl(
           window.history.state.product.category,
           Validators.required
         );

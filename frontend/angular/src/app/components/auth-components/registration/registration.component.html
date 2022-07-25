@@ -81,7 +81,7 @@
                                     'visibility'
                                     }}</mat-icon>
                             </button>
-                            <mat-hint style="color:#333" align="end">{{ userPassword.value?.length }} / 6</mat-hint>
+                            <mat-hint style="color:#333" align="end">{{ userPassword.value.length }} / 6</mat-hint>
                             <mat-error class="form__error" *ngIf="registerForm.get('password')?.errors">
                                 {{getErrorMessage('password')}}
                             </mat-error>

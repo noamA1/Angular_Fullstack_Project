@@ -1,6 +1,6 @@
 import { Category } from './../../../shared/models/category';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Router } from '@angular/router';
 import { FilesHandleService } from 'src/app/shared/services/files-handle.service';
@@ -23,7 +23,7 @@ export class AddCategoryComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private filesService: FilesHandleService,
     private router: Router
   ) {}

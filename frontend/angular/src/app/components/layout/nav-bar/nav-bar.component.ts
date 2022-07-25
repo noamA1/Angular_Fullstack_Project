@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { Product } from './../../../shared/models/product';
 import { ProductsService } from 'src/app/shared/services/products.service';
@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit {
   searchKey: string | undefined;
   options: String[] = [];
   filteredOptions: Observable<String[]> | undefined;
-  searchControl = new FormControl('');
+  searchControl = new UntypedFormControl('');
   @ViewChild(MatAutocompleteTrigger)
   autocomplete!: MatAutocompleteTrigger;
 

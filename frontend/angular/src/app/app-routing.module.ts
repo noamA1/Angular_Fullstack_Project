@@ -1,7 +1,7 @@
 import { VerifyEmailComponent } from './components/auth-components/verify-email/verify-email.component';
 import { ProductsComponent } from './components/products-components/products/products.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+// import { RouterModule, Routes } from '@angular/router';
 import { AddCategoryComponent } from './components/categories/add-category/add-category.component';
 import { CategoriesComponent } from './components/categories/categories/categories.component';
 import { AddProductComponent } from './components/products-components/add-product/add-product.component';
@@ -16,6 +16,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
