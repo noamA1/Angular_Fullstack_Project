@@ -51,21 +51,15 @@ export class AuthService {
       })
       .catch((error) => {
         const errorCode = error.code;
-        // if (
-        //   errorCode === 'auth/invalid-email' ||
-        //   errorCode === 'auth/wrong-password' ||
-        //   errorCode === 'auth/user-not-found'
-        // ) {
-        //   this.notificationService.showSnackBar(
-        //     'Wrong email address or password.',
-        //     'danger-snackbar'
-        //   );
-        // } else {
-        //   this.notificationService.showSnackBar(
-        //     'Unexpected Error',
-        //     'danger-snackbar'
-        //   );
-        // }
+        if (
+          errorCode === 'auth/invalid-email' ||
+          errorCode === 'auth/wrong-password' ||
+          errorCode === 'auth/user-not-found'
+        ) {
+          alert('Wrong email address or password.');
+        } else {
+          alert('Something went wrong please try again');
+        }
       });
   }
 
@@ -105,21 +99,15 @@ export class AuthService {
       })
       .catch((error) => {
         const errorCode = error.code;
-        // if (
-        //   errorCode === 'auth/invalid-email' ||
-        //   errorCode === 'auth/wrong-password' ||
-        //   errorCode === 'auth/user-not-found'
-        // ) {
-        //   this.notificationService.showSnackBar(
-        //     'Wrong email address or password.',
-        //     'danger-snackbar'
-        //   );
-        // } else {
-        //   this.notificationService.showSnackBar(
-        //     'Unexpected Error',
-        //     'danger-snackbar'
-        //   );
-        // }
+        if (
+          errorCode === 'auth/invalid-email' ||
+          errorCode === 'auth/wrong-password' ||
+          errorCode === 'auth/user-not-found'
+        ) {
+          alert('Wrong email address or password.');
+        } else if (errorCode === 'auth/email-already-in-use') {
+          alert('This email already in use');
+        }
       });
   }
 
