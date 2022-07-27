@@ -105,16 +105,7 @@ import { OrdersChartComponent } from './components/charts/orders-chart/orders-ch
     RecaptchaFormsModule,
     NgChartsModule,
   ],
-  providers: [
-    AuthService,
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
-    // {
-    //   provide: RECAPTCHA_SETTINGS,
-    //   useValue: {
-    //     siteKey: environment.recaptcha.siteKey,
-    //   } as RecaptchaSettings,
-    // },
-  ],
+  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
