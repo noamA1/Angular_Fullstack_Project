@@ -17,9 +17,11 @@ import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+
   {
     path: 'categories',
     children: [
@@ -68,6 +70,7 @@ const routes: Routes = [
       { path: 'add', component: OrderComponent, canActivate: [AuthGuard] },
     ],
   },
+  { path: 'dashboard', component: DashboardComponent },
   {
     path: 'authentication',
     children: [

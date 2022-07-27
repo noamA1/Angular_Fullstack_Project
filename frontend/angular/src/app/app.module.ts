@@ -49,6 +49,11 @@ import {
   RecaptchaModule,
   RecaptchaSettings,
 } from 'ng-recaptcha';
+import { NgChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProductsChartComponent } from './components/charts/products-chart/products-chart.component';
+import { UsersOrdersChartComponent } from './components/charts/users-orders-chart/users-orders-chart.component';
+import { OrdersChartComponent } from './components/charts/orders-chart/orders-chart.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +82,10 @@ import {
     EditProfileComponent,
     NotFoundComponent,
     HomeComponent,
+    DashboardComponent,
+    ProductsChartComponent,
+    UsersOrdersChartComponent,
+    OrdersChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +103,7 @@ import {
     AngularFireDatabaseModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    NgChartsModule,
   ],
   providers: [
     AuthService,

@@ -9,6 +9,7 @@ import { Order } from '../models/order';
 export class OrdersService {
   USERS_ORDERS_URL = 'http://localhost:5000/api/users/orders';
   ORDERS_URL = 'http://localhost:5000/api/orders';
+  orders: Order[] | undefined;
 
   constructor(private http: HttpClient) {}
 
@@ -28,5 +29,13 @@ export class OrdersService {
     return this.http.put<Order>(`${this.USERS_ORDERS_URL}/${orderId}`, {
       status,
     });
+  }
+
+  set setOrders(orders: Order[]) {
+    this.orders = orders;
+  }
+
+  get getOrders() {
+    return this.orders;
   }
 }

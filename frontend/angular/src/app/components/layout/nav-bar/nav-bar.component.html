@@ -13,10 +13,15 @@
                 </mat-grid-list>
 
             </mat-menu>
-            <button *ngIf="auth.getUser().role === 'manager'" class="nav-btn" mat-button routerLink="/categories/add">
-                Add Category</button>
-            <button *ngIf="auth.getUser().role === 'manager'" class="nav-btn" mat-button routerLink="/products/add"> Add
-                Product</button>
+            <ng-container *ngIf="auth.getUser().role === 'manager'">
+                <button class="nav-btn" mat-button routerLink="/dashboard">
+                    Dashboard</button>
+                <button class="nav-btn" mat-button routerLink="/categories/add">
+                    Add Category</button>
+                <button class="nav-btn" mat-button routerLink="/products/add"> Add
+                    Product</button>
+            </ng-container>
+
             <button class="nav-btn" mat-button routerLink="/orders">All Orders</button>
         </div>
         <span class="example-spacer"></span>

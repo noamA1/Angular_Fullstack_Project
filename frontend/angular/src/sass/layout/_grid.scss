@@ -3,3 +3,9 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 300px));
   gap: 1rem;
 }
+.container__charts {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  // grid-template-rows: repeat(2, 630px);
+  gap: 2rem;
+}
