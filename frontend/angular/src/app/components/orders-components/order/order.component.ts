@@ -30,10 +30,8 @@ import { FilesHandleService } from 'src/app/shared/services/files-handle.service
 })
 export class OrderComponent implements OnInit {
   minDate: Date | undefined;
-  firstFormGroup: UntypedFormGroup = this._formBuilder.group({
-    firstCtrl: [''],
-  });
-  selectedShippingDate: Date | undefined;
+
+  // selectedShippingDate: Date | undefined;
   allOrdersFromDB: Order[] = [];
   orderTotalPrice: Number | undefined;
   cartId: String | undefined;
@@ -49,6 +47,10 @@ export class OrderComponent implements OnInit {
     street: ['', [Validators.required, Validators.pattern('^[a-z|A-Z ]*$')]],
     house: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     zipCode: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+  });
+
+  shippingDateForm: UntypedFormGroup = this._formBuilder.group({
+    shippingDate: [null, Validators.required],
   });
 
   paymentForm: UntypedFormGroup = this._formBuilder.group({
@@ -162,17 +164,17 @@ export class OrderComponent implements OnInit {
     let counter = 0;
     this.date = moment(event.value);
 
-    this.selectedShippingDate = new Date(event.value!);
+    this.shippingDateForm.get('shippingDate')?.setValue(new Date(event.value!));
     this.allOrdersFromDB.forEach((order) => {
       if (
         new Date(order.deliveryDate!.toString()).getDate() ===
-        this.selectedShippingDate!.getDate()
+        this.shippingDateForm.get('shippingDate')?.value!.getDate()
       ) {
         counter++;
       }
     });
 
-    if (counter >= 3 || !this.selectedShippingDate) {
+    if (counter >= 3 || !this.shippingDateForm.get('shippingDate')?.value) {
       this.deliveryDateError = true;
     } else {
       this.deliveryDateError = false;
@@ -201,11 +203,12 @@ export class OrderComponent implements OnInit {
     this.newOrder = {
       cart: this.cartId!,
       user: this.userId!,
-      deliveryDate: this.selectedShippingDate,
+      deliveryDate: this.shippingDateForm.get('shippingDate')?.value,
       totalPrice: this.orderTotalPrice,
       address: this.orderAddress,
       creditCard: this.orderPaymentMethod,
     };
+
     this.ordersService.addOrder(this.newOrder).subscribe((result) => {
       const order = {
         products: this.orderProducts,

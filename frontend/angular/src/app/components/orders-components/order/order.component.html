@@ -55,9 +55,9 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step class="order__stepper-step">
+        <mat-step [stepControl]="shippingDateForm" class="order__stepper-step">
             <ng-template matStepLabel>Choose shipping date</ng-template>
-            <form class="form" [formGroup]="addressForm">
+            <form class="form">
                 <mat-form-field class="form__field" color="primary" appearance="standard">
                     <mat-label>Shipping date</mat-label>
                     <input matInput [matDatepicker]="picker2" [min]="minDate" (dateInput)="selectedDate( $event)"
@@ -71,8 +71,9 @@
                 </mat-error>
             </form>
             <div>
-                <button mat-button matStepperNext [disabled]="deliveryDateError || !selectedShippingDate">Next</button>
                 <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext
+                    [disabled]="deliveryDateError || shippingDateForm.invalid">Next</button>
             </div>
         </mat-step>
         <mat-step class="order__stepper-step" [stepControl]="paymentForm">
@@ -109,8 +110,8 @@
                         {{getErrorMessage("cvv")}}</mat-error>
                 </mat-form-field>
                 <div>
-                    <button mat-button matStepperNext (click)="setOrderPayment()">Next</button>
                     <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext (click)="setOrderPayment()">Next</button>
                 </div>
             </form>
         </mat-step>
@@ -121,9 +122,9 @@
                     Last chance to change order details.
                 </h1>
                 <h5>After clicking on the confirmation you will not be able to change the order</h5>
-                <button mat-flat-button color="primary" (click)="submit()">Confirm</button>
                 <div>
                     <button mat-button matStepperPrevious>Back</button>
+                    <button class="btn" (click)="submit()">Confirm</button>
                 </div>
             </form>
         </mat-step>

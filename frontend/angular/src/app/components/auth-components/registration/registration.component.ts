@@ -42,12 +42,7 @@ export class RegistrationComponent implements OnInit {
     fName: ['', [Validators.required]],
     lName: ['', [Validators.required]],
     role: [null, [Validators.required]],
-    userId: [
-      '',
-      [Validators.required],
-      Validators.minLength(8),
-      Validators.maxLength(9),
-    ],
+    userId: ['', [Validators.required, Validators.pattern('^[0-9]{8,9}$')]],
   });
 
   addressForm = this.fb.group({
@@ -103,39 +98,28 @@ export class RegistrationComponent implements OnInit {
         return `${
           key === 'house' ? 'house number' : key
         } can contain numbers only`;
+      } else if (key === 'userId') {
+        return 'ID can contain numbers only and must contain 9 digits';
       }
     }
     if (this.registerForm.get(key)?.errors?.['minLength']) {
-      if (key === 'password') {
-        return 'Password must contain at least 6 characters';
-      } else {
-        return 'ID number must contain at least 8 digits';
-      }
+      return 'Password must contain at least 6 characters';
     }
     if (this.registerForm.get(key)?.errors?.['maxLength']) {
-      if (key === 'tel') {
-        return 'Phone number need to be 10 digits and 1 dash only';
-      } else {
-        return "ID number can't contain more then 9 digits";
-      }
+      return 'Phone number need to be 10 digits and 1 dash only';
     }
 
     return null;
   }
 
-  setUserAddress() {
+  add() {
+    this.displayName = `${this.registerForm.value.fName} ${this.registerForm.value.lName}`;
     this.userAddress = {
       city: this.addressForm.get('city')?.value,
       street: this.addressForm.get('street')?.value,
       houseNumber: this.addressForm.get('house')?.value,
       zipCode: this.addressForm.get('zipCode')?.value,
     };
-
-    this.nextStep();
-  }
-
-  add() {
-    this.displayName = `${this.registerForm.value.fName} ${this.registerForm.value.lName}`;
     this.authService.SignUp(
       this.registerForm.value.email,
       this.registerForm.value.password,
@@ -144,7 +128,7 @@ export class RegistrationComponent implements OnInit {
       this.registerForm.value.tel,
       this.isLogin ? this.registerForm.value.role : 'user',
       this.registerForm.value.userId,
-      this.userAddress!,
+      this.userAddress,
       this.displayName
     );
   }
