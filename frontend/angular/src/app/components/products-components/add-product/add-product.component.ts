@@ -1,5 +1,4 @@
 import { FilesHandleService } from './../../../shared/services/files-handle.service';
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -88,7 +87,6 @@ export class AddProductComponent implements OnInit {
     if (this.productForm.get(key)?.errors?.['pattern']) {
       return `The ${key} can contain only letters, number and special characters like % or -`;
     }
-
     return;
   }
 

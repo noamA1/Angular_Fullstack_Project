@@ -11,7 +11,6 @@
                         products</button>
                 </mat-card-content>
                 <mat-card-footer class="card__footer">
-
                     <mat-card-actions *ngIf="auth.getUser().role === 'manager'" class="card__buttons">
                         <button mat-icon-button (click)="editCategory(category)" color="primary">
                             <mat-icon>edit</mat-icon>
@@ -24,5 +23,4 @@
             </mat-card>
         </div>
     </div>
-
 </div>

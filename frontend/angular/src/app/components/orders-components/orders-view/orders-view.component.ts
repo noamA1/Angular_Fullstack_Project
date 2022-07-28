@@ -95,13 +95,7 @@ export class OrdersViewComponent implements OnInit {
     }
   }
 
-  openDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    cart: string,
-    orderTotalPrice: string,
-    orderId: string
-  ): void {
+  openDialog(cart: string, orderTotalPrice: string, orderId: string): void {
     this.cartService.getCartItemsByCartId(cart).subscribe((cartProducts) => {
       this.orderProducts = this.cartService.prepareToDisplay(
         this.allProducts!,

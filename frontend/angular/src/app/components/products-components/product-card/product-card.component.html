@@ -24,11 +24,9 @@
             <div class="card__disabled-text" *ngIf="product!.stock === 0">
                 Out of stock
             </div>
-
         </div>
     </mat-card-content>
     <mat-card-footer *ngIf="auth.getUser().role === 'manager'" class="card__footer">
-
         <mat-card-actions class="card__buttons">
             <button mat-icon-button (click)="editProduct(product!)" color="primary">
                 <mat-icon>edit</mat-icon>

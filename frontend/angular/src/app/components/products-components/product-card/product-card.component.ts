@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-product-card',
@@ -25,7 +24,6 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
-    private notificaionService: NotificationService,
     private router: Router,
     public auth: AuthService
   ) {}

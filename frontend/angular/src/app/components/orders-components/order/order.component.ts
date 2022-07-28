@@ -30,8 +30,6 @@ import { FilesHandleService } from 'src/app/shared/services/files-handle.service
 })
 export class OrderComponent implements OnInit {
   minDate: Date | undefined;
-
-  // selectedShippingDate: Date | undefined;
   allOrdersFromDB: Order[] = [];
   orderTotalPrice: Number | undefined;
   cartId: String | undefined;

@@ -1,8 +1,6 @@
 <div class="container">
-
     <mat-vertical-stepper class="order__stepper" [linear]="true" #stepper>
         <mat-step class="order__stepper-step">
-
             <div>
                 <ng-template matStepLabel>Order Summary</ng-template>
                 <div class="container__cards">
@@ -27,21 +25,18 @@
                     <mat-error class="form__error" class="form__error" *ngIf="addressForm.get('city')?.errors">
                         {{getErrorMessage("city")}}</mat-error>
                 </mat-form-field>
-
                 <mat-form-field class="form__field">
                     <mat-label>Street:</mat-label>
                     <input matInput formControlName="street" required>
                     <mat-error class="form__error" *ngIf="addressForm.get('street')?.errors">
                         {{getErrorMessage("street")}}</mat-error>
                 </mat-form-field>
-
                 <mat-form-field class="form__field">
                     <mat-label>House number:</mat-label>
                     <input matInput type="number" formControlName="house" required>
                     <mat-error class="form__error" *ngIf="addressForm.get('house')?.errors">{{getErrorMessage("house")}}
                     </mat-error>
                 </mat-form-field>
-
                 <mat-form-field class="form__field">
                     <mat-label>ZipCode:</mat-label>
                     <input matInput type="number" formControlName="zipCode" required>
@@ -77,7 +72,6 @@
             </div>
         </mat-step>
         <mat-step class="order__stepper-step" [stepControl]="paymentForm">
-
             <div class="credit-cards-images">
                 <img [ngClass]="{'image__border image__scale': credit.value.startsWith('4')}"
                     src="../../../../assets/general-images/Visa-logo.png" class="image__credit-card">

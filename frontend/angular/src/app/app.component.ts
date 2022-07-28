@@ -12,7 +12,7 @@ export class AppComponent {
 
   url = false;
   constructor(private router: Router, location: Location) {
-    router.events.subscribe((event) => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         if (
           event.url === '/not-found' ||
