@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/shared/models/category';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-categories',
@@ -15,6 +16,7 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private router: Router,
+    private notificaionService: NotificationService,
     public auth: AuthService
   ) {}
 
@@ -36,6 +38,10 @@ export class CategoriesComponent implements OnInit {
 
   delCategory(doc: any) {
     this.categoriesService.deleteCategory(doc._id).subscribe((result) => {
+      this.notificaionService.showSnackBar(
+        'Category was deleted successfully',
+        'snackbar__danger'
+      );
       this.categoriesService.refreshData();
       this.getAllCategories();
     });

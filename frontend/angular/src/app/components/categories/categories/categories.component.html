@@ -3,7 +3,7 @@
         <div *ngFor="let category of allCategories">
             <mat-card class="card">
                 <mat-card-title-group class="card__title-group">
-                    <mat-card-title class="heading-3">{{category.name}}</mat-card-title>
+                    <mat-card-title class="heading-3">{{category.name.replaceAll('&', " and ")}}</mat-card-title>
                 </mat-card-title-group>
                 <mat-card-content class="card__content">
                     <img class="card__picture" src="../../../../../../assets/categoriesImeges/{{category.image}}">

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +18,7 @@ export class ProductsComponent implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
+    private notificaionService: NotificationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -42,6 +44,16 @@ export class ProductsComponent implements OnInit {
     } else {
       this.products = this.productsService.getProducts;
     }
+  }
+
+  delete(docId: string) {
+    this.productsService.deleteProduct(docId).subscribe((result) => {
+      this.notificaionService.showSnackBar(
+        'Product was deleted successfully',
+        'snackbar__danger'
+      );
+      this.productsService.refreshData();
+    });
   }
 
   ngOnInit(): void {

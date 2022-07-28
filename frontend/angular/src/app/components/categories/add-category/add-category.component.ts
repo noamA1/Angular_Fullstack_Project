@@ -4,6 +4,7 @@ import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { Router } from '@angular/router';
 import { FilesHandleService } from 'src/app/shared/services/files-handle.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-add-category',
@@ -25,6 +26,7 @@ export class AddCategoryComponent implements OnInit {
     private categoriesService: CategoriesService,
     private fb: UntypedFormBuilder,
     private filesService: FilesHandleService,
+    private notificaionService: NotificationService,
     private router: Router
   ) {}
 
@@ -95,10 +97,18 @@ export class AddCategoryComponent implements OnInit {
       this.categoriesService
         .editCategory(this.category, this.docId)
         .subscribe((result) => {
+          this.notificaionService.showSnackBar(
+            'Category was updated successfully',
+            'snackbar__info'
+          );
           this.router.navigate(['/categories']);
         });
     } else {
       this.categoriesService.addCategory(this.category).subscribe((result) => {
+        this.notificaionService.showSnackBar(
+          'Category was added successfully',
+          'snackbar__success'
+        );
         this.router.navigate(['/categories']);
       });
     }

@@ -1,10 +1,10 @@
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { Address } from 'src/app/shared/interfaces/address';
 import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { User } from './../../../shared/models/user';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,7 +19,7 @@ export class EditProfileComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private userSer: UserService,
     private router: Router,
-    private auth: AuthService
+    private notificaionService: NotificationService
   ) {}
 
   docId: string = '';
@@ -106,6 +106,10 @@ export class EditProfileComponent implements OnInit {
     };
 
     this.userSer.updateUser(this.userInfo, this.docId).subscribe((res) => {
+      this.notificaionService.showSnackBar(
+        'Your profile was updated successfully',
+        'snackbar__info'
+      );
       this.router.navigate(['/profile']);
     });
   }

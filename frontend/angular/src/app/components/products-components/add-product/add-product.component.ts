@@ -11,6 +11,7 @@ import { Category } from 'src/app/shared/models/category';
 import { Product } from 'src/app/shared/models/product';
 import { CategoriesService } from 'src/app/shared/services/categories.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-add-product',
@@ -48,7 +49,8 @@ export class AddProductComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
-    private filesService: FilesHandleService
+    private filesService: FilesHandleService,
+    private notificaionService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -129,10 +131,18 @@ export class AddProductComponent implements OnInit {
       this.productsService
         .editProduct(this.product, this.docId)
         .subscribe((result) => {
+          this.notificaionService.showSnackBar(
+            'Product was updated successfully',
+            'snackbar__info'
+          );
           this.router.navigate([`products/${categoryName}`]);
         });
     } else {
       this.productsService.addProduct(this.product).subscribe((result) => {
+        this.notificaionService.showSnackBar(
+          'Product was added successfully',
+          'snackbar__success'
+        );
         this.router.navigate([`products/${categoryName}`]);
       });
     }

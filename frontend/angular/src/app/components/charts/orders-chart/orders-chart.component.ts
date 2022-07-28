@@ -121,17 +121,24 @@ export class OrdersChartComponent implements OnInit, OnChanges {
     let labels: string[] = [];
     let ordersCount: number[] = [];
     this.allOrders.forEach((order) => {
-      const labelDate = new Date(order.orderDate!)
+      let labelDate = new Date(order.orderDate!)
         .toLocaleDateString()
         .substring(3)
         .replace('.', '/');
+      if (labelDate.substring(0, 2).endsWith('/')) {
+        labelDate = '0' + labelDate;
+      }
       const lableIndex = labels.indexOf(labelDate);
       if (lableIndex === -1) {
         labels.push(labelDate);
-        ordersCount.push(1);
+        ordersCount[labels.indexOf(labelDate)] = 1;
       } else {
         ordersCount[lableIndex] += 1;
       }
+      labels.sort((a, b) => +a.substring(0, 2) - +b.substring(0, 2));
+      ordersCount.sort(
+        (a, b) => labels.indexOf(a.toString()) - labels.indexOf(b.toString())
+      );
       this.chartLabels = labels;
       this.chartData[0].data = ordersCount;
     });

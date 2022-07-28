@@ -18,6 +18,21 @@ body {
   justify-content: center;
 }
 
+.snackbar {
+  text-align: center;
+  color: #fff;
+  &__success {
+    background-color: #51cf66;
+  }
+  &__info {
+    background-color: #4263eb;
+  }
+  &__danger {
+    background-color: #ff6b6b;
+    color: #e9ecef;
+  }
+}
+
 @import "abstracts/typography";
 @import "abstracts/variables";
 

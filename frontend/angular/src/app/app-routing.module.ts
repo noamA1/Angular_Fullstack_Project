@@ -69,7 +69,11 @@ const routes: Routes = [
       { path: 'add', component: OrderComponent, canActivate: [AuthGuard] },
     ],
   },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard, SecureInnerPagesGuard],
+  },
   {
     path: 'authentication',
     children: [

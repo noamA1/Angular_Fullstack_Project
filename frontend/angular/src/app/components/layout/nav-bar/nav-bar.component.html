@@ -2,17 +2,6 @@
     <mat-toolbar class="nav-bar">
         <span>Shopping App</span>
         <div *ngIf="auth.isLoggedIn">
-            <button mat-button class="nav-btn" [matMenuTriggerFor]="menu">Categories</button>
-            <mat-menu #menu="matMenu" class="nav-bar__menu">
-                <mat-grid-list cols="2" rowHeight="2:1">
-                    <mat-grid-tile *ngFor="let category of categoriesMenu">
-                        <button class="menu__btn" (click)="navigateMenu(category.name)"
-                            mat-menu-item>{{category.name}}</button>
-                    </mat-grid-tile>
-                    <mat-divider></mat-divider>
-                </mat-grid-list>
-
-            </mat-menu>
             <ng-container *ngIf="auth.getUser().role === 'manager'">
                 <button class="nav-btn" mat-button routerLink="/dashboard">
                     Dashboard</button>
@@ -21,7 +10,16 @@
                 <button class="nav-btn" mat-button routerLink="/products/add"> Add
                     Product</button>
             </ng-container>
-
+            <button mat-button class="nav-btn" [matMenuTriggerFor]="menu">Categories</button>
+            <mat-menu #menu="matMenu" class="nav-bar__menu">
+                <mat-grid-list cols="2" rowHeight="2:1">
+                    <mat-grid-tile *ngFor="let category of categoriesMenu">
+                        <button class="menu__btn" (click)="navigateMenu(category.name)"
+                            mat-menu-item>{{category.name.replaceAll('&', ' and ')}}</button>
+                    </mat-grid-tile>
+                    <mat-divider></mat-divider>
+                </mat-grid-list>
+            </mat-menu>
             <button class="nav-btn" mat-button routerLink="/orders">All Orders</button>
         </div>
         <span class="example-spacer"></span>
@@ -73,8 +71,6 @@
                     <span>Log-out</span>
                 </button>
             </mat-menu>
-
-
         </div>
     </mat-toolbar>
 

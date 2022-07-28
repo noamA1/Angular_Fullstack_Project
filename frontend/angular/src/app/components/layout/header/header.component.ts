@@ -19,10 +19,12 @@ export class HeaderComponent implements OnInit {
       event instanceof NavigationEnd && this.handleRouteChange();
     });
   }
+
   url = 'http://localhost:4200/';
+
   ngOnInit(): void {
-    this.handleRouteChange();
     this.setCurrentTime();
+    this.handleRouteChange();
   }
 
   setCurrentTime() {
@@ -31,13 +33,13 @@ export class HeaderComponent implements OnInit {
   }
 
   setTitle() {
-    if (this.currentTime! > 6 && this.currentTime! < 12) {
+    if (this.currentTime! >= 6 && this.currentTime! < 12) {
       this.title = 'Good morning ';
-    } else if (this.currentTime! > 12 && this.currentTime! < 16) {
+    } else if (this.currentTime! >= 12 && this.currentTime! < 16) {
       this.title = 'Good noon ';
-    } else if (this.currentTime! > 16 && this.currentTime! < 19) {
+    } else if (this.currentTime! >= 16 && this.currentTime! < 19) {
       this.title = 'Good afternoon ';
-    } else if (this.currentTime! > 19 && this.currentTime! < 22) {
+    } else if (this.currentTime! >= 19 && this.currentTime! < 22) {
       this.title = 'Good evening ';
     } else {
       this.title = 'Good night ';
@@ -97,6 +99,9 @@ export class HeaderComponent implements OnInit {
       if (url.endsWith('add-employee')) {
         this.title = 'Add new employee';
       }
+    }
+    if (url.endsWith('dashboard')) {
+      this.title = 'Summary';
     }
   };
 }

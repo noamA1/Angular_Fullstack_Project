@@ -1,7 +1,6 @@
-import { ChartOptions, ChartType, ChartDataset, Legend } from 'chart.js';
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 import { Product } from 'src/app/shared/models/product';
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { OrdersService } from 'src/app/shared/services/orders.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { Order } from 'src/app/shared/models/order';
 import { CartService } from 'src/app/shared/services/cart.service';
@@ -91,7 +90,6 @@ export class ProductsChartComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private ordersService: OrdersService,
     private cartsService: CartService
   ) {}
 

@@ -1,11 +1,12 @@
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/shared/models/product';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartItem } from 'src/app/shared/models/cart-item';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductsService } from 'src/app/shared/services/products.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-product-card',
@@ -15,6 +16,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class ProductCardComponent implements OnInit {
   @Input() product: Product | undefined;
   @Input() categoryName: String | undefined;
+  @Output() deletProduct = new EventEmitter<any>();
 
   quantity = new UntypedFormControl('', Validators.required);
   cartItem: CartItem | undefined;
@@ -23,6 +25,7 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
+    private notificaionService: NotificationService,
     private router: Router,
     public auth: AuthService
   ) {}
@@ -46,9 +49,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   delProduct(docId: any) {
-    this.productsService.deleteProduct(docId).subscribe((result) => {
-      console.log(result);
-    });
+    this.deletProduct.emit(docId);
   }
 
   addToCart(product: Product) {
